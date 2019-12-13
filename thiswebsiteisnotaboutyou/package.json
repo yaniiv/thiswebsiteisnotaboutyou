@@ -1,0 +1,19 @@
+{
+  "name": "thiswebsiteisnotaboutyou",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "yarn server.js",
+    "build": "next build",
+    "start": "NODE_ENV=production node server.js"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.4",
+    "express": "^4.17.1",
+    "geoip-lite": "^1.3.8",
+    "morgan": "^1.9.1",
+    "next": "9.1.5",
+    "react": "16.12.0",
+    "react-dom": "16.12.0"
+  }
+}
