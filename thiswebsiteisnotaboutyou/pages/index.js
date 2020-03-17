@@ -1,6 +1,213 @@
-import React from 'react'
-import Head from 'next/head'
-import Nav from '../components/nav'
+import React from "react";
+import Head from "next/head";
+import chroma from "chroma-js";
+import styled from "@emotion/styled";
+import { css, jsx, Global, keyframes } from "@emotion/core";
+
+import Nav from "../components/nav";
+
+const datum = Array.from(true).fill(10);
+const colors = chroma
+  .scale(["#fafa6e", "#2A4858"])
+  .mode("lch")
+  .colors(1000);
+
+const buttons = colors.map(color => {
+  const Button = styled.button`
+    padding: 32px;
+    background-color: hotpink;
+    font-size: 24px;
+    border-radius: 4px;
+    color: black;
+    font-weight: bold;
+    &:hover {
+      color: white;
+    }
+  `;
+
+  return Button;
+});
+
+const basicStyles = css`
+  background-color: white;
+  color: cornflowerblue;
+  border: 1px solid lightgreen;
+  border-right: none;
+  border-bottom: none;
+  box-shadow: 5px 5px 0 0 lightgreen, 10px 10px 0 0 lightyellow;
+  transition: all 0.1s linear;
+  margin: 3rem 0;
+  padding: 1rem 0.5rem;
+`;
+const hoverStyles = css`
+  &:hover {
+    color: white;
+    background-color: lightgray;
+    border-color: aqua;
+    box-shadow: -15px -15px 0 0 aqua, -30px -30px 0 0 cornflowerblue;
+  }
+`;
+const bounce = keyframes`
+  from {
+    transform: scale(1.01);
+  }
+  to {
+    transform: scale(0.99);
+  }
+`;
+
+const Basic = styled.div`
+  ${basicStyles};
+`;
+
+const Combined = styled.div`
+  ${basicStyles};
+  ${hoverStyles};
+  & code {
+    background-color: linen;
+  }
+`;
+const Animated = styled.div`
+  ${basicStyles};
+  ${hoverStyles};
+  & code {
+    background-color: linen;
+  }
+  animation: ${props => props.animation} 0.2s infinite ease-in-out alternate;
+`;
+
+console.warn("colors", colors);
+
+console.warn("datum", datum);
+
+const Landing = () => (
+  <React.Fragment>
+    <Global
+      styles={css`
+        html,
+        body {
+          margin: 0;
+          background: grey;
+          min-height: 100%;
+          font-family: Helvetica, Arial, sans-serif;
+          font-size: 24px;
+        }
+      `}
+    />
+    <div
+      css={css`
+        display: flex;
+        height: 100%;
+        width: 100%;
+        flex-wrap: wrap;
+      `}
+    >
+      <Head>
+        <title>With Emotion</title>
+      </Head>
+      <div>
+        <div
+          css={css`
+            position: fixed;
+            top: 200px;
+            background: white;
+          `}
+        >
+          This website is not about you
+        </div>
+        <div
+          css={css`
+            position: fixed;
+            top: 276px;
+            left: 180px;
+            background: white;
+
+            width: 400px;
+          `}
+        >
+          It's about everyone else who's been here except for you
+        </div>
+        <div
+          css={css`
+            position: fixed;
+            top: 376px;
+            left: 380px;
+            background: white;
+
+            width: 400px;
+          `}
+        >
+          each box represents a person who's come here and left their mark: a
+          color and a note
+        </div>
+        <div
+          css={css`
+            position: fixed;
+            top: 476px;
+            left: 280px;
+            background: white;
+
+            width: 400px;
+          `}
+        >
+          you may <a hrof="">contribute to the wall</a> if you'd like, but
+          you'll never see your own box on the screen
+        </div>
+
+        <div
+          css={css`
+            position: fixed;
+            top: 576px;
+            left: 480px;
+            background: white;
+            width: 400px;
+          `}
+        >
+          In an era of websites that personalize, optimize, analyze and contort
+          themselves for you, reinforcing a view of the world in which we think
+          only of ourselves, and never consider the impact of our actions on
+          others.
+        </div>
+        <div
+          css={css`
+            position: fixed;
+            top: 896px;
+            left: 680px;
+            background: white;
+
+            width: 400px;
+          `}
+        >
+          this website just isn't about you. It's about everyone else but you.
+        </div>
+        {/* <Basic>Cool Styles</Basic>
+        <Combined>
+          With <code>:hover</code>.
+        </Combined>
+        <Animated animation={bounce}>Let's bounce.</Animated> */}
+      </div>
+      {colors.map((color, index) => {
+        return (
+          <div
+            key={index}
+            css={css`
+              /* margin: 10px; */
+              height: 50px;
+              width: 50px;
+              margin: 2px;
+              background-color: ${color};
+              font-size: 24px;
+              border-radius: 4px;
+              &:hover {
+                color: ${color};
+              }
+            `}
+          />
+        );
+      })}
+    </div>
+  </React.Fragment>
+);
 
 const Home = () => (
   <div>
@@ -83,6 +290,6 @@ const Home = () => (
       }
     `}</style>
   </div>
-)
+);
 
-export default Home
+export default Landing;
