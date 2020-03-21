@@ -10,7 +10,7 @@ const datum = Array.from(true).fill(10);
 const colors = chroma
   .scale(["#fafa6e", "#2A4858"])
   .mode("lch")
-  .colors(1000);
+  .colors(600);
 
 const buttons = colors.map(color => {
   const Button = styled.button`
@@ -150,8 +150,8 @@ const Landing = () => (
             width: 400px;
           `}
         >
-          you may <a hrof="">contribute to the wall</a> if you'd like, but
-          you'll never see your own box on the screen
+          every reload page brings up the most recent set of many submissions as
+          will fit on your screen
         </div>
 
         <div
@@ -163,12 +163,10 @@ const Landing = () => (
             width: 400px;
           `}
         >
-          In an era of websites that personalize, optimize, analyze and contort
-          themselves for you, reinforcing a view of the world in which we think
-          only of ourselves, and never consider the impact of our actions on
-          others.
+          it would be wonderful if you <a hrof="">contributed to the wall</a>,
+          but you'll never see your own box on the screen.
         </div>
-        <div
+        {/* <div
           css={css`
             position: fixed;
             top: 896px;
@@ -179,7 +177,7 @@ const Landing = () => (
           `}
         >
           this website just isn't about you. It's about everyone else but you.
-        </div>
+        </div> */}
         {/* <Basic>Cool Styles</Basic>
         <Combined>
           With <code>:hover</code>.
