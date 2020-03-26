@@ -214,7 +214,7 @@ export async function getServerSideProps(context) {
     geoIpData = req.geoIpData;
   }
   if (req.parsedIp) {
-    geoIpData = req.parsedIp;
+    parsedIp = req.parsedIp;
   }
   // geolocationParser(req, res);
   // console.warn("context", context);

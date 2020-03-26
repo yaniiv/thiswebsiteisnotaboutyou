@@ -38,7 +38,7 @@ app.prepare().then(() => {
     return handle(req, res);
   });
 
-  server.listen(process.env.PORT || 3000, err => {
+  server.listen(process.env.PORT || 5000, err => {
     if (err) throw err;
     console.log("> HOLLA on http://localhost: port:", process.env.PORT || 3000);
   });
