@@ -197,29 +197,44 @@ const Landing = ({ data, parsedIp, geoIpData }) => {
             but you'll never see your own contributions on the screen.
           </div>
         </div>
-        {colors.map((color, index) => {
-          return (
-            <div
-              key={index}
-              css={css`
-                /* margin: 10px; */
-                height: 50px;
-                width: 50px;
-                margin: 2px;
-                background-color: ${chroma.random().hex()};
-                font-size: 24px;
-                border-radius: 4px;
-                &:hover {
-                  color: ${color};
-                }
-              `}
-            />
-          );
-        })}
+        <div
+          css={css`
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+          `}
+        >
+          {colors.map((color, index) => {
+            let width = getBoxDimensions();
+            return (
+              <div
+                key={index}
+                css={css`
+                  /* margin: 10px; */
+                  height: ${width}px;
+                  width: ${width}px;
+                  background-color: ${chroma.random().hex()};
+                  font-size: 24px;
+                  /* border-radius: 4px; */
+                `}
+              />
+            );
+          })}
+        </div>
       </div>
     </React.Fragment>
   );
 };
+
+function getBoxDimensions() {
+  let width = 50;
+
+  if (window) {
+    width = Math.floor(window.innerWidth / 15);
+  }
+
+  return width;
+}
 
 export async function getServerSideProps(context) {
   const { req, res } = context;
