@@ -32,7 +32,7 @@ const geolocationParser = function(req, res, next) {
   req.parsedIp = parsedIp;
 
   if (parsedIp) {
-    geoIpData = geoip.lookup(ip);
+    geoIpData = geoip.lookup(parsedIp);
     req.geoIpData = geoIpData;
   }
 
