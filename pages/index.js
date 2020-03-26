@@ -79,9 +79,8 @@ console.warn("HI from index.js");
 // console.warn("colors", colors);
 
 const Landing = ({ data, parsedIp, geoIpData }) => {
-  console.warn("data", data);
-  console.warn("parsedIp", parsedIp);
-  console.warn("geoIpData", geoIpData);
+  console.warn("RENDER ___> parsedIp", parsedIp);
+  console.warn("RENDER ___> geoIpData", geoIpData);
   return (
     <React.Fragment>
       <Global
@@ -204,50 +203,11 @@ const Landing = ({ data, parsedIp, geoIpData }) => {
   );
 };
 
-const isLocalDevIp = ip => ip === "127.0.0.1" || ip === "::1";
-
-function getIpIfAvailable(req) {
-  // if request routed via proxy, req.ip contains x-forwarded-for original IP
-  let ip = req.ip || req.connection.remoteAddress || false;
-
-  // if (isLocalDevIp(ip)) {
-  //   return false;
-  // }
-  // IPV6 address can look like ::ffff:192.168.0.1'
-  if (ip && ip.includes("::ffff:")) {
-    ip = ip.split(":").reverse()[0];
-  }
-
-  return ip;
-}
-
-const geolocationParser = function(req, res, next) {
-  console.log("geolocationParser", geolocationParser);
-  let geoIpData;
-  let parsedIp;
-
-  if (req.query.ip) {
-    parsedIp = req.query.ip;
-  } else {
-    parsedIp = getIpIfAvailable(req);
-  }
-
-  // TODO: probably remove this
-  req.parsedIp = parsedIp;
-
-  if (parsedIp) {
-    geoIpData = geoip.lookup(ip);
-    req.geoIpData = geoIpData;
-  }
-
-  next();
-};
-
 export async function getServerSideProps(context) {
   const { req, res } = context;
   let geoIpData = null;
-  console.warn("req", req);
-  console.log("req.parsedIp", req.parsedIp);
+  // console.warn("req", req);
+  // console.log("req.parsedIp", req.parsedIp);
   const parsedIp = req.parsedIp;
   if (req.geoIpData) {
     geoIpData = req.geoIpData;

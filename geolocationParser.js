@@ -7,6 +7,7 @@ function getIpIfAvailable(req) {
   let ip = req.ip || req.connection.remoteAddress || false;
   console.warn("ip", ip);
   if (isLocalDevIp(ip)) {
+    console.warn(`DETECTED local dev`);
     return false;
   }
   // IPV6 address can look like ::ffff:192.168.0.1'
@@ -18,7 +19,6 @@ function getIpIfAvailable(req) {
 }
 
 const geolocationParser = function(req, res, next) {
-  console.log("geolocationParser", geolocationParser);
   let geoIpData;
   let parsedIp;
 
