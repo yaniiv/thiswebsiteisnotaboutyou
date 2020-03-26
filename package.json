@@ -1,11 +1,16 @@
 {
   "name": "thiswebsiteisnotaboutyou",
   "version": "0.1.0",
+  "main": "server.js",
   "private": true,
   "scripts": {
-    "dev": "next",
+    "dev": "node server.js",
     "build": "next build",
-    "start": "next start"
+    "start": "node server.js",
+    "export": "npm run build && next export"
+  },
+  "engines": {
+    "node": "10.x"
   },
   "dependencies": {
     "@emotion/babel-preset-css-prop": "^10.0.27",
