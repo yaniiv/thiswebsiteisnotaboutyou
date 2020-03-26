@@ -206,11 +206,15 @@ const Landing = ({ data, parsedIp, geoIpData }) => {
 export async function getServerSideProps(context) {
   const { req, res } = context;
   let geoIpData = null;
+  let parsedIp = null;
   // console.warn("req", req);
   // console.log("req.parsedIp", req.parsedIp);
-  const parsedIp = req.parsedIp;
+
   if (req.geoIpData) {
     geoIpData = req.geoIpData;
+  }
+  if (req.parsedIp) {
+    geoIpData = req.parsedIp;
   }
   // geolocationParser(req, res);
   // console.warn("context", context);

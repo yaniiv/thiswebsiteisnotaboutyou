@@ -3,10 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "node server.js",
+    "dev": "next",
     "build": "next build",
-    "start": "NODE_ENV=production next start",
-    "export": "npm run build && next export"
+    "start": "next start"
   },
   "dependencies": {
     "@emotion/babel-preset-css-prop": "^10.0.27",
