@@ -5,7 +5,7 @@ const isLocalDevIp = ip => ip === "127.0.0.1" || ip === "::1";
 function getIpIfAvailable(req) {
   // if request routed via proxy, req.ip contains x-forwarded-for original IP
   let ip = req.ip || req.connection.remoteAddress || false;
-
+  console.warn("ip", ip);
   if (isLocalDevIp(ip)) {
     return false;
   }
@@ -18,10 +18,11 @@ function getIpIfAvailable(req) {
 }
 
 const geolocationParser = function(req, res, next) {
+  console.log("geolocationParser", geolocationParser);
   let geoIpData;
   let parsedIp;
 
-  if (req.query.ip) {
+  if (req && req.query && req.query.ip) {
     parsedIp = req.query.ip;
   } else {
     parsedIp = getIpIfAvailable(req);

@@ -6,7 +6,6 @@ import { css, jsx, Global, keyframes } from "@emotion/core";
 
 import Nav from "../components/nav";
 
-const datum = Array.from(true).fill(10);
 const colors = chroma
   .scale(["#fafa6e", "#2A4858"])
   .mode("lch")
@@ -76,218 +75,190 @@ const Animated = styled.div`
   animation: ${props => props.animation} 0.2s infinite ease-in-out alternate;
 `;
 
-console.warn("colors", colors);
+console.warn("HI from index.js");
+// console.warn("colors", colors);
 
-console.warn("datum", datum);
-
-const Landing = () => (
-  <React.Fragment>
-    <Global
-      styles={css`
-        html,
-        body {
-          margin: 0;
-          background: grey;
-          min-height: 100%;
-          font-family: Helvetica, Arial, sans-serif;
-          font-size: 24px;
-        }
-      `}
-    />
-    <div
-      css={css`
-        display: flex;
-        height: 100%;
-        width: 100%;
-        flex-wrap: wrap;
-      `}
-    >
-      <Head>
-        <title>With Emotion</title>
-      </Head>
-      <div>
-        <div
-          css={css`
-            position: fixed;
-            top: 200px;
-            background: white;
-          `}
-        >
-          This website is not about you
-        </div>
-        <div
-          css={css`
-            position: fixed;
-            top: 276px;
-            left: 180px;
-            background: white;
-
-            width: 400px;
-          `}
-        >
-          It's about everyone else who's been here except for you
-        </div>
-        <div
-          css={css`
-            position: fixed;
-            top: 376px;
-            left: 380px;
-            background: white;
-
-            width: 400px;
-          `}
-        >
-          each box represents a person who's come here and left their mark: a
-          color and a note
-        </div>
-        <div
-          css={css`
-            position: fixed;
-            top: 476px;
-            left: 280px;
-            background: white;
-
-            width: 400px;
-          `}
-        >
-          every reload page brings up the most recent set of many submissions as
-          will fit on your screen
-        </div>
-
-        <div
-          css={css`
-            position: fixed;
-            top: 576px;
-            left: 480px;
-            background: white;
-            width: 400px;
-          `}
-        >
-          it would be wonderful if you <a hrof="">contributed to the wall</a>,
-          but you'll never see your own box on the screen.
-        </div>
-        {/* <div
-          css={css`
-            position: fixed;
-            top: 896px;
-            left: 680px;
-            background: white;
-
-            width: 400px;
-          `}
-        >
-          this website just isn't about you. It's about everyone else but you.
-        </div> */}
-        {/* <Basic>Cool Styles</Basic>
-        <Combined>
-          With <code>:hover</code>.
-        </Combined>
-        <Animated animation={bounce}>Let's bounce.</Animated> */}
-      </div>
-      {colors.map((color, index) => {
-        return (
+const Landing = ({ data, parsedIp, geoIpData }) => {
+  console.warn("data", data);
+  console.warn("parsedIp", parsedIp);
+  return (
+    <React.Fragment>
+      <Global
+        styles={css`
+          html,
+          body {
+            margin: 0;
+            background: grey;
+            min-height: 100%;
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 24px;
+          }
+        `}
+      />
+      <div
+        css={css`
+          display: flex;
+          height: 100%;
+          width: 100%;
+          flex-wrap: wrap;
+        `}
+      >
+        <Head>
+          <title>With Emotion</title>
+        </Head>
+        <div>
           <div
-            key={index}
             css={css`
-              /* margin: 10px; */
-              height: 50px;
-              width: 50px;
-              margin: 2px;
-              background-color: ${color};
-              font-size: 24px;
-              border-radius: 4px;
-              &:hover {
-                color: ${color};
-              }
+              position: fixed;
+              top: 200px;
+              background: white;
             `}
-          />
-        );
-      })}
-    </div>
-  </React.Fragment>
-);
+          >
+            This website is not about you
+          </div>
+          <div
+            css={css`
+              position: fixed;
+              top: 276px;
+              left: 180px;
+              background: white;
 
-const Home = () => (
-  <div>
-    <Head>
-      <title>Home</title>
-      <link rel="icon" href="/favicon.ico" />
-    </Head>
+              width: 400px;
+            `}
+          >
+            It's about everyone else who's been here except for you
+          </div>
+          <div
+            css={css`
+              position: fixed;
+              top: 376px;
+              left: 380px;
+              background: white;
 
-    <Nav />
+              width: 400px;
+            `}
+          >
+            each box represents a person who's come here and left their mark
+          </div>
+          <div
+            css={css`
+              position: fixed;
+              top: 476px;
+              left: 280px;
+              background: white;
 
-    <div className="hero">
-      <h1 className="title">Welcome to Next.js!</h1>
-      <p className="description">
-        To get started, edit <code>pages/index.js</code> and save to reload.
-      </p>
+              width: 400px;
+            `}
+          >
+            every reload page brings up the most recent set of 100 notes
+          </div>
 
-      <div className="row">
-        <a href="https://nextjs.org/docs" className="card">
-          <h3>Documentation &rarr;</h3>
-          <p>Learn more about Next.js in the documentation.</p>
-        </a>
-        <a href="https://nextjs.org/learn" className="card">
-          <h3>Next.js Learn &rarr;</h3>
-          <p>Learn about Next.js by following an interactive tutorial!</p>
-        </a>
-        <a
-          href="https://github.com/zeit/next.js/tree/master/examples"
-          className="card"
-        >
-          <h3>Examples &rarr;</h3>
-          <p>Find other example boilerplates on the Next.js GitHub.</p>
-        </a>
+          <div
+            css={css`
+              position: fixed;
+              top: 576px;
+              left: 520px;
+              background: white;
+              width: 400px;
+            `}
+          >
+            it would be wonderful if you <a hrof="">contributed to the wall</a>{" "}
+            and create something with the other people that have been here
+          </div>
+          <div
+            css={css`
+              position: fixed;
+              top: 740px;
+              left: 600px;
+              background: white;
+              width: 400px;
+            `}
+          >
+            but you'll never see your own box on the screen.
+          </div>
+        </div>
+        {colors.map((color, index) => {
+          return (
+            <div
+              key={index}
+              css={css`
+                /* margin: 10px; */
+                height: 50px;
+                width: 50px;
+                margin: 2px;
+                background-color: ${color};
+                font-size: 24px;
+                border-radius: 4px;
+                &:hover {
+                  color: ${color};
+                }
+              `}
+            />
+          );
+        })}
       </div>
-    </div>
+    </React.Fragment>
+  );
+};
 
-    <style jsx>{`
-      .hero {
-        width: 100%;
-        color: #333;
-      }
-      .title {
-        margin: 0;
-        width: 100%;
-        padding-top: 80px;
-        line-height: 1.15;
-        font-size: 48px;
-      }
-      .title,
-      .description {
-        text-align: center;
-      }
-      .row {
-        max-width: 880px;
-        margin: 80px auto 40px;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-      }
-      .card {
-        padding: 18px 18px 24px;
-        width: 220px;
-        text-align: left;
-        text-decoration: none;
-        color: #434343;
-        border: 1px solid #9b9b9b;
-      }
-      .card:hover {
-        border-color: #067df7;
-      }
-      .card h3 {
-        margin: 0;
-        color: #067df7;
-        font-size: 18px;
-      }
-      .card p {
-        margin: 0;
-        padding: 12px 0 0;
-        font-size: 13px;
-        color: #333;
-      }
-    `}</style>
-  </div>
-);
+const isLocalDevIp = ip => ip === "127.0.0.1" || ip === "::1";
+
+function getIpIfAvailable(req) {
+  // if request routed via proxy, req.ip contains x-forwarded-for original IP
+  let ip = req.ip || req.connection.remoteAddress || false;
+
+  // if (isLocalDevIp(ip)) {
+  //   return false;
+  // }
+  // IPV6 address can look like ::ffff:192.168.0.1'
+  if (ip && ip.includes("::ffff:")) {
+    ip = ip.split(":").reverse()[0];
+  }
+
+  return ip;
+}
+
+const geolocationParser = function(req, res, next) {
+  console.log("geolocationParser", geolocationParser);
+  let geoIpData;
+  let parsedIp;
+
+  if (req.query.ip) {
+    parsedIp = req.query.ip;
+  } else {
+    parsedIp = getIpIfAvailable(req);
+  }
+
+  // TODO: probably remove this
+  req.parsedIp = parsedIp;
+
+  if (parsedIp) {
+    geoIpData = geoip.lookup(ip);
+    req.geoIpData = geoIpData;
+  }
+
+  next();
+};
+
+export async function getServerSideProps(context) {
+  const { req, res } = context;
+  console.warn("req", req);
+  console.log("req.parsedIp", req.parsedIp);
+  const parsedIp = req.parsedIp;
+  if (req.geoIpData) {
+    const geoIpData = req.geoIpData;
+  }
+  // geolocationParser(req, res);
+  // console.warn("context", context);
+  // Fetch data from external API
+  // console.warn("req", req);
+  // console.warn("res", res);
+  // const res = await fetch(`https://.../data`);
+  // const data = await res.json();
+  const data = "hi";
+  console.warn("serverside boiii");
+  // Pass data to the page via props
+  return { props: { data, parsedIp, geoIpData } };
+}
 
 export default Landing;

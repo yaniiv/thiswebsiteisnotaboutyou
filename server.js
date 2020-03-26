@@ -21,10 +21,6 @@ const LOGGER_FORMAT = dev
 
 app.prepare().then(() => {
   const server = express();
-  console.log("hi");
-
-  // console.warn("request", { req });
-  // console.warn("response", { res });
   server.use(cookieParser());
   server.use(morgan(LOGGER_FORMAT));
   server.use(geolocationParser);
