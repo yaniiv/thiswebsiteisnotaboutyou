@@ -96,6 +96,8 @@ const Landing = ({ data, parsedIp, geoIpData }) => {
           }
         `}
       />
+      <div>{parsedIp}</div>
+      <div>{geoIpData}</div>
       <div
         css={css`
           display: flex;

@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "node server.js",
     "build": "next build",
-    "start": "NODE_ENV=production next start"
+    "start": "NODE_ENV=production next start",
+    "export": "npm run build && next export"
   },
   "dependencies": {
     "@emotion/babel-preset-css-prop": "^10.0.27",
