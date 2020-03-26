@@ -81,6 +81,7 @@ console.warn("HI from index.js");
 const Landing = ({ data, parsedIp, geoIpData }) => {
   console.warn("data", data);
   console.warn("parsedIp", parsedIp);
+  console.warn("geoIpData", geoIpData);
   return (
     <React.Fragment>
       <Global
@@ -242,7 +243,7 @@ const geolocationParser = function(req, res, next) {
 
 export async function getServerSideProps(context) {
   const { req, res } = context;
-  let geoIpData;
+  let geoIpData = null;
   console.warn("req", req);
   console.log("req.parsedIp", req.parsedIp);
   const parsedIp = req.parsedIp;
