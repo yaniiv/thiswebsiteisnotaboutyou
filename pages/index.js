@@ -11,6 +11,8 @@ const colors = chroma
   .mode("lch")
   .colors(600);
 
+console.warn("chroma.random()", chroma.random().hex());
+
 const buttons = colors.map(color => {
   const Button = styled.button`
     padding: 32px;
@@ -95,8 +97,18 @@ const Landing = ({ data, parsedIp, geoIpData }) => {
           }
         `}
       />
-      <div>{parsedIp}</div>
-      <div>{geoIpData}</div>
+      <h2
+        css={css`
+          position: fixed;
+          display: flex;
+          flex-direction: column;
+          top: 0;
+          right: 0;
+        `}
+      >
+        <div>parsedIp: {parsedIp}</div>
+        <div>geoIpData: {geoIpData}</div>
+      </h2>
       <div
         css={css`
           display: flex;
@@ -116,7 +128,16 @@ const Landing = ({ data, parsedIp, geoIpData }) => {
               background: white;
             `}
           >
-            Hello {parsedIp} 👋, welcome
+            Hello,
+            <span
+              css={css`
+                color: blueviolet;
+                text-decoration: underline;
+              `}
+            >
+              {parsedIp || "11.111.111.111"}
+            </span>
+            , welcome
           </div>
           <div
             css={css`
@@ -124,7 +145,6 @@ const Landing = ({ data, parsedIp, geoIpData }) => {
               top: 276px;
               left: 180px;
               background: white;
-
               width: 400px;
             `}
           >
@@ -136,7 +156,6 @@ const Landing = ({ data, parsedIp, geoIpData }) => {
               top: 376px;
               left: 380px;
               background: white;
-
               width: 400px;
             `}
           >
@@ -148,13 +167,11 @@ const Landing = ({ data, parsedIp, geoIpData }) => {
               top: 476px;
               left: 280px;
               background: white;
-
               width: 400px;
             `}
           >
             every reload page brings up a random sample of 100 notes
           </div>
-
           <div
             css={css`
               position: fixed;
@@ -189,7 +206,7 @@ const Landing = ({ data, parsedIp, geoIpData }) => {
                 height: 50px;
                 width: 50px;
                 margin: 2px;
-                background-color: ${color};
+                background-color: ${chroma.random().hex()};
                 font-size: 24px;
                 border-radius: 4px;
                 &:hover {

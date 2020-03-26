@@ -40,6 +40,9 @@ app.prepare().then(() => {
 
   server.listen(process.env.PORT || 5000, err => {
     if (err) throw err;
-    console.log("> HOLLA on http://localhost: port:", process.env.PORT || 3000);
+    if (!process.env.PORT) {
+      console.log("NO process.env.PORT found");
+    }
+    console.log("> HOLLA on http://localhost: port:", process.env.PORT || 5000);
   });
 });
