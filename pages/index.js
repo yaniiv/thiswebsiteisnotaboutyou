@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import Head from "next/head";
 import chroma from "chroma-js";
 import styled from "@emotion/styled";
 import { css, jsx, Global, keyframes } from "@emotion/core";
 
 import Nav from "../components/nav";
+import Icon from "../components/Icon";
+
+import { bodyContent } from "../cms-content";
 
 const colors = chroma
   .scale(["#fafa6e", "#2A4858"])
   .mode("lch")
-  .colors(600);
+  .colors(200);
 
 console.warn("chroma.random()", chroma.random().hex());
 
@@ -77,11 +80,46 @@ const Animated = styled.div`
   animation: ${props => props.animation} 0.2s infinite ease-in-out alternate;
 `;
 
+function getBoxDimensions() {
+  let width = 50;
+
+  if (typeof window !== "undefined") {
+    width = window.innerWidth / 15;
+  }
+  console.warn(`width`, width);
+  return width;
+}
+
+function getIconStyles() {
+  const width = getBoxDimensions();
+
+  return css`
+    vertical-align: middle;
+    stroke-width: 2;
+    svg {
+      height: ${width}px;
+      width: ${width}px;
+    }
+
+    stroke: white;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+
+    /* @media (min-width: 768px) {
+      stroke-width: 2;
+      height: 60px;
+      width: 60px;
+    } */
+  `;
+}
+
 console.warn("HI from index.js");
 // console.warn("colors", colors);
 
 const Landing = ({ data, parsedIp, geoIpData }) => {
-  console.warn("RENDER ___> parsedIp", parsedIp);
+  const [showBodyContent, setShowBodyContent] = useState(true);
+  console.warn("RENDER __ _> parsedIp", parsedIp);
   console.warn("RENDER ___> geoIpData", geoIpData);
   return (
     <React.Fragment>
@@ -97,18 +135,53 @@ const Landing = ({ data, parsedIp, geoIpData }) => {
           }
         `}
       />
-      <h2
+      <div
         css={css`
           position: fixed;
           display: flex;
+          color: white;
           flex-direction: column;
           left: 0;
           bottom: 0;
+          width: 200px;
         `}
       >
         <div>parsedIp: {parsedIp}</div>
         <div>geoIpData: {geoIpData}</div>
-      </h2>
+      </div>
+      <div
+        onClick={() => {
+          setShowBodyContent(false);
+        }}
+        css={css`
+          position: fixed;
+
+          left: 0;
+          top: 0;
+          width: ${getBoxDimensions()}px;
+          :hover {
+            cursor: pointer;
+          }
+        `}
+      >
+        <Icon css={getIconStyles()} name="close" />
+      </div>
+      <div
+        css={css`
+          position: fixed;
+          right: 0;
+          top: 0;
+          width: ${getBoxDimensions()}px;
+          :hover {
+            cursor: pointer;
+          }
+        `}
+        onClick={() => {
+          setShowBodyContent(true);
+        }}
+      >
+        <Icon css={getIconStyles()} name="info" />
+      </div>
       <div
         css={css`
           display: flex;
@@ -122,11 +195,35 @@ const Landing = ({ data, parsedIp, geoIpData }) => {
         </Head>
         <div
           css={css`
-            opacity: 0;
-            transition-property: opacity;
-            transition-duration: 1s;
-            transition-delay: 2s;
-            opacity: 1;
+            @keyframes fade-in {
+              from {
+                opacity: 0;
+              }
+              to {
+                opacity: 1;
+              }
+            }
+
+            @keyframes fade-out {
+              from {
+                opacity: 1;
+              }
+              to {
+                opacity: 0;
+              }
+            }
+
+            animation-duration: 4s;
+            animation-delay: 2s;
+            animation-fill-mode: forwards;
+            animation-name: fade-in;
+
+            ${!showBodyContent &&
+              css`
+                animation-duration: 1s;
+                animation-fill-mode: forwards;
+                animation-name: fade-out;
+              `}
           `}
         >
           <div
@@ -143,67 +240,24 @@ const Landing = ({ data, parsedIp, geoIpData }) => {
                 text-decoration: underline;
               `}
             >
-              {parsedIp || "11.111.111.111"}
+              {" "}
+              {parsedIp || "11.111.111.111"}{" "}
             </span>
-            , welcome
+            , welcome!
           </div>
-          <div
-            css={css`
-              position: fixed;
-              top: 276px;
-              left: 180px;
-              background: white;
-              width: 400px;
-            `}
-          >
-            This website is about everyone else who's been here except for you
-          </div>
-          <div
-            css={css`
-              position: fixed;
-              top: 376px;
-              left: 380px;
-              background: white;
-              width: 400px;
-            `}
-          >
-            each box represents a person who's come by and left a note
-          </div>
-          <div
-            css={css`
-              position: fixed;
-              top: 476px;
-              left: 280px;
-              background: white;
-              width: 400px;
-            `}
-          >
-            every reload page brings up a random sample of 100 notes
-          </div>
-          <div
-            css={css`
-              position: fixed;
-              top: 576px;
-              left: 520px;
-              background: white;
-              width: 400px;
-            `}
-          >
-            it would be wonderful if you <a hrof="">contributed to the wall</a>{" "}
-            and helped to create something with the other people that have been
-            here
-          </div>
-          <div
-            css={css`
-              position: fixed;
-              top: 740px;
-              left: 600px;
-              background: white;
-              width: 400px;
-            `}
-          >
-            but you'll never see your own contributions on the screen.
-          </div>
+          {bodyContent.map(section => (
+            <div
+              css={css`
+                position: fixed;
+                background: white;
+                top: ${section.top};
+                left: ${section.left};
+                width: ${section.width};
+              `}
+            >
+              {section.text}
+            </div>
+          ))}
         </div>
         <div
           css={css`
@@ -233,16 +287,6 @@ const Landing = ({ data, parsedIp, geoIpData }) => {
     </React.Fragment>
   );
 };
-
-function getBoxDimensions() {
-  let width = 50;
-
-  if (typeof window !== "undefined") {
-    width = Math.floor(window.innerWidth / 15);
-  }
-
-  return width;
-}
 
 export async function getServerSideProps(context) {
   const { req, res } = context;
