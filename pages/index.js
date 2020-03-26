@@ -106,7 +106,7 @@ const Landing = ({ data, parsedIp, geoIpData }) => {
         `}
       >
         <Head>
-          <title>With Emotion</title>
+          <title>This Website is not about You</title>
         </Head>
         <div>
           <div
@@ -116,7 +116,7 @@ const Landing = ({ data, parsedIp, geoIpData }) => {
               background: white;
             `}
           >
-            This website is not about you
+            Hello {parsedIp} 👋, welcome
           </div>
           <div
             css={css`
@@ -128,7 +128,7 @@ const Landing = ({ data, parsedIp, geoIpData }) => {
               width: 400px;
             `}
           >
-            It's about everyone else who's been here except for you
+            This website is about everyone else who's been here except for you
           </div>
           <div
             css={css`
@@ -140,7 +140,7 @@ const Landing = ({ data, parsedIp, geoIpData }) => {
               width: 400px;
             `}
           >
-            each box represents a person who's come here and left their mark
+            each box represents a person who's come by and left a note
           </div>
           <div
             css={css`
@@ -152,7 +152,7 @@ const Landing = ({ data, parsedIp, geoIpData }) => {
               width: 400px;
             `}
           >
-            every reload page brings up the most recent set of 100 notes
+            every reload page brings up a random sample of 100 notes
           </div>
 
           <div
@@ -165,7 +165,8 @@ const Landing = ({ data, parsedIp, geoIpData }) => {
             `}
           >
             it would be wonderful if you <a hrof="">contributed to the wall</a>{" "}
-            and create something with the other people that have been here
+            and helped to create something with the other people that have been
+            here
           </div>
           <div
             css={css`
@@ -176,7 +177,7 @@ const Landing = ({ data, parsedIp, geoIpData }) => {
               width: 400px;
             `}
           >
-            but you'll never see your own box on the screen.
+            but you'll never see your own contributions on the screen.
           </div>
         </div>
         {colors.map((color, index) => {
