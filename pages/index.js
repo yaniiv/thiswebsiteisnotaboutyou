@@ -102,8 +102,8 @@ const Landing = ({ data, parsedIp, geoIpData }) => {
           position: fixed;
           display: flex;
           flex-direction: column;
-          top: 0;
-          right: 0;
+          left: 0;
+          bottom: 0;
         `}
       >
         <div>parsedIp: {parsedIp}</div>
@@ -120,7 +120,15 @@ const Landing = ({ data, parsedIp, geoIpData }) => {
         <Head>
           <title>This Website is not about You</title>
         </Head>
-        <div>
+        <div
+          css={css`
+            opacity: 0;
+            transition-property: opacity;
+            transition-duration: 1s;
+            transition-delay: 2s;
+            opacity: 1;
+          `}
+        >
           <div
             css={css`
               position: fixed;
@@ -229,7 +237,7 @@ const Landing = ({ data, parsedIp, geoIpData }) => {
 function getBoxDimensions() {
   let width = 50;
 
-  if (window) {
+  if (typeof window !== "undefined") {
     width = Math.floor(window.innerWidth / 15);
   }
 
