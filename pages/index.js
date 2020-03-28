@@ -4,35 +4,11 @@ import chroma from "chroma-js";
 import styled from "@emotion/styled";
 import { css, jsx, Global, keyframes } from "@emotion/core";
 
-import Nav from "../components/nav";
-import Icon from "../components/Icon";
-
-import { bodyContent } from "../cms-content";
-
-const isBrowser = typeof window !== "undefined";
-
-const colors = chroma
-  .scale(["#fafa6e", "#2A4858"])
-  .mode("lch")
-  .colors(200);
+import Nav from "../components/Nav";
+import BodyText from "../components/BodyText";
+import Boxes from "../components/Boxes";
 
 console.warn("chroma.random()", chroma.random().hex());
-
-const buttons = colors.map(color => {
-  const Button = styled.button`
-    padding: 32px;
-    background-color: hotpink;
-    font-size: 24px;
-    border-radius: 4px;
-    color: black;
-    font-weight: bold;
-    &:hover {
-      color: white;
-    }
-  `;
-
-  return Button;
-});
 
 const basicStyles = css`
   background-color: white;
@@ -82,38 +58,18 @@ const Animated = styled.div`
   animation: ${props => props.animation} 0.2s infinite ease-in-out alternate;
 `;
 
+function isBrowser() {
+  return typeof window !== "undefined";
+}
+
 function getBoxDimensions() {
   let width = 50;
 
-  if (typeof window !== "undefined") {
+  if (isBrowser()) {
     width = window.innerWidth / 15;
   }
   console.warn(`width`, width);
   return width;
-}
-
-function getIconStyles() {
-  const width = getBoxDimensions();
-
-  return css`
-    vertical-align: middle;
-    stroke-width: 2;
-    svg {
-      height: ${width}px;
-      width: ${width}px;
-    }
-
-    stroke: white;
-    fill: none;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-
-    /* @media (min-width: 768px) {
-      stroke-width: 2;
-      height: 60px;
-      width: 60px;
-    } */
-  `;
 }
 
 console.warn("HI from index.js");
@@ -121,6 +77,8 @@ console.warn("HI from index.js");
 
 const Landing = ({ data, parsedIp, geoIpData }) => {
   const [showBodyContent, setShowBodyContent] = useState(true);
+  const boxSize = getBoxDimensions();
+  console.warn("boxSize", boxSize);
   console.warn("RENDER __ _> parsedIp", parsedIp);
   console.warn("RENDER ___> geoIpData", geoIpData);
   return (
@@ -137,156 +95,76 @@ const Landing = ({ data, parsedIp, geoIpData }) => {
           }
         `}
       />
-      <div
-        css={css`
-          position: fixed;
-          display: flex;
-          color: white;
-          flex-direction: column;
-          left: 0;
-          bottom: 0;
-          width: 200px;
-        `}
-      >
-        <div>parsedIp: {parsedIp}</div>
-        <div>geoIpData: {geoIpData}</div>
-      </div>
-      <div
-        onClick={() => {
-          setShowBodyContent(false);
-        }}
-        css={css`
-          position: fixed;
-
-          left: 0;
-          top: 0;
-          width: ${getBoxDimensions()}px;
-          :hover {
-            cursor: pointer;
-          }
-        `}
-      >
-        <Icon css={getIconStyles()} name="close" />
-      </div>
-      <div
-        css={css`
-          position: fixed;
-          right: 0;
-          top: 0;
-          width: ${getBoxDimensions()}px;
-          :hover {
-            cursor: pointer;
-          }
-        `}
-        onClick={() => {
-          setShowBodyContent(true);
-        }}
-      >
-        <Icon css={getIconStyles()} name="info" />
-      </div>
-      <div
-        css={css`
-          display: flex;
-          height: 100%;
-          width: 100%;
-          flex-wrap: wrap;
-        `}
-      >
-        <Head>
-          <title>This Website is not about You</title>
-        </Head>
-        <div
-          css={css`
-            @keyframes fade-in {
-              from {
-                opacity: 0;
-              }
-              to {
-                opacity: 1;
-              }
-            }
-
-            @keyframes fade-out {
-              from {
-                opacity: 1;
-              }
-              to {
-                opacity: 0;
-              }
-            }
-
-            animation-duration: 4s;
-            animation-delay: 2s;
-            animation-fill-mode: forwards;
-            animation-name: fade-in;
-
-            ${!showBodyContent &&
-              css`
-                animation-duration: 1s;
-                animation-fill-mode: forwards;
-                animation-name: fade-out;
-              `}
-          `}
-        >
+      {isBrowser() && (
+        <div>
           <div
             css={css`
               position: fixed;
-              top: 200px;
-              background: white;
+              display: flex;
+              color: white;
+              flex-direction: column;
+              left: 0;
+              bottom: 0;
+              width: 200px;
             `}
           >
-            Hello,
-            <span
-              css={css`
-                color: blueviolet;
-                text-decoration: underline;
-              `}
-            >
-              {" "}
-              {parsedIp || "11.111.111.111"}{" "}
-            </span>
-            , welcome!
+            <div>parsedIp: {parsedIp}</div>
+            <div>geoIpData: {geoIpData}</div>
           </div>
-          {bodyContent.map(section => (
+          <div
+            css={css`
+              display: flex;
+              height: 100%;
+              width: 100%;
+              flex-wrap: wrap;
+            `}
+          >
+            <Head>
+              <title>This Website is not about You</title>
+            </Head>
+            <Nav boxSize={boxSize} setShowBodyContent={setShowBodyContent} />
             <div
               css={css`
-                position: fixed;
-                background: white;
-                top: ${section.top};
-                left: ${section.left};
-                width: ${section.width};
+                opacity: 1;
+                ${!showBodyContent &&
+                  css`
+                    opacity: 0;
+                  `}
               `}
             >
-              {section.text}
-            </div>
-          ))}
-        </div>
-        <div
-          css={css`
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-evenly;
-          `}
-        >
-          {isBrowser() &&
-            colors.map((color, index) => {
-              let width = getBoxDimensions();
-              return (
-                <div
-                  key={index}
+              <div
+                css={css`
+                  position: fixed;
+                  top: 200px;
+                  background: white;
+                `}
+              >
+                Hello,
+                <span
                   css={css`
-                    /* margin: 10px; */
-                    height: ${width}px;
-                    width: ${width}px;
-                    background-color: ${chroma.random().hex()};
-                    font-size: 24px;
-                    /* border-radius: 4px; */
+                    color: blueviolet;
+                    text-decoration: underline;
                   `}
-                />
-              );
-            })}
+                >
+                  {" "}
+                  {parsedIp || "11.111.111.111"}{" "}
+                </span>
+                , welcome!
+              </div>
+              <BodyText />
+            </div>
+            <div
+              css={css`
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-evenly;
+              `}
+            >
+              <Boxes boxSize={boxSize} />
+            </div>
+          </div>
         </div>
-      </div>
+      )}
     </React.Fragment>
   );
 };
