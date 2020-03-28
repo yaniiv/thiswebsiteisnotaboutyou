@@ -9,6 +9,8 @@ import Icon from "../components/Icon";
 
 import { bodyContent } from "../cms-content";
 
+const isBrowser = typeof window !== "undefined";
+
 const colors = chroma
   .scale(["#fafa6e", "#2A4858"])
   .mode("lch")
@@ -266,22 +268,23 @@ const Landing = ({ data, parsedIp, geoIpData }) => {
             justify-content: space-evenly;
           `}
         >
-          {colors.map((color, index) => {
-            let width = getBoxDimensions();
-            return (
-              <div
-                key={index}
-                css={css`
-                  /* margin: 10px; */
-                  height: ${width}px;
-                  width: ${width}px;
-                  background-color: ${chroma.random().hex()};
-                  font-size: 24px;
-                  /* border-radius: 4px; */
-                `}
-              />
-            );
-          })}
+          {isBrowser() &&
+            colors.map((color, index) => {
+              let width = getBoxDimensions();
+              return (
+                <div
+                  key={index}
+                  css={css`
+                    /* margin: 10px; */
+                    height: ${width}px;
+                    width: ${width}px;
+                    background-color: ${chroma.random().hex()};
+                    font-size: 24px;
+                    /* border-radius: 4px; */
+                  `}
+                />
+              );
+            })}
         </div>
       </div>
     </React.Fragment>
