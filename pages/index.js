@@ -4,10 +4,10 @@ import chroma from "chroma-js";
 import styled from "@emotion/styled";
 import { css, jsx, Global, keyframes } from "@emotion/core";
 
-import Nav from "../components/Nav";
 import Hello from "../components/Hello";
 import Boxes from "../components/Boxes";
 import BodyText from "../components/BodyText";
+import Nav from "../components/NavCons";
 
 console.warn("chroma.random()", chroma.random().hex());
 

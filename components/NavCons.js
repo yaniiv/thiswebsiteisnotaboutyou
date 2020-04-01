@@ -5,7 +5,7 @@ import chroma from "chroma-js";
 import styled from "@emotion/styled";
 import { css, jsx, Global, keyframes } from "@emotion/core";
 
-import Icon from "../components/Icon";
+import Icon from "./Icon";
 
 import { bodyContent } from "../cms-content";
 

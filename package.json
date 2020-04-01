@@ -9,7 +9,7 @@
     "start": "PORT=5000 NODE_ENV=production node server.js"
   },
   "engines": {
-    "node": "12.x"
+    "node": "10.x"
   },
   "dependencies": {
     "@emotion/babel-preset-css-prop": "^10.0.27",

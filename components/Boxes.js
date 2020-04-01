@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import chroma from "chroma-js";
 import { css } from "@emotion/core";
 
-const numBoxes = 200;
 const colors = chroma
   .scale(["#fafa6e", "#2A4858"])
   .mode("lch")
