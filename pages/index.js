@@ -5,8 +5,9 @@ import styled from "@emotion/styled";
 import { css, jsx, Global, keyframes } from "@emotion/core";
 
 import Nav from "../components/Nav";
-import BodyText from "../components/BodyText";
+import Hello from "../components/Hello";
 import Boxes from "../components/Boxes";
+import BodyText from "../components/BodyText";
 
 console.warn("chroma.random()", chroma.random().hex());
 
@@ -111,14 +112,7 @@ const Landing = ({ data, parsedIp, geoIpData }) => {
             <div>parsedIp: {parsedIp}</div>
             <div>geoIpData: {geoIpData}</div>
           </div>
-          <div
-            css={css`
-              display: flex;
-              height: 100%;
-              width: 100%;
-              flex-wrap: wrap;
-            `}
-          >
+          <div>
             <Head>
               <title>This Website is not about You</title>
             </Head>
@@ -132,36 +126,10 @@ const Landing = ({ data, parsedIp, geoIpData }) => {
                   `}
               `}
             >
-              <div
-                css={css`
-                  position: fixed;
-                  top: 200px;
-                  background: white;
-                `}
-              >
-                Hello,
-                <span
-                  css={css`
-                    color: blueviolet;
-                    text-decoration: underline;
-                  `}
-                >
-                  {" "}
-                  {parsedIp || "11.111.111.111"}{" "}
-                </span>
-                , welcome!
-              </div>
+              <Hello parsedIp={parsedIp} />
               <BodyText />
             </div>
-            <div
-              css={css`
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: space-evenly;
-              `}
-            >
-              <Boxes boxSize={boxSize} />
-            </div>
+            <Boxes boxSize={boxSize} />
           </div>
         </div>
       )}

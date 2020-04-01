@@ -19,11 +19,6 @@ const links = [
 
 function getIconStyles(boxSize) {
   return css`
-    position: fixed;
-    vertical-align: middle;
-    top: 0;
-    width: ${boxSize}px;
-
     :hover {
       cursor: pointer;
     }
@@ -41,20 +36,28 @@ function getIconStyles(boxSize) {
 }
 
 const Nav = ({ setShowBodyContent, boxSize }) => (
-  <nav css={css``}>
+  <nav>
     <div
       onClick={() => {
         setShowBodyContent(false);
       }}
       css={css`
+        top: 0;
         left: 0;
+        position: fixed;
+
+        width: ${boxSize}px;
       `}
     >
       <Icon css={getIconStyles(boxSize)} name="close" />
     </div>
     <div
       css={css`
+        top: 0;
         right: 0;
+        position: fixed;
+
+        width: ${boxSize}px;
       `}
       onClick={() => {
         setShowBodyContent(true);

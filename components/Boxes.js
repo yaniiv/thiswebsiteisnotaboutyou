@@ -11,13 +11,17 @@ const colors = chroma
 
 const Boxes = ({ boxSize }) => {
   return (
-    <>
+    <div
+      css={css`
+        display: flex;
+        flex-wrap: wrap;
+      `}
+    >
       {colors.map((_, index) => {
         return (
           <div
             key={index}
             css={css`
-              /* margin: 10px; */
               height: ${boxSize}px;
               width: ${boxSize}px;
               background-color: ${chroma.random().hex()};
@@ -27,7 +31,7 @@ const Boxes = ({ boxSize }) => {
           />
         );
       })}
-    </>
+    </div>
   );
 };
 
