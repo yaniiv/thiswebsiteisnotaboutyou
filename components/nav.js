@@ -19,18 +19,14 @@ const links = [
 
 function getIconStyles(boxSize) {
   return css`
-    :hover {
-      cursor: pointer;
-    }
-
-    stroke: white;
+    /* stroke: white; */
     fill: none;
     stroke-linecap: round;
     stroke-linejoin: round;
     stroke-width: 2;
     svg {
-      height: ${boxSize}px;
-      width: ${boxSize}px;
+      height: ${boxSize - 10}px;
+      width: ${boxSize - 10}px;
     }
   `;
 }
@@ -45,25 +41,35 @@ const Nav = ({ setShowBodyContent, boxSize }) => (
         top: 0;
         left: 0;
         position: fixed;
-
+        height: ${boxSize}px;
         width: ${boxSize}px;
+        background: white;
+        padding: 10px;
+        :hover {
+          cursor: pointer;
+        }
       `}
     >
-      <Icon css={getIconStyles(boxSize)} name="close" />
+      <Icon stroke="red" css={getIconStyles(boxSize)} name="close" />
     </div>
     <div
       css={css`
         top: 0;
         right: 0;
+        padding: 10px;
         position: fixed;
-
         width: ${boxSize}px;
+        height: ${boxSize}px;
+        background: white;
+        :hover {
+          cursor: pointer;
+        }
       `}
       onClick={() => {
         setShowBodyContent(true);
       }}
     >
-      <Icon css={getIconStyles(boxSize)} name="info" />
+      <Icon stroke="red" css={getIconStyles(boxSize)} name="info" />
     </div>
   </nav>
 );

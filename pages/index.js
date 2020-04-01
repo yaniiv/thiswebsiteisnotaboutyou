@@ -89,7 +89,7 @@ const Landing = ({ data, parsedIp, geoIpData }) => {
           html,
           body {
             margin: 0;
-            background: grey;
+            background: black;
             min-height: 100%;
             font-family: Helvetica, Arial, sans-serif;
             font-size: 24px;

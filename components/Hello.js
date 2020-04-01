@@ -7,20 +7,19 @@ const Hello = ({ parsedIp }) => {
       css={css`
         position: fixed;
         top: 200px;
+        padding: 10px;
         background: white;
       `}
     >
-      Hello,
+      Hello,{" "}
       <span
         css={css`
           color: blueviolet;
           text-decoration: underline;
         `}
       >
-        {" "}
         {parsedIp || "11.111.111.111"}{" "}
       </span>
-      , welcome!
     </div>
   );
 };

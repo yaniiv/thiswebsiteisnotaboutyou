@@ -12,6 +12,7 @@ const BodyText = () => {
           css={css`
             position: fixed;
             background: white;
+            padding: 10px;
             top: ${section.top};
             left: ${section.left};
             width: ${section.width};
