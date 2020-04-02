@@ -116,7 +116,11 @@ const Landing = ({ data, parsedIp, geoIpData }) => {
             <Head>
               <title>This Website is not about You</title>
             </Head>
-            <Nav boxSize={boxSize} setShowBodyContent={setShowBodyContent} />
+            <Nav
+              boxSize={boxSize}
+              showBodyContent={showBodyContent}
+              setShowBodyContent={setShowBodyContent}
+            />
             <div
               css={css`
                 opacity: 1;

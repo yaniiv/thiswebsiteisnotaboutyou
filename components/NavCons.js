@@ -31,46 +31,55 @@ function getIconStyles(boxSize) {
   `;
 }
 
-const Nav = ({ setShowBodyContent, boxSize }) => (
+const Nav = ({ setShowBodyContent, boxSize, showBodyContent }) => (
   <nav>
-    <div
-      onClick={() => {
-        setShowBodyContent(false);
-      }}
-      css={css`
-        top: 0;
-        left: 0;
-        position: fixed;
-        height: ${boxSize}px;
-        width: ${boxSize}px;
-        background: white;
-        padding: 10px;
-        :hover {
-          cursor: pointer;
-        }
-      `}
-    >
-      <Icon stroke="red" css={getIconStyles(boxSize)} name="close" />
-    </div>
-    <div
-      css={css`
-        top: 0;
-        right: 0;
-        padding: 10px;
-        position: fixed;
-        width: ${boxSize}px;
-        height: ${boxSize}px;
-        background: white;
-        :hover {
-          cursor: pointer;
-        }
-      `}
-      onClick={() => {
-        setShowBodyContent(true);
-      }}
-    >
-      <Icon stroke="red" css={getIconStyles(boxSize)} name="info" />
-    </div>
+    {showBodyContent && (
+      <div
+        onClick={() => {
+          setShowBodyContent(false);
+        }}
+        css={css`
+          top: 0;
+          right: 0;
+          position: fixed;
+          height: ${boxSize}px;
+          width: ${boxSize}px;
+          background: white;
+          padding: 10px;
+          :hover {
+            cursor: pointer;
+          }
+        `}
+      >
+        <Icon stroke="red" css={getIconStyles(boxSize)} name="close" />
+      </div>
+    )}
+    {!showBodyContent && (
+      <div
+        css={css`
+          top: 0;
+          right: 0;
+          padding: 10px;
+          position: fixed;
+          width: ${boxSize}px;
+          height: ${boxSize}px;
+          background: white;
+          :hover {
+            cursor: pointer;
+          }
+
+          ${showBodyContent &
+            css`
+              display: none;
+            `}
+        `}
+        onClick={() => {
+          setShowBodyContent(true);
+        }}
+      >
+        <Icon stroke="red" css={getIconStyles(boxSize)} name="info" />
+      </div>
+    )}
   </nav>
 );
 
