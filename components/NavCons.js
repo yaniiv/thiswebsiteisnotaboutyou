@@ -40,15 +40,15 @@ const Nav = ({ setShowBodyContent, boxSize, showBodyContent }) => {
             top: 0;
             right: 0;
             position: fixed;
-            height: 60px;
-            width: 60px;
-            background: white;
+            height: 90px;
+            width: 90px;
+            background: transparent;
             :hover {
               cursor: pointer;
             }
           `}
         >
-          <Icon stroke="red" css={getIconStyles(boxSize)} name="close" />
+          <Icon stroke="white" css={getIconStyles(boxSize)} name="close" />
         </div>
       )}
       {/*!showBodyContent && (

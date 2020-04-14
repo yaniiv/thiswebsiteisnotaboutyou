@@ -17,7 +17,7 @@ function getIconStyles(boxSize) {
   `;
 }
 
-const SelectedBox = ({ selectedIndex, colors }) => {
+const SelectedBox = ({ selectedIndex, setSelectedIndex, colors }) => {
   return (
     <div
       css={css`

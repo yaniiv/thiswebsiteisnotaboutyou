@@ -133,16 +133,16 @@ const Landing = ({ data, parsedIp, geoIpData }) => {
               <Hello parsedIp={parsedIp} />
               <BodyText />
             </div>
-            <Boxes
-              colors={colors}
-              setSelectedIndex={setSelectedIndex}
-              selectedIndex={selectedIndex}
-              boxSize={boxSize}
-            />
             <SelectedBox
               setSelectedIndex={setSelectedIndex}
               selectedIndex={selectedIndex}
               colors={colors}
+              boxSize={boxSize}
+            />
+            <Boxes
+              colors={colors}
+              setSelectedIndex={setSelectedIndex}
+              selectedIndex={selectedIndex}
               boxSize={boxSize}
             />
           </div>
