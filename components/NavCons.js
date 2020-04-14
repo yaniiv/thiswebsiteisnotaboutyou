@@ -51,15 +51,14 @@ const Nav = ({ setShowBodyContent, boxSize, showBodyContent }) => {
           <Icon stroke="white" css={getIconStyles(boxSize)} name="close" />
         </div>
       )}
-      {/*!showBodyContent && (
+      {!showBodyContent && (
         <div
           css={css`
             top: 0;
-            right: 0;
+            left: 0;
             position: fixed;
-            width: ${boxSize}px;
-            height: ${boxSize}px;
-            background: white;
+            height: 90px;
+            width: 90px;
             :hover {
               cursor: pointer;
             }
@@ -73,9 +72,9 @@ const Nav = ({ setShowBodyContent, boxSize, showBodyContent }) => {
             setShowBodyContent(true);
           }}
         >
-          <Icon stroke="red" css={getIconStyles(boxSize)} name="info" />
+          <Icon stroke="white" css={getIconStyles(boxSize)} name="info" />
         </div>
-        ) */}
+      )}
     </nav>
   );
 };

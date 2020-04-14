@@ -1,30 +1,13 @@
-import React, { useState, useEffect } from "react";
-import chroma from "chroma-js";
+import React from "react";
 import { css } from "@emotion/core";
+
 import Icon from "./Icon";
 
-// const colors = chroma.scale(["#fafa6e", "#2A4858"]).mode("lch").colors(121);
-function getIconStyles(boxSize) {
-  return css`
-    cursor: pointer;
-    /* stroke: white; */
-    fill: none;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 2;
-    height: 60px;
-    width: 60px;
-  `;
-}
-
 const SelectedBox = ({ selectedIndex, setSelectedIndex, colors }) => {
+  const selectedColor = colors[selectedIndex] || "white";
+
   return (
-    <div
-      css={css`
-        display: flex;
-        flex-wrap: wrap;
-      `}
-    >
+    <div css={css``}>
       <div
         css={css`
           position: fixed;
@@ -33,14 +16,13 @@ const SelectedBox = ({ selectedIndex, setSelectedIndex, colors }) => {
           display: none;
           align-items: center;
           justify-content: center;
-          opacity: 0;
 
           ${selectedIndex !== -1 &&
           css`
             display: flex;
             transition-property: opacity;
             transition-duration: 1s;
-            opacity: 1;
+            border: 1px solid #036cdb;
           `}
         `}
       >
@@ -50,18 +32,28 @@ const SelectedBox = ({ selectedIndex, setSelectedIndex, colors }) => {
             background-color: white;
             width: 600px;
             height: 600px;
-
+            border: 1px solid #036cdb;
             ${selectedIndex !== -1 &&
             css`
-              background-color: ${colors[selectedIndex] || "white"};
+              background-color: ${selectedColor};
             `}
           `}
         >
           <Icon
-            stroke="red"
-            css={getIconStyles()}
+            stroke="white"
+            css={css`
+              cursor: pointer;
+              fill: none;
+              float: right;
+              top: 0;
+              right: 0;
+              stroke-linecap: round;
+              stroke-linejoin: round;
+              stroke-width: 2;
+              height: 60px;
+              width: 60px;
+            `}
             onClick={() => {
-              console.warn("icon close box click");
               setSelectedIndex(-1);
             }}
             name="close"

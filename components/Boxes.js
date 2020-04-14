@@ -1,30 +1,8 @@
-import React, { useState, useEffect } from "react";
-import chroma from "chroma-js";
+import React from "react";
 import { css } from "@emotion/core";
-import Icon from "./Icon";
-
-// const colors = chroma.scale(["#fafa6e", "#2A4858"]).mode("lch").colors(121);
-function getIconStyles(boxSize) {
-  return css`
-    cursor: pointer;
-    /* stroke: white; */
-    fill: none;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 2;
-    height: 60px;
-    width: 60px;
-  `;
-}
-
-const handleBoxClick = (index) => {
-  console.warn("clicked me", e);
-  return;
-};
 
 const Boxes = ({ boxSize, colors, setSelectedIndex }) => {
   console.warn("RERENDER BOXES. boxSize:", boxSize);
-  // console.warn("selectedIndex", selectedIndex);
 
   return (
     <div
@@ -34,8 +12,6 @@ const Boxes = ({ boxSize, colors, setSelectedIndex }) => {
       `}
     >
       {colors.map((color, index) => {
-        // const isSelectedSquare = selectedIndex === index;
-        console.warn("RERENDER COLORS");
         return (
           <div
             onClick={() => setSelectedIndex(index)}
@@ -51,7 +27,11 @@ const Boxes = ({ boxSize, colors, setSelectedIndex }) => {
               cursor: pointer;
 
               :hover {
-                border-radius: 20px;
+                box-shadow: 0px 15px 65px -7px rgba(0, 0, 0, 0.2),
+                  0px 24px 38px 3px rgba(0, 0, 0, 0.14),
+                  0px 9px 46px 8px rgba(0, 0, 0, 0.12);
+                color: rgba(0, 0, 0, 0.87);
+                border: 2px solid white;
                 /* background-color: black; */
                 /* margin-top: -24px; */
                 /* margin-left: -24px; */
