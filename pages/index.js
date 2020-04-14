@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import chroma from "chroma-js";
 import styled from "@emotion/styled";
@@ -6,10 +6,9 @@ import { css, jsx, Global, keyframes } from "@emotion/core";
 
 import Hello from "../components/Hello";
 import Boxes from "../components/Boxes";
+import SelectedBox from "../components/SelectedBox";
 import BodyText from "../components/BodyText";
 import Nav from "../components/NavCons";
-
-console.warn("chroma.random()", chroma.random().hex());
 
 const basicStyles = css`
   background-color: white;
@@ -56,32 +55,33 @@ const Animated = styled.div`
   & code {
     background-color: linen;
   }
-  animation: ${props => props.animation} 0.2s infinite ease-in-out alternate;
+  animation: ${(props) => props.animation} 0.2s infinite ease-in-out alternate;
 `;
 
 function isBrowser() {
   return typeof window !== "undefined";
 }
 
-function getBoxDimensions() {
-  let width = 50;
-
-  if (isBrowser()) {
-    width = window.innerWidth / 15;
-  }
-  console.warn(`width`, width);
-  return width;
-}
-
-console.warn("HI from index.js");
-// console.warn("colors", colors);
-
 const Landing = ({ data, parsedIp, geoIpData }) => {
   const [showBodyContent, setShowBodyContent] = useState(true);
-  const boxSize = getBoxDimensions();
+  const [boxSize, setBoxSize] = useState(50);
+  const [selectedIndex, setSelectedIndex] = useState(-1);
+  const [colors, setColors] = useState([]);
+
+  useEffect(() => {
+    console.warn("Landing useEffect");
+    setBoxSize(window.innerWidth / 11);
+    for (let i = 0; i < 200; i++) {
+      colors.push(chroma.random().hex());
+    }
+    setColors(colors);
+  }, []);
+
+  console.warn("showBodyContent", showBodyContent);
+  console.warn("selectedIndex", selectedIndex);
   console.warn("boxSize", boxSize);
-  console.warn("RENDER __ _> parsedIp", parsedIp);
-  console.warn("RENDER ___> geoIpData", geoIpData);
+  console.warn("colors", colors);
+
   return (
     <React.Fragment>
       <Global
@@ -125,15 +125,26 @@ const Landing = ({ data, parsedIp, geoIpData }) => {
               css={css`
                 opacity: 1;
                 ${!showBodyContent &&
-                  css`
-                    opacity: 0;
-                  `}
+                css`
+                  opacity: 0;
+                `}
               `}
             >
               <Hello parsedIp={parsedIp} />
               <BodyText />
             </div>
-            <Boxes boxSize={boxSize} />
+            <Boxes
+              colors={colors}
+              setSelectedIndex={setSelectedIndex}
+              selectedIndex={selectedIndex}
+              boxSize={boxSize}
+            />
+            <SelectedBox
+              setSelectedIndex={setSelectedIndex}
+              selectedIndex={selectedIndex}
+              colors={colors}
+              boxSize={boxSize}
+            />
           </div>
         </div>
       )}
