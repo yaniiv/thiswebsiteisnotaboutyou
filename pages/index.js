@@ -174,10 +174,6 @@ export async function getServerSideProps(context) {
   if (req.parsedIp) {
     parsedIp = req.parsedIp;
   }
-  // geolocationParser(req, res);
-  // console.warn("context", context);
-  // Fetch data from external API
-  // console.warn("req", req);
   // console.warn("res", res);
   // const res = await fetch(`https://.../data`);
   // const data = await res.json();
