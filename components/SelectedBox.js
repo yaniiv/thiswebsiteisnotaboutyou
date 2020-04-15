@@ -23,16 +23,11 @@ const SelectedBox = ({ selectedIndex, setSelectedIndex, colors }) => {
           top: 50%;
           left: 50%;
           display: none;
-          margin: 0 auto;
-          align-items: center;
-          justify-content: center;
           transform: translate(-50%, -50%);
 
           ${isBoxSelected &&
           css`
             display: flex;
-            transition-property: opacity;
-            transition-duration: 1s;
             border: 1px solid #036cdb;
           `}
         `}

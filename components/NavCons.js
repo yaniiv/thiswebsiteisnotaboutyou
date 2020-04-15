@@ -16,6 +16,7 @@ const Nav = ({
   boxSize,
   isBoxSelected,
   showBodyContent,
+  setIsContributeFormActive,
 }) => {
   console.warn("boxSize", boxSize);
   return (
@@ -28,54 +29,61 @@ const Nav = ({
         justify-content: flex-end;
       `}
     >
-      {showBodyContent && !isBoxSelected && (
-        <>
-          <div
-            onClick={() => {
-              setShowBodyContent(false);
-            }}
-            css={css`
-              padding: 0 10px;
-              color: white;
-              background: transparent;
-              :hover {
-                cursor: pointer;
-                color: blue;
-                text-decoration: underline;
+      <div
+        css={css`
+          display: flex;
+          flex-direction: column-reverse;
+          align-items: center;
+          border: 1px solid #036cdb;
+        `}
+      >
+        <div
+          onClick={() => {
+            setIsContributeFormActive(true);
+          }}
+          css={css`
+            margin: 20px 0;
+            color: white;
+            background: transparent;
+            border: 1px solid #036cdb;
+            :hover {
+              cursor: pointer;
+              color: blue;
+              text-decoration: underline;
+            }
+          `}
+        >
+          contribute
+        </div>
+        <div
+          onClick={() => {
+            setShowBodyContent(false);
+          }}
+          css={css`
+            height: 90px;
+            padding: 0 10px;
+            border: 1px solid #036cdb;
+            width: 90px;
+            background: transparent;
+            :hover {
+              cursor: pointer;
+              svg {
+                stroke: red;
               }
-            `}
-          >
-            contribute
-          </div>
-          <div
-            onClick={() => {
-              setShowBodyContent(false);
-            }}
+            }
+          `}
+        >
+          <Icon
             css={css`
-              height: 90px;
-              padding: 0 10px;
-              width: 90px;
-              background: transparent;
-              :hover {
-                cursor: pointer;
-                svg {
-                  stroke: red;
-                }
-              }
+              fill: none;
+              stroke-linecap: round;
+              stroke-linejoin: round;
+              stroke-width: 2;
             `}
-          >
-            <Icon
-              css={css`
-                fill: none;
-                stroke-linecap: round;
-                stroke-linejoin: round;
-                stroke-width: 2;
-              `}
-              name="close"
-            />
-          </div>
-        </>
-      )}
+            name="close"
+          />
+        </div>
+      </div>
     </nav>
   );
 };

@@ -13,6 +13,7 @@ const BodyText = () => {
             position: fixed;
             background: white;
             padding: 10px;
+            border: 1px solid #036cdb;
             top: ${section.top};
             left: ${section.left};
             width: ${section.width};

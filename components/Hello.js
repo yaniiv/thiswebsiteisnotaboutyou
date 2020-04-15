@@ -8,6 +8,7 @@ const Hello = ({ parsedIp }) => {
         position: fixed;
         top: 200px;
         padding: 10px;
+        border: 1px solid #036cdb;
         background: white;
       `}
     >

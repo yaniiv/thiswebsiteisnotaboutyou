@@ -9,6 +9,7 @@ import Boxes from "../components/Boxes";
 import SelectedBox from "../components/SelectedBox";
 import BodyText from "../components/BodyText";
 import Nav from "../components/NavCons";
+import Contribute from "../components/Contribute";
 
 const basicStyles = css`
   background-color: white;
@@ -67,6 +68,7 @@ const Landing = ({ data, parsedIp, geoIpData }) => {
   const [boxSize, setBoxSize] = useState(50);
   const [selectedIndex, setSelectedIndex] = useState(-1);
 
+  const [isContributeFormActive, setIsContributeFormActive] = useState(false);
   const isBoxSelected = selectedIndex !== -1;
   const [colors, setColors] = useState([]);
 
@@ -118,29 +120,22 @@ const Landing = ({ data, parsedIp, geoIpData }) => {
             <Head>
               <title>This Website Is Not About You</title>
             </Head>
-            <Nav
-              boxSize={boxSize}
-              showBodyContent={showBodyContent}
-              setShowBodyContent={setShowBodyContent}
-              isBoxSelected={isBoxSelected}
-            />
-            <div
-              css={css`
-                opacity: 1;
-                ${!showBodyContent &&
-                css`
-                  opacity: 0;
-                `}
 
-                ${isBoxSelected &&
-                css`
-                  opacity: 0;
-                `}
-              `}
-            >
-              <Hello parsedIp={parsedIp} />
-              <BodyText />
-            </div>
+            {showBodyContent && !isBoxSelected && (
+              <>
+                <Nav
+                  boxSize={boxSize}
+                  showBodyContent={showBodyContent}
+                  setShowBodyContent={setShowBodyContent}
+                  setIsContributeFormActive={setIsContributeFormActive}
+                  isBoxSelected={isBoxSelected}
+                />
+                <div>
+                  <Hello parsedIp={parsedIp} />
+                  <BodyText />
+                </div>
+              </>
+            )}
             <SelectedBox
               setSelectedIndex={setSelectedIndex}
               selectedIndex={selectedIndex}
@@ -155,6 +150,11 @@ const Landing = ({ data, parsedIp, geoIpData }) => {
               selectedIndex={selectedIndex}
               boxSize={boxSize}
             />
+            {isContributeFormActive && (
+              <Contribute
+                setIsContributeFormActive={setIsContributeFormActive}
+              />
+            )}
           </div>
         </div>
       )}
