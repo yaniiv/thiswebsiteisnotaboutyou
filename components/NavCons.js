@@ -51,30 +51,6 @@ const Nav = ({ setShowBodyContent, boxSize, showBodyContent }) => {
           <Icon stroke="white" css={getIconStyles(boxSize)} name="close" />
         </div>
       )}
-      {!showBodyContent && (
-        <div
-          css={css`
-            top: 0;
-            left: 0;
-            position: fixed;
-            height: 90px;
-            width: 90px;
-            :hover {
-              cursor: pointer;
-            }
-
-            ${showBodyContent &
-            css`
-              display: none;
-            `}
-          `}
-          onClick={() => {
-            setShowBodyContent(true);
-          }}
-        >
-          <Icon stroke="white" css={getIconStyles(boxSize)} name="info" />
-        </div>
-      )}
     </nav>
   );
 };

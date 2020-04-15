@@ -66,6 +66,8 @@ const Landing = ({ data, parsedIp, geoIpData }) => {
   const [showBodyContent, setShowBodyContent] = useState(true);
   const [boxSize, setBoxSize] = useState(50);
   const [selectedIndex, setSelectedIndex] = useState(-1);
+
+  const isBoxSelected = selectedIndex !== -1;
   const [colors, setColors] = useState([]);
 
   useEffect(() => {
@@ -114,7 +116,7 @@ const Landing = ({ data, parsedIp, geoIpData }) => {
           </div>
           <div>
             <Head>
-              <title>This Website is not about You</title>
+              <title>This Website Is Not About You</title>
             </Head>
             <Nav
               boxSize={boxSize}
@@ -128,6 +130,11 @@ const Landing = ({ data, parsedIp, geoIpData }) => {
                 css`
                   opacity: 0;
                 `}
+
+                ${isBoxSelected &&
+                css`
+                  opacity: 0;
+                `}
               `}
             >
               <Hello parsedIp={parsedIp} />
@@ -138,8 +145,10 @@ const Landing = ({ data, parsedIp, geoIpData }) => {
               selectedIndex={selectedIndex}
               colors={colors}
               boxSize={boxSize}
+              isBoxSelected={isBoxSelected}
             />
             <Boxes
+              isBoxSelected={isBoxSelected}
               colors={colors}
               setSelectedIndex={setSelectedIndex}
               selectedIndex={selectedIndex}

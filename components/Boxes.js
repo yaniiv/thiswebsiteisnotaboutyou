@@ -1,9 +1,7 @@
 import React from "react";
 import { css } from "@emotion/core";
 
-const Boxes = ({ boxSize, colors, setSelectedIndex }) => {
-  console.warn("RERENDER BOXES. boxSize:", boxSize);
-
+const Boxes = ({ boxSize, colors, isBoxSelected, setSelectedIndex }) => {
   return (
     <div
       css={css`
@@ -14,7 +12,14 @@ const Boxes = ({ boxSize, colors, setSelectedIndex }) => {
       {colors.map((color, index) => {
         return (
           <div
-            onClick={() => setSelectedIndex(index)}
+            onClick={() => {
+              if (isBoxSelected) {
+                console.warn("isBoxSelected", isBoxSelected);
+                setSelectedIndex(-1);
+              } else {
+                setSelectedIndex(index);
+              }
+            }}
             key={index}
             css={css`
               height: ${boxSize}px;
@@ -32,11 +37,6 @@ const Boxes = ({ boxSize, colors, setSelectedIndex }) => {
                   0px 9px 46px 8px rgba(0, 0, 0, 0.12);
                 color: rgba(0, 0, 0, 0.87);
                 border: 3px solid #036cdb;
-                /* background-color: black; */
-                /* margin-top: -24px; */
-                /* margin-left: -24px; */
-                /* transform: translateY(-24px); */
-                /* transform: translateX(-24px); */
               }
             `}
           />

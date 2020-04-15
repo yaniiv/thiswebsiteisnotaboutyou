@@ -5,9 +5,21 @@ import Icon from "./Icon";
 
 const SelectedBox = ({ selectedIndex, setSelectedIndex, colors }) => {
   const selectedColor = colors[selectedIndex] || "white";
+  console.log(
+    "%c selectedColor",
+    selectedColor,
+    `background: ${selectedColor};`
+  );
+  console.log("%c the green hulk got mad!", "color: green; font-weight: bold;");
+
+  const isBoxSelected = selectedIndex !== -1;
 
   return (
-    <div css={css``}>
+    <div
+      css={css`
+        pointer-events: none;
+      `}
+    >
       <div
         css={css`
           position: fixed;
@@ -17,7 +29,7 @@ const SelectedBox = ({ selectedIndex, setSelectedIndex, colors }) => {
           align-items: center;
           justify-content: center;
 
-          ${selectedIndex !== -1 &&
+          ${isBoxSelected &&
           css`
             display: flex;
             transition-property: opacity;
@@ -33,7 +45,7 @@ const SelectedBox = ({ selectedIndex, setSelectedIndex, colors }) => {
             width: 600px;
             height: 600px;
             border: 1px solid #036cdb;
-            ${selectedIndex !== -1 &&
+            ${isBoxSelected &&
             css`
               background-color: ${selectedColor};
             `}
