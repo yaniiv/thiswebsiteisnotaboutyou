@@ -11,14 +11,15 @@ const Hello = ({ parsedIp }) => {
         background: white;
       `}
     >
-      Hello,{" "}
+      Hello{" "}
       <span
         css={css`
           color: blueviolet;
           text-decoration: underline;
         `}
       >
-        {parsedIp || "11.111.111.111"}{" "}
+        {parsedIp || "11.111.111.111"}
+        {", "}
       </span>
     </div>
   );

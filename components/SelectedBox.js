@@ -2,9 +2,27 @@ import React from "react";
 import { css } from "@emotion/core";
 
 import Icon from "./Icon";
+import CanvasDraw from "react-canvas-draw";
 
 const SelectedBox = ({ selectedIndex, setSelectedIndex, colors }) => {
   const selectedColor = colors[selectedIndex] || "white";
+  const canvasProps = {
+    onChange: null,
+    loadTimeOffset: 5,
+    lazyRadius: 30,
+    brushRadius: 12,
+    brushColor: "#444",
+    catenaryColor: "#0a0302",
+    gridColor: "rgba(150,150,150,0.17)",
+    hideGrid: false,
+    canvasWidth: 400,
+    canvasHeight: 400,
+    disabled: false,
+    imgSrc: "",
+    saveData: null,
+    immediateLoading: false,
+    hideInterface: false,
+  };
   console.log(
     "%c selectedColor",
     selectedColor,
@@ -15,19 +33,13 @@ const SelectedBox = ({ selectedIndex, setSelectedIndex, colors }) => {
   const isBoxSelected = selectedIndex !== -1;
 
   return (
-    <div
-      css={css`
-        pointer-events: none;
-      `}
-    >
+    <div css={css``}>
       <div
         css={css`
-          position: fixed;
-          width: 100%;
-          height: 100%;
           display: none;
           align-items: center;
           justify-content: center;
+          flex-direction: center;
 
           ${isBoxSelected &&
           css`
@@ -44,6 +56,7 @@ const SelectedBox = ({ selectedIndex, setSelectedIndex, colors }) => {
             background-color: white;
             width: 600px;
             height: 600px;
+            position: fixed;
             border: 1px solid #036cdb;
             ${isBoxSelected &&
             css`
@@ -71,6 +84,7 @@ const SelectedBox = ({ selectedIndex, setSelectedIndex, colors }) => {
             name="close"
           />
           <div>From: Date: Text:</div>
+          <CanvasDraw {...canvasProps} />
         </div>
       </div>
     </div>
