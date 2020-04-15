@@ -11,38 +11,70 @@ import Icon from "./Icon";
 //   return link;
 // });
 
-const Nav = ({ setShowBodyContent, boxSize, showBodyContent }) => {
+const Nav = ({
+  setShowBodyContent,
+  boxSize,
+  isBoxSelected,
+  showBodyContent,
+}) => {
   console.warn("boxSize", boxSize);
   return (
-    <nav>
-      {showBodyContent && (
-        <div
-          onClick={() => {
-            setShowBodyContent(false);
-          }}
-          css={css`
-            top: 0;
-            right: 0;
-            position: fixed;
-            height: 90px;
-            width: 90px;
-            background: transparent;
-            :hover {
-              cursor: pointer;
-            }
-          `}
-        >
-          <Icon
-            stroke="white"
+    <nav
+      css={css`
+        top: 0;
+        width: 100%;
+        position: fixed;
+        display: flex;
+        justify-content: flex-end;
+      `}
+    >
+      {showBodyContent && !isBoxSelected && (
+        <>
+          <div
+            onClick={() => {
+              setShowBodyContent(false);
+            }}
             css={css`
-              fill: none;
-              stroke-linecap: round;
-              stroke-linejoin: round;
-              stroke-width: 2;
+              padding: 0 10px;
+              color: white;
+              background: transparent;
+              :hover {
+                cursor: pointer;
+                color: blue;
+                text-decoration: underline;
+              }
             `}
-            name="close"
-          />
-        </div>
+          >
+            contribute
+          </div>
+          <div
+            onClick={() => {
+              setShowBodyContent(false);
+            }}
+            css={css`
+              height: 90px;
+              padding: 0 10px;
+              width: 90px;
+              background: transparent;
+              :hover {
+                cursor: pointer;
+                svg {
+                  stroke: red;
+                }
+              }
+            `}
+          >
+            <Icon
+              css={css`
+                fill: none;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+                stroke-width: 2;
+              `}
+              name="close"
+            />
+          </div>
+        </>
       )}
     </nav>
   );

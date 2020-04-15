@@ -122,6 +122,7 @@ const Landing = ({ data, parsedIp, geoIpData }) => {
               boxSize={boxSize}
               showBodyContent={showBodyContent}
               setShowBodyContent={setShowBodyContent}
+              isBoxSelected={isBoxSelected}
             />
             <div
               css={css`

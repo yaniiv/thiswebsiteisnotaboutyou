@@ -13,6 +13,7 @@ const Boxes = ({ boxSize, colors, isBoxSelected, setSelectedIndex }) => {
         return (
           <div
             onClick={() => {
+              console.warn("BOXES click");
               if (isBoxSelected) {
                 console.warn("isBoxSelected", isBoxSelected);
                 setSelectedIndex(-1);
