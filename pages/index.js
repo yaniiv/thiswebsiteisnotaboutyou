@@ -67,7 +67,7 @@ const Landing = ({ data, parsedIp, geoIpData }) => {
   const [showBodyContent, setShowBodyContent] = useState(true);
   const [boxSize, setBoxSize] = useState(50);
   const [selectedIndex, setSelectedIndex] = useState(-1);
-  const [isContributeFormActive, setIsContributeFormActive] = useState(false);
+  const [isContributeFormActive, setIsContributeFormActive] = useState(true);
   const isBoxSelected = selectedIndex !== -1;
   const [colors, setColors] = useState([]);
 
