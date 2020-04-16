@@ -20,7 +20,7 @@ const iconStyles = css`
   float: right;
   top: 0;
   right: 0;
-  transform: translate(0%, calc(-100% - 20px));
+  transform: translate(calc(100% + 20px), 0%);
   stroke-width: 2;
   z-index: 50;
   height: 60px;
@@ -81,7 +81,7 @@ const Contribute = ({ setIsContributeFormActive }) => {
         <SketchPicker
           css={css`
             position: absolute;
-            top: 0;
+            bottom: 0;
             right: 0;
             transform: translate(calc(100% + 20px), 0%);
             border-radius: 0;
@@ -116,7 +116,8 @@ const Contribute = ({ setIsContributeFormActive }) => {
             position: absolute;
             bottom: 0;
             right: 0;
-            height: 80px;
+            background: white;
+            height: 50px;
             width: 120px;
             transform: translate(0%, calc(100% + 20px));
             font-size: 20px;

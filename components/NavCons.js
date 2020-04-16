@@ -76,8 +76,8 @@ const Nav = ({
           <Icon
             css={css`
               fill: none;
-              stroke-linecap: round;
-              stroke-linejoin: round;
+              /* stroke-linecap: round; */
+              /* stroke-linejoin: round; */
               stroke-width: 2;
             `}
             name="close"
