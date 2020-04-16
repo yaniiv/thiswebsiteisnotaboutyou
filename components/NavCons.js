@@ -23,66 +23,56 @@ const Nav = ({
     <nav
       css={css`
         top: 0;
-        width: 100%;
         position: fixed;
+        z-index: 50;
+        width: 100%;
         display: flex;
         justify-content: flex-end;
       `}
     >
       <div
+        onClick={() => {
+          setIsContributeFormActive((prevState) => !prevState);
+        }}
         css={css`
-          display: flex;
-          flex-direction: column-reverse;
-          align-items: center;
-          border: 1px solid #036cdb;
+          color: white;
+          background: transparent;
+          border: 2px solid #036cdb;
+          position: fixed;
+          top: 110px;
+          :hover {
+            cursor: pointer;
+            color: blue;
+            text-decoration: underline;
+          }
         `}
       >
-        <div
-          onClick={() => {
-            setIsContributeFormActive(true);
-          }}
-          css={css`
-            margin: 20px 0;
-            color: white;
-            background: transparent;
-            border: 1px solid #036cdb;
-            :hover {
-              cursor: pointer;
-              color: blue;
-              text-decoration: underline;
+        contribute
+      </div>
+      <div
+        onClick={() => {
+          setShowBodyContent(false);
+        }}
+        css={css`
+          height: 90px;
+          border: 2px solid #036cdb;
+          width: 90px;
+          background: transparent;
+          :hover {
+            cursor: pointer;
+            svg {
+              stroke: red;
             }
-          `}
-        >
-          contribute
-        </div>
-        <div
-          onClick={() => {
-            setShowBodyContent(false);
-          }}
+          }
+        `}
+      >
+        <Icon
           css={css`
-            height: 90px;
-            padding: 0 10px;
-            border: 1px solid #036cdb;
-            width: 90px;
-            background: transparent;
-            :hover {
-              cursor: pointer;
-              svg {
-                stroke: red;
-              }
-            }
+            fill: none;
+            stroke-width: 2;
           `}
-        >
-          <Icon
-            css={css`
-              fill: none;
-              /* stroke-linecap: round; */
-              /* stroke-linejoin: round; */
-              stroke-width: 2;
-            `}
-            name="close"
-          />
-        </div>
+          name="close"
+        />
       </div>
     </nav>
   );

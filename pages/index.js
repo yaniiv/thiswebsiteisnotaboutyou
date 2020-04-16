@@ -67,7 +67,6 @@ const Landing = ({ data, parsedIp, geoIpData }) => {
   const [showBodyContent, setShowBodyContent] = useState(true);
   const [boxSize, setBoxSize] = useState(50);
   const [selectedIndex, setSelectedIndex] = useState(-1);
-
   const [isContributeFormActive, setIsContributeFormActive] = useState(true);
   const isBoxSelected = selectedIndex !== -1;
   const [colors, setColors] = useState([]);
@@ -120,7 +119,22 @@ const Landing = ({ data, parsedIp, geoIpData }) => {
             <Head>
               <title>This Website Is Not About You</title>
             </Head>
-
+            {(isBoxSelected || isContributeFormActive) && (
+              <div
+                onClick={() => {
+                  setIsContributeFormActive(false);
+                  setSelectedIndex(-1);
+                }}
+                css={css`
+                  height: 100%;
+                  width: 100%;
+                  position: fixed;
+                  z-index: 10;
+                  background: white;
+                  opacity: 0.75;
+                `}
+              />
+            )}
             {showBodyContent && !isBoxSelected && (
               <>
                 <Nav

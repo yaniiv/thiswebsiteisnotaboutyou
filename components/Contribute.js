@@ -5,16 +5,10 @@ import CanvasDraw from "react-canvas-draw";
 import { SketchPicker } from "react-color";
 import Icon from "./Icon";
 
-const hoverStyles = css`
-  :hover {
-    cursor: pointer;
-    svg {
-      stroke: red;
-    }
-  }
-`;
+const hoverStyles = css``;
 
 const iconStyles = css`
+  border: 2px solid #036cdb;
   cursor: pointer;
   fill: none;
   float: right;
@@ -56,6 +50,7 @@ const Contribute = ({ setIsContributeFormActive }) => {
         background: ${selectedColor};
         border: 2px solid #036cdb;
         position: fixed;
+        z-index: 50;
         flex-direction: column;
         top: 50%;
         left: 50%;
@@ -77,14 +72,20 @@ const Contribute = ({ setIsContributeFormActive }) => {
         <Icon css={iconStyles} name="close" fill="white" stroke="white" />
       </div>
 
-      <div>
+      <div
+        css={css`
+          .sketch-picker {
+          }
+        `}
+      >
         <SketchPicker
           css={css`
-            position: absolute;
-            bottom: 0;
             right: 0;
+            bottom: 0;
+            border: 2px solid #036cdb;
+            border-radius: 0 !important;
+            position: absolute;
             transform: translate(calc(100% + 20px), 0%);
-            border-radius: 0;
           `}
           color={selectedColor}
           onChangeComplete={(sketchColor) => {
@@ -119,6 +120,7 @@ const Contribute = ({ setIsContributeFormActive }) => {
             background: white;
             height: 50px;
             width: 120px;
+            border: 2px solid #036cdb;
             transform: translate(0%, calc(100% + 20px));
             font-size: 20px;
           `}

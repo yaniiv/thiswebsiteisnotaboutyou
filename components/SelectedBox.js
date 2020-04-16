@@ -20,6 +20,7 @@ const SelectedBox = ({ selectedIndex, setSelectedIndex, colors }) => {
       <div
         css={css`
           position: fixed;
+          z-index: 50;
           top: 50%;
           left: 50%;
           display: none;
@@ -28,7 +29,6 @@ const SelectedBox = ({ selectedIndex, setSelectedIndex, colors }) => {
           ${isBoxSelected &&
           css`
             display: flex;
-            border: 1px solid #036cdb;
           `}
         `}
       >
@@ -38,7 +38,7 @@ const SelectedBox = ({ selectedIndex, setSelectedIndex, colors }) => {
             background-color: white;
             width: 600px;
             height: 600px;
-            border: 1px solid #036cdb;
+            border: 2px solid #036cdb;
             ${isBoxSelected &&
             css`
               background-color: ${selectedColor};
@@ -70,6 +70,8 @@ const SelectedBox = ({ selectedIndex, setSelectedIndex, colors }) => {
                 stroke-width: 2;
                 height: 60px;
                 width: 60px;
+                transform: translate(calc(100% + 20px), 0%);
+                border: 2px solid #036cdb;
               `}
               name="close"
             />
