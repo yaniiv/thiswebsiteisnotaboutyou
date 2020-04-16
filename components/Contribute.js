@@ -1,102 +1,131 @@
 import React, { useState } from "react";
 import { css } from "@emotion/core";
 import CanvasDraw from "react-canvas-draw";
-import { useForm } from "react-hook-form";
+// import { useForm } from "react-hook-form";
 import { SketchPicker } from "react-color";
 import Icon from "./Icon";
 
+const hoverStyles = css`
+  :hover {
+    cursor: pointer;
+    svg {
+      stroke: red;
+    }
+  }
+`;
+
+const iconStyles = css`
+  cursor: pointer;
+  fill: none;
+  float: right;
+  top: 0;
+  right: 0;
+  transform: translate(0%, calc(-100% - 20px));
+  stroke-width: 2;
+  z-index: 50;
+  height: 60px;
+  width: 60px;
+`;
+
 const Contribute = ({ setIsContributeFormActive }) => {
-  console.warn("contribute form");
   const canvasProps = {
     onChange: null,
     loadTimeOffset: 5,
     lazyRadius: 30,
-    brushRadius: 12,
-    brushColor: "#444",
-    catenaryColor: "#0a0302",
-    gridColor: "rgba(150,150,150,0.17)",
-    hideGrid: false,
-    canvasWidth: 400,
-    canvasHeight: 400,
+    brushRadius: 6,
+    brushColor: "black",
+    // catenaryColor: "#0a0302",
+    // gridColor: "rgba(150,150,150,0.17)",
+    hideGrid: true,
+    canvasWidth: 600,
+    canvasHeight: 600,
     disabled: false,
-    imgSrc: "",
     saveData: null,
     immediateLoading: false,
     hideInterface: false,
   };
 
-  const { register, handleSubmit, errors } = useForm();
+  // const { register, handleSubmit, errors } = useForm();
   const onSubmit = (data) => {
     console.log("Form Submit:", data);
   };
-  console.log(errors);
   const [selectedColor, setSelectedColor] = useState("grey");
   return (
     <div
       css={css`
         background: ${selectedColor};
         border: 2px solid #036cdb;
-        height: 600px;
-        width: 600px;
         position: fixed;
+        flex-direction: column;
         top: 50%;
         left: 50%;
-        z-index: 40;
-        align-items: center;
-        justify-content: center;
         transform: translate(-50%, -50%);
-        display: flex;
-        flex-direction: column;
-        flex-direction: column;
+        height: 300px;
+        width: 300px;
+        @media (min-width: 768px) {
+          height: 600px;
+          width: 600px;
+        }
       `}
     >
       <div
         onClick={() => {
           setIsContributeFormActive(false);
         }}
-        css={css`
-          :hover {
-            cursor: pointer;
-            svg {
-              stroke: red;
-            }
-          }
-        `}
+        css={hoverStyles}
       >
-        <Icon
-          css={css`
-            cursor: pointer;
-            fill: none;
-            float: right;
-            top: 0;
-            right: 0;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            stroke-width: 2;
-            height: 60px;
-            width: 60px;
-          `}
-          name="close"
-        />
+        <Icon css={iconStyles} name="close" fill="white" stroke="white" />
       </div>
-      <SketchPicker
-        color={selectedColor}
-        onChangeComplete={(sketchColor) => {
-          console.warn("sketchColor", sketchColor);
-          setSelectedColor(sketchColor.hex);
-        }}
-      />
 
       <div>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <SketchPicker
+          css={css`
+            position: absolute;
+            top: 0;
+            right: 0;
+            transform: translate(calc(100% + 20px), 0%);
+            border-radius: 0;
+          `}
+          color={selectedColor}
+          onChangeComplete={(sketchColor) => {
+            setSelectedColor(sketchColor.hex);
+          }}
+        />
+
+        {/* <form
+          css={css`
+            position: absolute;
+            bottom: 0;
+            right: 0;
+
+            input[type="submit"] {
+              height: 90px;
+            }
+          `}
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <textarea
             name="something to share:"
             ref={register({ max: 500, maxLength: 500 })}
           />
-          <input type="submit" />
-        </form>
+          <input css={css``} type="submit" />
+        </form> */}
+        <button
+          onClick={onSubmit}
+          css={css`
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            height: 80px;
+            width: 120px;
+            transform: translate(0%, calc(100% + 20px));
+            font-size: 20px;
+          `}
+        >
+          submit
+        </button>
+        <CanvasDraw {...canvasProps} style={{ background: "transparent" }} />
       </div>
-      <CanvasDraw {...canvasProps} />
     </div>
   );
 };
