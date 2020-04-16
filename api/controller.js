@@ -1,8 +1,6 @@
-import { dbConnect, disconnect } from "../dao";
-import { insertNewContribution } from "../queries/insertNewMessage.query";
-import { updateMessage } from "../queries/updateMessage.query";
-import { validMessageBody, validReaction, validMessageId } from "./api-utils";
-
+import { dbConnect, disconnect } from "../db";
+import { validContributionBody } from "./api-utils";
+import { addNewContribution, getAllContributions } from "./queries";
 /**
  * @function sendMessage Connects to database and posts a new message with to and from data
  *
@@ -16,18 +14,39 @@ const addContribution = async (contributionData) => {
     throw new Error(e);
   });
 
-  // if (!validMessageBody(messageData)) throw new Error(400)
+  // if (!validContributionBody(contributionData)) throw new Error(400);
 
-  let newMessage = insertNewMessage(messageData);
+  let newContribution = addNewContribution(contributionData);
   try {
-    newMessage = await newMessage.save();
+    newContribution = await newContribution.save();
     disconnect();
   } catch (err) {
     throw new Error(500);
   }
-  return { id: newMessage.id };
+  return { id: newContribution.id };
+};
+
+/**
+ * @function queryForAllMessages Connect to database, query for all messages in database sent within 30 days, limited to 100 messages, then close database
+ *
+ * @param none
+ *
+ * @returns {object[]} Returns an array of message objects [ { to: <string>, from: <string>, message: <string>, createdAt: <timestamp>}]
+ */
+
+const queryForAllContributions = async () => {
+  await dbConnect().catch((e) => {
+    throw new Error(e);
+  });
+  return getAllContributions().then((messages, err) => {
+    console.log("messages", messages);
+    if (err) throw new Error(err);
+    disconnect();
+    return messages;
+  });
 };
 
 module.exports = {
   addContribution,
+  queryForAllContributions,
 };

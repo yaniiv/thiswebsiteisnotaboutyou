@@ -2,6 +2,7 @@
 // Make sure the syntax and sources this file requires are compatible with the current node version you are running
 // See https://github.com/zeit/next.js/issues/1245 for discussions on Universal Webpack or universal Babel
 // const { createServer } = require("http");
+
 const { parse } = require("url");
 const next = require("next");
 const express = require("express");
@@ -14,6 +15,8 @@ const geolocationParser = require("./geolocationParser");
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
+
+import { addContribution, queryForAllContributions } from './controller'
 
 const LOGGER_FORMAT = dev
   ? "dev"
@@ -29,6 +32,30 @@ app.prepare().then(() => {
   // This tells it to parse the query portion of the URL.
   // const { pathname, query } = parsedUrl
 
+  server.get("/contributions", (req, res) => {
+    console.warn('server.get contributions')
+    let contributions
+    try {
+      contributions = await queryForAllContributions()
+    } catch (err) {
+      return res.status(400).send(err)
+    }
+    return res.status(200).json(contributions)
+  })
+
+
+  server.post("/contributions", (req, res) => {
+    console.warn('server.post contributions')
+    let contributionAddedConfirmation
+    try {
+      contributionAddedConfirmation = await addContribution(req.body)
+    } catch (err) {
+      const errorCode = parseInt(err.message)
+      return res.status(errorCode).json(err.message)
+    }
+    res.status(200).send(contributionAddedConfirmation)
+  })
+
   server.get("*", (req, res) => {
     console.warn("req.ip", req.ip);
     console.warn("req.cookies", req.cookies);
@@ -37,6 +64,8 @@ app.prepare().then(() => {
 
     return handle(req, res);
   });
+
+
 
   server.listen(process.env.PORT || 5000, err => {
     if (err) throw err;
