@@ -1,4 +1,4 @@
-import moment from "moment";
+const moment = require("moment");
 
 /**
  * @function generateTimeStamp30DaysAgo generates a timestamp 30 days before cthe current time using the library "moment"

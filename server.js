@@ -16,7 +16,10 @@ const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
-import { addContribution, queryForAllContributions } from './controller'
+const {
+  addContribution,
+  queryForAllContributions,
+} = require("./api/controller");
 
 const LOGGER_FORMAT = dev
   ? "dev"
@@ -32,29 +35,28 @@ app.prepare().then(() => {
   // This tells it to parse the query portion of the URL.
   // const { pathname, query } = parsedUrl
 
-  server.get("/contributions", (req, res) => {
-    console.warn('server.get contributions')
-    let contributions
+  server.get("/contributions", async (req, res) => {
+    console.warn("server.get contributions");
+    let contributions;
     try {
-      contributions = await queryForAllContributions()
+      contributions = await queryForAllContributions();
     } catch (err) {
-      return res.status(400).send(err)
+      return res.status(400).send(err);
     }
-    return res.status(200).json(contributions)
-  })
+    return res.status(200).json(contributions);
+  });
 
-
-  server.post("/contributions", (req, res) => {
-    console.warn('server.post contributions')
-    let contributionAddedConfirmation
+  server.post("/contributions", async (req, res) => {
+    console.warn("server.post contributions");
+    let contributionAddedConfirmation;
     try {
-      contributionAddedConfirmation = await addContribution(req.body)
+      contributionAddedConfirmation = await addContribution(req.body);
     } catch (err) {
-      const errorCode = parseInt(err.message)
-      return res.status(errorCode).json(err.message)
+      const errorCode = parseInt(err.message);
+      return res.status(errorCode).json(err.message);
     }
-    res.status(200).send(contributionAddedConfirmation)
-  })
+    res.status(200).send(contributionAddedConfirmation);
+  });
 
   server.get("*", (req, res) => {
     console.warn("req.ip", req.ip);
@@ -65,9 +67,7 @@ app.prepare().then(() => {
     return handle(req, res);
   });
 
-
-
-  server.listen(process.env.PORT || 5000, err => {
+  server.listen(process.env.PORT || 5000, (err) => {
     if (err) throw err;
     if (!process.env.PORT) {
       console.log("NO process.env.PORT found");

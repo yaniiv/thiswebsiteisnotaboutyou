@@ -1,10 +1,9 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
-import config from "./db-config";
-import contributionSchema from "./schema";
+const contributionSchema = require("./schema");
 
-const DB_URI = config.db;
-const COLLECTION = config.collection;
+const DB_URI = process.env.DB_URI;
+const COLLECTION = process.env.COLLECTION;
 
 module.exports = {
   dbConnect: () => mongoose.connect(DB_URI, { useNewUrlParser: true }),

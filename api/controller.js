@@ -1,6 +1,6 @@
-import { dbConnect, disconnect } from "../db";
-import { validContributionBody } from "./api-utils";
-import { addNewContribution, getAllContributions } from "./queries";
+const { dbConnect, disconnect } = require("./db");
+const { validContributionBody } = require("./api-utils");
+const { addNewContribution, getAllContributions } = require("./queries");
 /**
  * @function sendMessage Connects to database and posts a new message with to and from data
  *
