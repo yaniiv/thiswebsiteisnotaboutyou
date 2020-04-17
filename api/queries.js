@@ -1,12 +1,12 @@
-import { Contribution } from "../db";
-import { generateTimeStamp30DaysAgo } from "api-utis";
-import keys from "./responseKeys.query";
+const { Contribution } = require("./db");
+const { generateTimeStamp30DaysAgo } = require("./api-utils");
 
 /**
  * @function getAllContributions generates a query for all messages sent within 30 days, limited to 100
  *
  * @returns {object} Returns mongoose query for the messages
  */
+const keys = "-_id message createdAt";
 
 const getAllContributions = async () =>
   Contribution.find({}, keys)

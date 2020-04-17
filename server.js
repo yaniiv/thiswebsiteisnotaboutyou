@@ -14,6 +14,7 @@ const geolocationParser = require("./geolocationParser");
 
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
+
 const handle = app.getRequestHandler();
 
 const {
@@ -28,6 +29,8 @@ const LOGGER_FORMAT = dev
 app.prepare().then(() => {
   const server = express();
   server.use(cookieParser());
+  server.use(express.json());
+  server.use(express.urlencoded({ extended: true }));
   server.use(morgan(LOGGER_FORMAT));
   server.use(geolocationParser);
 
@@ -40,6 +43,7 @@ app.prepare().then(() => {
     let contributions;
     try {
       contributions = await queryForAllContributions();
+      console.warn("contributions", contributions);
     } catch (err) {
       return res.status(400).send(err);
     }
@@ -47,7 +51,7 @@ app.prepare().then(() => {
   });
 
   server.post("/contributions", async (req, res) => {
-    console.warn("server.post contributions");
+    console.warn("server.post contributions,", req.body);
     let contributionAddedConfirmation;
     try {
       contributionAddedConfirmation = await addContribution(req.body);
