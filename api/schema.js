@@ -4,11 +4,15 @@ const contributionSchema = new mongoose.Schema(
   {
     ip: {
       type: String,
-      required: true,
+      required: false,
     },
-    message: {
+    canvas: {
       type: String,
-      required: true,
+      required: false,
+    },
+    color: {
+      type: String,
+      required: false,
     },
   },
   {

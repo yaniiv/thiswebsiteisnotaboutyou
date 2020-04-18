@@ -6,13 +6,13 @@ const { generateTimeStamp30DaysAgo } = require("./api-utils");
  *
  * @returns {object} Returns mongoose query for the messages
  */
-const keys = "-_id message createdAt";
+const keys = "-_id ip canvas color createdAt";
 
 const getAllContributions = async () =>
   Contribution.find({}, keys)
     .where("createdAt")
     .gte(generateTimeStamp30DaysAgo())
-    .limit(100);
+    .limit(111);
 
 /**
  * @function addNewContribution generates new model for a message from the imported mongoose schema
@@ -22,7 +22,9 @@ const getAllContributions = async () =>
  * @returns {object} Returns mongoose model for a message
  */
 
-const addNewContribution = (contributionData) =>
-  new Contribution(contributionData);
+const addNewContribution = (contributionData) => {
+  console.warn("contribution data", contributionData);
+  return new Contribution(contributionData);
+};
 
 module.exports = { getAllContributions, addNewContribution };

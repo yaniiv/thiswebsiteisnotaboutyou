@@ -17,18 +17,15 @@ const generateTimeStamp30DaysAgo = () =>
 
 const validContributionBody = (contributionBody) => {
   if (!contributionBody) return false;
-  if (
-    !contributionBody.to ||
-    !contributionBody.from ||
-    !contributionBody.message
-  )
-    return false;
-  if (
-    Object.keys(contributionBody).find(
-      (key) => typeof contributionBody[key] !== "string"
-    )
-  )
-    return false;
+  console.warn("contributionBody.canvas", contributionBody.canvas);
+  console.warn("contributionBody.color", contributionBody.color);
+  if (!contributionBody.canvas || !contributionBody.color) return false;
+  // if (
+  //   Object.keys(contributionBody).find(
+  //     (key) => typeof contributionBody[key] !== "string"
+  //   )
+  // )
+  //   return false;
   return true;
 };
 

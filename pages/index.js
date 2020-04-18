@@ -3,6 +3,7 @@ import Head from "next/head";
 import chroma from "chroma-js";
 import styled from "@emotion/styled";
 import { css, jsx, Global, keyframes } from "@emotion/core";
+import fetch from "node-fetch";
 
 import Hello from "../components/Hello";
 import Boxes from "../components/Boxes";
@@ -15,7 +16,8 @@ function isBrowser() {
   return typeof window !== "undefined";
 }
 
-const Landing = ({ data, parsedIp, geoIpData }) => {
+const Landing = ({ data, parsedIp, geoIpData, contributions }) => {
+  console.warn("contributions", contributions);
   const [showBodyContent, setShowBodyContent] = useState(true);
   const [boxSize, setBoxSize] = useState(50);
   const [selectedIndex, setSelectedIndex] = useState(-1);
@@ -132,6 +134,21 @@ const Landing = ({ data, parsedIp, geoIpData }) => {
   );
 };
 
+// Example POST method implementation:
+async function getData(url = "") {
+  // Default options are marked with *
+  const response = await fetch(url, {
+    method: "GET", // *GET, POST, PUT, DELETE, etc.
+    mode: "cors", // no-cors, *cors, same-origin
+    "Access-Control-Allow-Origin": "*",
+    credentials: "same-origin", // include, *same-origin, omit
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return response.json(); // parses JSON response into native JavaScript objects
+}
+
 export async function getServerSideProps(context) {
   const { req, res } = context;
   let geoIpData = null;
@@ -145,13 +162,24 @@ export async function getServerSideProps(context) {
   if (req.parsedIp) {
     parsedIp = req.parsedIp;
   }
+
+  let contributions = null;
+  try {
+    contributions = await getData("https://localhost:5000/contributions");
+    console.warn("GET DATA SUCCESS -> response", response);
+  } catch (err) {
+    console.warn("GET DATA ERROR -> err", err);
+
+    console.error(err);
+  }
+
   // console.warn("res", res);
   // const res = await fetch(`https://.../data`);
   // const data = await res.json();
   const data = "hi";
   console.warn("serverside boiii");
   // Pass data to the page via props
-  return { props: { data, parsedIp, geoIpData } };
+  return { props: { data, parsedIp, geoIpData, contributions } };
 }
 
 export default Landing;
