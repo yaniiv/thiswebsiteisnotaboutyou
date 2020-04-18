@@ -52,7 +52,7 @@ app.prepare().then(() => {
   });
 
   server.post("/contributions", async (req, res) => {
-    console.warn("server.post contributions,", req.body);
+    console.warn("server.post contribution s,", req.body);
     let contributionAddedConfirmation;
     try {
       contributionAddedConfirmation = await addContribution(req.body);
