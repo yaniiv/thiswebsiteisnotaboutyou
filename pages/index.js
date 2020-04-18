@@ -10,7 +10,6 @@ import SelectedBox from "../components/SelectedBox";
 import BodyText from "../components/BodyText";
 import Nav from "../components/NavCons";
 import Contribute from "../components/Contribute";
-import { getEnv } from "../api/getEnv";
 
 function isBrowser() {
   return typeof window !== "undefined";
@@ -137,6 +136,7 @@ const Landing = ({ data, parsedIp, geoIpData, contributions }) => {
 
 // Example POST method implementation:
 async function getData(url = "") {
+  console.warn("url", url);
   // Default options are marked with *
   const response = await fetch(url, {
     method: "GET", // *GET, POST, PUT, DELETE, etc.
@@ -147,8 +147,8 @@ async function getData(url = "") {
       "Content-Type": "application/json",
     },
   });
-  console.warn("response", response);
-  return response.json(); // parses JSON response into native JavaScript objects
+  console.warn("getData response", response);
+  // return response.json(); // parses JSON response into native JavaScript objects
 }
 
 export async function getServerSideProps(context) {
@@ -164,14 +164,15 @@ export async function getServerSideProps(context) {
   if (req.parsedIp) {
     parsedIp = req.parsedIp;
   }
-
+  console.warn(" process.env", process.env);
+  console.warn("process.env.BASE_URL", process.env.BASE_URL);
   const baseUrl = process.env.BASE_URL;
   let contributions = [];
   try {
-    contributions = await getData(`${baseUrl}/contributions`);
-    console.warn("GET DATA SUCCESS -> response", response);
+    await getData(`${baseUrl}/contributions`);
+    // console.warn("getServerSideProps GET DATA SUCCESS -> response", response);
   } catch (err) {
-    console.warn("GET DATA ERROR -> err", err);
+    console.warn("getServerSideProps GET DATA ERROR -> err", err);
 
     console.error(err);
   }
@@ -181,7 +182,6 @@ export async function getServerSideProps(context) {
   // const data = await res.json();
   const data = "hi";
   console.warn("serverside boiii");
-  console.warn("getEnv", getEnv());
   // Pass data to the page via props
   return { props: { data, parsedIp, geoIpData, contributions } };
 }

@@ -1,6 +1,12 @@
 const mongoose = require("mongoose");
 const contributionSchema = require("./schema");
-const { getEnv } = require("./getEnv");
+
+const getEnv = () => {
+  return {
+    DB_URI: process.env.DB_URI,
+    COLLECTION: process.env.COLLECTION,
+  };
+};
 
 const { DB_URI, COLLECTION } = getEnv();
 console.warn("getEnv()", getEnv());
