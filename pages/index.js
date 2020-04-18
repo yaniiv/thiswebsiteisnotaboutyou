@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import chroma from "chroma-js";
-import styled from "@emotion/styled";
-import { css, jsx, Global, keyframes } from "@emotion/core";
+import { css, Global } from "@emotion/core";
 import fetch from "node-fetch";
 
 import Hello from "../components/Hello";
@@ -21,7 +20,7 @@ const Landing = ({ data, parsedIp, geoIpData, contributions }) => {
   const [showBodyContent, setShowBodyContent] = useState(true);
   const [boxSize, setBoxSize] = useState(50);
   const [selectedIndex, setSelectedIndex] = useState(-1);
-  const [isContributeFormActive, setIsContributeFormActive] = useState(true);
+  const [isContributeFormActive, setIsContributeFormActive] = useState(false);
   const isBoxSelected = selectedIndex !== -1;
   const [colors, setColors] = useState([]);
 
@@ -114,6 +113,7 @@ const Landing = ({ data, parsedIp, geoIpData, contributions }) => {
               isBoxSelected={isBoxSelected}
             />
             <Boxes
+              contributions={contributions}
               isBoxSelected={isBoxSelected}
               colors={colors}
               setSelectedIndex={setSelectedIndex}
@@ -165,7 +165,7 @@ export async function getServerSideProps(context) {
 
   let contributions = null;
   try {
-    contributions = await getData("https://localhost:5000/contributions");
+    contributions = await getData("http://localhost:5000/contributions");
     console.warn("GET DATA SUCCESS -> response", response);
   } catch (err) {
     console.warn("GET DATA ERROR -> err", err);
