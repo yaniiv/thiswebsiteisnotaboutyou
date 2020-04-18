@@ -1,7 +1,8 @@
 import React from "react";
 import { css } from "@emotion/core";
-import CanvasDraw from "react-canvas-draw";
 import moment from "moment";
+
+import CanvasDraw from "react-canvas-draw";
 
 import Icon from "./Icon";
 

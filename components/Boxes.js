@@ -1,7 +1,8 @@
 import React from "react";
 import { css } from "@emotion/core";
-import CanvasDraw from "react-canvas-draw";
 import moment from "moment";
+
+import CanvasDraw from "react-canvas-draw";
 
 const Boxes = ({ boxSize, contributions, setSelectedIndex }) => {
   return (
@@ -16,7 +17,6 @@ const Boxes = ({ boxSize, contributions, setSelectedIndex }) => {
           <div
             key={index}
             onClick={() => {
-              console.warn("Boxes onclick", index);
               setSelectedIndex(index);
             }}
             css={css`
@@ -27,6 +27,7 @@ const Boxes = ({ boxSize, contributions, setSelectedIndex }) => {
               border: 1px solid #036cdb;
               box-sizing: border-box;
               cursor: pointer;
+              position: relative;
 
               :hover {
                 border: 3px solid #036cdb;
@@ -36,7 +37,16 @@ const Boxes = ({ boxSize, contributions, setSelectedIndex }) => {
               }
             `}
           >
-            {/* {moment(createdAt)} */}
+            <div
+              css={css`
+                position: absolute;
+                top: 0;
+                left: 0;
+                font-size: 8px;
+              `}
+            >
+              {moment.utc(createdAt).format("MMMM Do YYYY, h:mma")}
+            </div>
             <CanvasDraw
               canvasWidth={boxSize}
               canvasHeight={boxSize}
