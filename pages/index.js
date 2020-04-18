@@ -165,7 +165,7 @@ export async function getServerSideProps(context) {
   }
 
   const baseUrl = process.env.BASE_URL;
-  let contributions = null;
+  let contributions = [];
   try {
     contributions = await getData(`${baseUrl}/contributions`);
     console.warn("GET DATA SUCCESS -> response", response);
