@@ -4,12 +4,12 @@ import chroma from "chroma-js";
 import { css, Global } from "@emotion/core";
 import fetch from "node-fetch";
 
-import Hello from "../components/Hello";
 import Boxes from "../components/Boxes";
 import SelectedBox from "../components/SelectedBox";
-import BodyText from "../components/BodyText";
 import Nav from "../components/NavCons";
 import Contribute from "../components/Contribute";
+import Overlay from "../components/Overlay";
+import Intro from "../components/Intro";
 
 function isBrowser() {
   return typeof window !== "undefined";
@@ -22,21 +22,14 @@ const Landing = ({ data, parsedIp, geoIpData, contributions }) => {
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [isContributeFormActive, setIsContributeFormActive] = useState(false);
   const isBoxSelected = selectedIndex !== -1;
-  const [colors, setColors] = useState([]);
 
   useEffect(() => {
-    console.warn("Landing useEffect");
     setBoxSize(window.innerWidth / 11);
-    for (let i = 0; i < 200; i++) {
-      colors.push(chroma.random().hex());
-    }
-    setColors(colors);
   }, []);
 
   console.warn("showBodyContent", showBodyContent);
   console.warn("selectedIndex", selectedIndex);
   console.warn("boxSize", boxSize);
-  console.warn("colors", colors);
 
   return (
     <React.Fragment>
@@ -72,50 +65,36 @@ const Landing = ({ data, parsedIp, geoIpData, contributions }) => {
             <Head>
               <title>This Website Is Not About You</title>
             </Head>
-            {(isBoxSelected || isContributeFormActive) && (
-              <div
-                onClick={() => {
-                  setIsContributeFormActive(false);
-                  setSelectedIndex(-1);
-                }}
-                css={css`
-                  height: 100%;
-                  width: 100%;
-                  position: fixed;
-                  z-index: 10;
-                  background: white;
-                  opacity: 0.75;
-                `}
-              />
-            )}
-            {showBodyContent && !isBoxSelected && (
-              <>
-                <Nav
-                  boxSize={boxSize}
-                  showBodyContent={showBodyContent}
-                  setShowBodyContent={setShowBodyContent}
-                  setIsContributeFormActive={setIsContributeFormActive}
-                  isBoxSelected={isBoxSelected}
-                />
-                <div>
-                  <Hello parsedIp={parsedIp} />
-                  <BodyText
-                    setIsContributeFormActive={setIsContributeFormActive}
-                  />
-                </div>
-              </>
-            )}
+            <Overlay
+              setSelectedIndex={setSelectedIndex}
+              selectedIndex={selectedIndex}
+              isBoxSelected={isBoxSelected}
+              isContributeFormActive={isContributeFormActive}
+              setIsContributeFormActive={setIsContributeFormActive}
+            />
+            <Nav
+              boxSize={boxSize}
+              showBodyContent={showBodyContent}
+              setShowBodyContent={setShowBodyContent}
+              setIsContributeFormActive={setIsContributeFormActive}
+              isBoxSelected={isBoxSelected}
+            />
+            <Intro
+              showBodyContent={showBodyContent}
+              isBoxSelected={isBoxSelected}
+              setIsContributeFormActive={setIsContributeFormActive}
+              parsedIp={parsedIp}
+            />
             <SelectedBox
               setSelectedIndex={setSelectedIndex}
               selectedIndex={selectedIndex}
-              colors={colors}
               boxSize={boxSize}
+              contributions={contributions}
               isBoxSelected={isBoxSelected}
             />
             <Boxes
               contributions={contributions}
               isBoxSelected={isBoxSelected}
-              colors={colors}
               setSelectedIndex={setSelectedIndex}
               selectedIndex={selectedIndex}
               boxSize={boxSize}

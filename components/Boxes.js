@@ -3,7 +3,7 @@ import { css } from "@emotion/core";
 import CanvasDraw from "react-canvas-draw";
 import moment from "moment";
 
-const Boxes = ({ boxSize, contributions }) => {
+const Boxes = ({ boxSize, contributions, setSelectedIndex }) => {
   return (
     <div
       css={css`
@@ -15,6 +15,10 @@ const Boxes = ({ boxSize, contributions }) => {
         return (
           <div
             key={index}
+            onClick={() => {
+              console.warn("Boxes onclick", index);
+              setSelectedIndex(index);
+            }}
             css={css`
               height: ${boxSize}px;
               width: ${boxSize}px;

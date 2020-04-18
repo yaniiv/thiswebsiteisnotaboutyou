@@ -23,9 +23,9 @@ const Nav = ({
     <nav
       css={css`
         top: 0;
+        right: 0;
         position: fixed;
         z-index: 50;
-        width: 100%;
         display: flex;
         justify-content: flex-end;
       `}
