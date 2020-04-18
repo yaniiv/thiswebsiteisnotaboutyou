@@ -10,7 +10,7 @@ import SelectedBox from "../components/SelectedBox";
 import BodyText from "../components/BodyText";
 import Nav from "../components/NavCons";
 import Contribute from "../components/Contribute";
-import getEnv from "./api/getEnv";
+import getEnv from "../api/getEnv";
 
 function isBrowser() {
   return typeof window !== "undefined";
