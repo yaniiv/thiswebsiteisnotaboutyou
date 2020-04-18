@@ -3,13 +3,7 @@ import { css } from "@emotion/core";
 import CanvasDraw from "react-canvas-draw";
 import moment from "moment";
 
-const Boxes = ({
-  boxSize,
-  colors,
-  isBoxSelected,
-  setSelectedIndex,
-  contributions,
-}) => {
+const Boxes = ({ boxSize, contributions }) => {
   return (
     <div
       css={css`
@@ -31,11 +25,10 @@ const Boxes = ({
               cursor: pointer;
 
               :hover {
+                border: 3px solid #036cdb;
                 box-shadow: 0px 15px 65px -7px rgba(0, 0, 0, 0.2),
                   0px 24px 38px 3px rgba(0, 0, 0, 0.14),
                   0px 9px 46px 8px rgba(0, 0, 0, 0.12);
-                color: rgba(0, 0, 0, 0.87);
-                border: 3px solid #036cdb;
               }
             `}
           >

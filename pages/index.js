@@ -146,6 +146,7 @@ async function getData(url = "") {
       "Content-Type": "application/json",
     },
   });
+  console.warn("response", response);
   return response.json(); // parses JSON response into native JavaScript objects
 }
 
