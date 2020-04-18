@@ -3,7 +3,7 @@ import Head from "next/head";
 import chroma from "chroma-js";
 import { css, Global } from "@emotion/core";
 import fetch from "node-fetch";
-
+import { getData } from "../fetchers";
 import Boxes from "../components/Boxes";
 import SelectedBox from "../components/SelectedBox";
 import Nav from "../components/NavCons";
@@ -113,44 +113,23 @@ const Landing = ({ data, parsedIp, geoIpData, contributions }) => {
   );
 };
 
-// Example POST method implementation:
-async function getData(url = "") {
-  console.warn("url", url);
-  // Default options are marked with *
-  const response = await fetch(url, {
-    method: "GET", // *GET, POST, PUT, DELETE, etc.
-    mode: "cors", // no-cors, *cors, same-origin
-    credentials: "same-origin", // include, *same-origin, omit
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  console.warn("getData response", response);
-  console.warn("getData response.body", response.body);
-
-  return response.json(); // parses JSON response into native JavaScript objects
-}
-
 export async function getServerSideProps(context) {
+  console.warn("getServerSideProps", getServerSideProps);
   const { req, res } = context;
   let geoIpData = null;
   let parsedIp = null;
-  // console.warn("req", req);
-  // console.log("req.parsedIp", req.parsedIp);
 
   if (req.geoIpData) {
     geoIpData = req.geoIpData;
   }
+
   if (req.parsedIp) {
     parsedIp = req.parsedIp;
   }
-  console.warn(" process.env", process.env);
-  console.warn("process.env.BASE_URL", process.env.BASE_URL);
-  const resourceUri = process.env.RESOURCE_URI;
-  console.warn("resourceUri", resourceUri);
+
   let contributions = [];
   try {
-    contributions = await getData(resourceUri);
+    contributions = await getData(process.env.RESOURCE_URI);
     console.warn("getServerSideProps GET DATA SUCCESS -> response", response);
   } catch (err) {
     console.warn("getServerSideProps GET DATA ERROR -> err", err);
@@ -158,12 +137,9 @@ export async function getServerSideProps(context) {
     console.error(err);
   }
 
-  // console.warn("res", res);
-  // const res = await fetch(`https://.../data`);
-  // const data = await res.json();
   const data = "hi";
   console.warn("serverside boiii");
-  // Pass data to the page via props
+
   return { props: { data, parsedIp, geoIpData, contributions } };
 }
 

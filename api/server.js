@@ -18,10 +18,7 @@ const app = next({ dev });
 
 const handle = app.getRequestHandler();
 
-const {
-  addContribution,
-  queryForAllContributions,
-} = require("./api/controller");
+const { addContribution, queryForAllContributions } = require("./controller");
 
 const LOGGER_FORMAT = dev
   ? "dev"
@@ -44,7 +41,7 @@ app.prepare().then(() => {
     let contributions;
     try {
       contributions = await queryForAllContributions();
-      console.warn("contributions", contributions);
+      // console.warn("contributions", contributions);
     } catch (err) {
       return res.status(400).send(err);
     }
