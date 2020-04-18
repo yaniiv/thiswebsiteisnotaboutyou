@@ -1,10 +1,15 @@
 const mongoose = require("mongoose");
 const contributionSchema = require("./schema");
 
-const DB_URI = process.env.DB_URI;
-console.warn("DB_URI", DB_URI);
-const COLLECTION = process.env.COLLECTION;
-console.warn("COLLECTION", COLLECTION);
+const getEnv = () => {
+  return {
+    DB_URI: process.env.DB_URI,
+    COLLECTION: process.env.COLLECTION,
+  };
+};
+
+const { DB_URI, COLLECTION } = getEnv();
+console.warn("getEnv()", getEnv());
 
 module.exports = {
   dbConnect: () => mongoose.connect(DB_URI, { useNewUrlParser: true }),

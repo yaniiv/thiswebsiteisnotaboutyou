@@ -2,6 +2,7 @@
 // Make sure the syntax and sources this file requires are compatible with the current node version you are running
 // See https://github.com/zeit/next.js/issues/1245 for discussions on Universal Webpack or universal Babel
 // const { createServer } = require("http");
+require("dotenv").config();
 
 const { parse } = require("url");
 const next = require("next");
