@@ -23,7 +23,6 @@ const getAllContributions = async () =>
  */
 
 const addNewContribution = (contributionData) => {
-  console.warn("contribution data", contributionData);
   return new Contribution(contributionData);
 };
 

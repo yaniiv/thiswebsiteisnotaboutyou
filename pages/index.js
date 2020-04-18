@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import chroma from "chroma-js";
 import { css, Global } from "@emotion/core";
-import fetch from "node-fetch";
 import { getData } from "../fetchers";
 import Boxes from "../components/Boxes";
 import SelectedBox from "../components/SelectedBox";
@@ -114,10 +113,13 @@ const Landing = ({ data, parsedIp, geoIpData, contributions }) => {
 };
 
 export async function getServerSideProps(context) {
-  console.warn("getServerSideProps", getServerSideProps);
   const { req, res } = context;
-  let geoIpData = null;
-  let parsedIp = null;
+  const { parsedIp, clientIp } = req;
+
+  console.warn(">>>>>>>>>> getServerSideProps");
+  console.warn("parsedIp", parsedIp);
+  // console.warn("geoIpData", geoIpData);
+  console.warn("clientIp", clientIp);
 
   if (req.geoIpData) {
     geoIpData = req.geoIpData;
@@ -128,19 +130,17 @@ export async function getServerSideProps(context) {
   }
 
   let contributions = [];
+
   try {
     contributions = await getData(process.env.RESOURCE_URI);
-    console.warn("getServerSideProps GET DATA SUCCESS -> response", response);
+    // console.warn("getServerSideProps GET DATA SUCCESS -> response", response);
   } catch (err) {
     console.warn("getServerSideProps GET DATA ERROR -> err", err);
 
     console.error(err);
   }
 
-  const data = "hi";
-  console.warn("serverside boiii");
-
-  return { props: { data, parsedIp, geoIpData, contributions } };
+  return { props: { parsedIp, contributions } };
 }
 
 export default Landing;

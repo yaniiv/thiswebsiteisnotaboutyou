@@ -1,3 +1,5 @@
+import fetch from "isomorphic-unfetch";
+
 // Default options are marked with *
 export async function postData(url = "", data = {}) {
   const response = await fetch(url, {
@@ -26,8 +28,6 @@ export async function getData(url = "") {
       "Content-Type": "application/json",
     },
   });
-  console.warn("getData response", response);
-  console.warn("getData response.body", response.body);
 
   return response.json(); // parses JSON response into native JavaScript objects
 }

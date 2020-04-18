@@ -37,7 +37,7 @@ app.prepare().then(() => {
   // const { pathname, query } = parsedUrl
 
   server.get("/contributions", async (req, res) => {
-    console.warn("server.get contributions");
+    console.warn("server.get");
     let contributions;
     try {
       contributions = await queryForAllContributions();
@@ -49,7 +49,8 @@ app.prepare().then(() => {
   });
 
   server.post("/contributions", async (req, res) => {
-    console.warn("server.post contribution s,", req.body);
+    console.warn("server.post");
+
     let contributionAddedConfirmation;
     try {
       contributionAddedConfirmation = await addContribution(req.body);
@@ -65,6 +66,7 @@ app.prepare().then(() => {
     console.warn("req.cookies", req.cookies);
     console.warn("req.query", req.query);
     console.warn("req.parsedIp", req.parsedIp);
+    console.warn("req.clientIp", req.clientIp);
 
     return handle(req, res);
   });

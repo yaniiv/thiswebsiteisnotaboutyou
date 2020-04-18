@@ -33,6 +33,7 @@ const geolocationParser = function (req, res, next) {
 
   // TODO: probably remove this
   req.parsedIp = parsedIp;
+  req.clientIp = ip_info.clientIp;
 
   if (parsedIp) {
     geoIpData = geoip.lookup(parsedIp);

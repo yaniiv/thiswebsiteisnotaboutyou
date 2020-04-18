@@ -10,16 +10,13 @@ const { addNewContribution, getAllContributions } = require("./queries");
  */
 
 const addContribution = async (contributionData) => {
-  console.warn("contributionData", contributionData);
   await dbConnect().catch((e) => {
-    console.warn("dbConnect cat", e);
     throw new Error(e);
   });
 
   if (!validContributionBody(contributionData)) throw new Error(400);
 
   let newContribution = addNewContribution(contributionData);
-  console.warn("newContribution", newContribution);
   try {
     newContribution = await newContribution.save();
     disconnect();
@@ -42,7 +39,6 @@ const queryForAllContributions = async () => {
     throw new Error(e);
   });
   return getAllContributions().then((messages, err) => {
-    console.log("messages", messages);
     if (err) throw new Error(err);
     disconnect();
     return messages;

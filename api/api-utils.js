@@ -17,8 +17,6 @@ const generateTimeStamp30DaysAgo = () =>
 
 const validContributionBody = (contributionBody) => {
   if (!contributionBody) return false;
-  console.warn("contributionBody.canvas", contributionBody.canvas);
-  console.warn("contributionBody.color", contributionBody.color);
   if (!contributionBody.canvas || !contributionBody.color) return false;
   // if (
   //   Object.keys(contributionBody).find(
