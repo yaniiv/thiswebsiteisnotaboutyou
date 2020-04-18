@@ -141,7 +141,6 @@ async function getData(url = "") {
   const response = await fetch(url, {
     method: "GET", // *GET, POST, PUT, DELETE, etc.
     mode: "cors", // no-cors, *cors, same-origin
-    "Access-Control-Allow-Origin": "*",
     credentials: "same-origin", // include, *same-origin, omit
     headers: {
       "Content-Type": "application/json",
@@ -168,11 +167,11 @@ export async function getServerSideProps(context) {
   }
   console.warn(" process.env", process.env);
   console.warn("process.env.BASE_URL", process.env.BASE_URL);
-  const baseUrl = process.env.BASE_URL;
+  const resourceUri = process.env.RESOURCE_URI;
+  console.warn("resourceUri", resourceUri);
   let contributions = [];
   try {
-    contributionsResponse = await getData(`${baseUrl}/contributions`);
-    console.warn("contributionsResponse", contributionsResponse);
+    contributions = await getData(resourceUri);
     console.warn("getServerSideProps GET DATA SUCCESS -> response", response);
   } catch (err) {
     console.warn("getServerSideProps GET DATA ERROR -> err", err);
