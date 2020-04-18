@@ -1,7 +1,7 @@
 import React from "react";
 import { css } from "@emotion/core";
 
-const Hello = ({ parsedIp }) => {
+const Hello = ({ clientIp }) => {
   return (
     <div
       css={css`
@@ -19,7 +19,7 @@ const Hello = ({ parsedIp }) => {
           text-decoration: underline;
         `}
       >
-        {parsedIp || "11.111.111.111"}
+        {clientIp || "11.111.111.111"}
         {", "}
       </span>
     </div>

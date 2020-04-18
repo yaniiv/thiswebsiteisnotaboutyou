@@ -14,7 +14,7 @@ function isBrowser() {
   return typeof window !== "undefined";
 }
 
-const Landing = ({ data, parsedIp, clientIp, geoIpData, contributions }) => {
+const Landing = ({ data, clientIp, geoIpData, contributions }) => {
   // console.warn("contributions", contributions);
   const [showBodyContent, setShowBodyContent] = useState(true);
   const [boxSize, setBoxSize] = useState(50);
@@ -57,8 +57,7 @@ const Landing = ({ data, parsedIp, clientIp, geoIpData, contributions }) => {
               width: 200px;
             `}
           >
-            <div>parsedIp: {parsedIp}</div>
-            <div>parsedIp: {clientIp}</div>
+            <div>clientIp: {clientIp}</div>
             <div>geoIpData: {geoIpData}</div>
           </div>
           <div>
@@ -83,7 +82,7 @@ const Landing = ({ data, parsedIp, clientIp, geoIpData, contributions }) => {
               showBodyContent={showBodyContent}
               isBoxSelected={isBoxSelected}
               setIsContributeFormActive={setIsContributeFormActive}
-              parsedIp={parsedIp}
+              clientIp={clientIp}
             />
             <SelectedBox
               setSelectedIndex={setSelectedIndex}
@@ -101,7 +100,7 @@ const Landing = ({ data, parsedIp, clientIp, geoIpData, contributions }) => {
             />
             {isContributeFormActive && (
               <Contribute
-                parsedIp={parsedIp}
+                clientIp={clientIp}
                 setIsContributeFormActive={setIsContributeFormActive}
                 isContributeFormActive={isContributeFormActive}
               />
@@ -115,10 +114,9 @@ const Landing = ({ data, parsedIp, clientIp, geoIpData, contributions }) => {
 
 export async function getServerSideProps(context) {
   const { req, res } = context;
-  const { parsedIp, clientIp } = req;
+  const { clientIp } = req;
 
   console.warn(">>>>>>>>>> getServerSideProps");
-  console.warn("parsedIp", parsedIp);
   // console.warn("geoIpData", geoIpData);
   console.warn("clientIp", clientIp);
 
@@ -137,7 +135,7 @@ export async function getServerSideProps(context) {
     console.error(err);
   }
 
-  return { props: { parsedIp, clientIp, contributions } };
+  return { props: { clientIp, contributions } };
 }
 
 export default Landing;

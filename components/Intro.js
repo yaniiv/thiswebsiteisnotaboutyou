@@ -6,7 +6,7 @@ import BodyText from "./BodyText";
 
 const Intro = ({
   setIsContributeFormActive,
-  parsedIp,
+  clientIp,
   showBodyContent,
   isBoxSelected,
 }) => {
@@ -20,7 +20,7 @@ const Intro = ({
               z-index: 69;
             `}
           >
-            <Hello parsedIp={parsedIp} />
+            <Hello clientIp={clientIp} />
             <BodyText setIsContributeFormActive={setIsContributeFormActive} />
           </div>
         </>
