@@ -151,7 +151,7 @@ async function getData(url = "") {
   console.warn("getData response.body", response.body);
   console.warn("getData response.json()", response.json());
 
-  // return response.json(); // parses JSON response into native JavaScript objects
+  return response.json(); // parses JSON response into native JavaScript objects
 }
 
 export async function getServerSideProps(context) {
