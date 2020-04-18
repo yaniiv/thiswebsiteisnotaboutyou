@@ -61,6 +61,7 @@ const Contribute = ({ setIsContributeFormActive, parsedIp }) => {
     try {
       console.warn("payload", payload);
       response = await postData("/contributions", payload);
+      setIsContributeFormActive(false);
       console.warn("POST DATA SUCCESS -> response", response);
     } catch (err) {
       console.warn("POST DATA ERROR -> err", err);

@@ -163,9 +163,10 @@ export async function getServerSideProps(context) {
     parsedIp = req.parsedIp;
   }
 
+  const baseUrl = process.env.BASE_URL;
   let contributions = null;
   try {
-    contributions = await getData("http://localhost:5000/contributions");
+    contributions = await getData(`${baseUrl}/contributions`);
     console.warn("GET DATA SUCCESS -> response", response);
   } catch (err) {
     console.warn("GET DATA ERROR -> err", err);
