@@ -24,8 +24,6 @@ const geolocationParser = function (req, res, next) {
   let parsedIp;
   const clientIp = get_ip(req).clientIp;
 
-  console.warn("ip_info", ip_info);
-
   if (req && req.query && req.query.ip) {
     parsedIp = req.query.ip;
   } else {
@@ -38,6 +36,7 @@ const geolocationParser = function (req, res, next) {
 
   if (clientIp && !isLocalDevIp(clientIp)) {
     geoIpData = geoip.lookup(ip_info.clientIp);
+    console.warn("[geolocationParser] geoIpData", geoIpData);
     req.geoIpData = geoIpData;
   }
 
