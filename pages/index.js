@@ -172,8 +172,9 @@ export async function getServerSideProps(context) {
   const baseUrl = process.env.BASE_URL;
   let contributions = [];
   try {
-    await getData(`${baseUrl}/contributions`);
-    // console.warn("getServerSideProps GET DATA SUCCESS -> response", response);
+    contributionsResponse = await getData(`${baseUrl}/contributions`);
+    console.warn("contributionsResponse", contributionsResponse);
+    console.warn("getServerSideProps GET DATA SUCCESS -> response", response);
   } catch (err) {
     console.warn("getServerSideProps GET DATA ERROR -> err", err);
 
