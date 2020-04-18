@@ -10,7 +10,7 @@ import SelectedBox from "../components/SelectedBox";
 import BodyText from "../components/BodyText";
 import Nav from "../components/NavCons";
 import Contribute from "../components/Contribute";
-import getEnv from "../api/getEnv";
+import { getEnv } from "../api/getEnv";
 
 function isBrowser() {
   return typeof window !== "undefined";
@@ -181,7 +181,7 @@ export async function getServerSideProps(context) {
   // const data = await res.json();
   const data = "hi";
   console.warn("serverside boiii");
-  console.warn("getEnv", getEnv);
+  console.warn("getEnv", getEnv());
   // Pass data to the page via props
   return { props: { data, parsedIp, geoIpData, contributions } };
 }
