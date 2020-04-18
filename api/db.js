@@ -1,10 +1,12 @@
 const mongoose = require("mongoose");
-const config = require("../next.config.js");
+// const getConfig = require("next/config")
+// const config = require("../next.config.js");
 const contributionSchema = require("./schema");
+const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
 
-const DB_URI = config.env.DB_URI;
+const DB_URI = process.env.DB_URI;
 console.warn("DB_URI", DB_URI);
-const COLLECTION = config.env.COLLECTION;
+const COLLECTION = process.env.COLLECTION;
 console.warn("COLLECTION", COLLECTION);
 
 module.exports = {
