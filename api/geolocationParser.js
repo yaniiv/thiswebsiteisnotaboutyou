@@ -1,7 +1,7 @@
 const geoip = require("geoip-lite");
 const get_ip = require("ipware")().get_ip;
 
-const isLocalDevIp = (ip) => ip === "127.0.0.1" || ip === "::1";
+const isLocalDevIp = (ip) => ip === "::ffff:127.0.0.1" || ip === "::1";
 
 function getIpIfAvailable(req) {
   // if request routed via proxy, req.ip contains x-forwarded-for original IP
@@ -22,7 +22,8 @@ function getIpIfAvailable(req) {
 const geolocationParser = function (req, res, next) {
   let geoIpData;
   let parsedIp;
-  const ip_info = get_ip(req);
+  const clientIp = get_ip(req).clientIp;
+
   console.warn("ip_info", ip_info);
 
   if (req && req.query && req.query.ip) {
@@ -33,10 +34,10 @@ const geolocationParser = function (req, res, next) {
 
   // TODO: probably remove this
   req.parsedIp = parsedIp;
-  req.clientIp = ip_info.clientIp;
+  req.clientIp = clientIp;
 
-  if (parsedIp) {
-    geoIpData = geoip.lookup(parsedIp);
+  if (clientIp && !isLocalDevIp(clientIp)) {
+    geoIpData = geoip.lookup(ip_info.clientIp);
     req.geoIpData = geoIpData;
   }
 

@@ -14,8 +14,8 @@ function isBrowser() {
   return typeof window !== "undefined";
 }
 
-const Landing = ({ data, parsedIp, geoIpData, contributions }) => {
-  console.warn("contributions", contributions);
+const Landing = ({ data, parsedIp, clientIp, geoIpData, contributions }) => {
+  // console.warn("contributions", contributions);
   const [showBodyContent, setShowBodyContent] = useState(true);
   const [boxSize, setBoxSize] = useState(50);
   const [selectedIndex, setSelectedIndex] = useState(-1);
@@ -58,6 +58,7 @@ const Landing = ({ data, parsedIp, geoIpData, contributions }) => {
             `}
           >
             <div>parsedIp: {parsedIp}</div>
+            <div>parsedIp: {clientIp}</div>
             <div>geoIpData: {geoIpData}</div>
           </div>
           <div>
@@ -121,26 +122,22 @@ export async function getServerSideProps(context) {
   // console.warn("geoIpData", geoIpData);
   console.warn("clientIp", clientIp);
 
-  if (req.geoIpData) {
-    geoIpData = req.geoIpData;
-  }
-
-  if (req.parsedIp) {
-    parsedIp = req.parsedIp;
-  }
-
   let contributions = [];
 
   try {
     contributions = await getData(process.env.RESOURCE_URI);
-    // console.warn("getServerSideProps GET DATA SUCCESS -> response", response);
+
+    // console.warn(
+    //   "getServerSideProps | GET CONTRIBUTIONS SUCCESS -> contributions",
+    //   contributions
+    // );
   } catch (err) {
-    console.warn("getServerSideProps GET DATA ERROR -> err", err);
+    console.warn("getServerSideProps | GET CONTRIBUTIONS ERROR -> err", err);
 
     console.error(err);
   }
 
-  return { props: { parsedIp, contributions } };
+  return { props: { parsedIp, clientIp, contributions } };
 }
 
 export default Landing;

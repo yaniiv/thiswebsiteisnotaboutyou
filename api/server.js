@@ -62,11 +62,11 @@ app.prepare().then(() => {
   });
 
   server.get("*", (req, res) => {
-    console.warn("req.ip", req.ip);
-    console.warn("req.cookies", req.cookies);
-    console.warn("req.query", req.query);
-    console.warn("req.parsedIp", req.parsedIp);
-    console.warn("req.clientIp", req.clientIp);
+    // console.warn("req.ip", req.ip);
+    // console.warn("req.cookies", req.cookies);
+    // console.warn("req.query", req.query);
+    // console.warn("req.parsedIp", req.parsedIp);
+    // console.warn("req.clientIp", req.clientIp);
 
     return handle(req, res);
   });
