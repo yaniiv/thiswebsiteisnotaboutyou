@@ -6,6 +6,7 @@ import { SketchPicker } from "react-color";
 import Icon from "./Icon";
 import { postData } from "../fetchers";
 import { isGeoIpDataValid, getLocationString } from "../helpers";
+import moment from "moment";
 
 const canvasProps = {};
 
@@ -129,7 +130,7 @@ const Contribute = ({ setIsContributeFormActive, reflection, canvasSize }) => {
             height: 50px;
             width: 120px;
             border: 2px solid #036cdb;
-            transform: translate(0%, calc(100% + 20px));
+            transform: translate(calc(100% + 20px), 0%);
             font-size: 20px;
 
             &:hover {
@@ -161,7 +162,8 @@ const Contribute = ({ setIsContributeFormActive, reflection, canvasSize }) => {
               transform: translate(0%, calc(100% + 2px));
             `}
           >
-            Contributed from {getLocationString(geoIpData)}
+            Contributed on {moment().format("MMMM Do YYYY, [at] h:mm:ss a")}{" "}
+            {isGeoIpDataValid && `${getLocationString(geoIpData)}`}
           </div>
         </div>
       </div>
