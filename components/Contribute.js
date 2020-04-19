@@ -12,7 +12,7 @@ const Contribute = ({ setIsContributeFormActive, reflection, canvasSize }) => {
   const [backgroundColor, setBackgroundColor] = useState("grey");
   const canvasElement = useRef(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [showMoreColors, setShowMoreColors] = useState(true);
+  const [showMoreColors, setShowMoreColors] = useState(false);
 
   const { clientIp, geoIpData } = reflection;
   const geoIpValid = isGeoIpDataValid(geoIpData);
@@ -46,6 +46,7 @@ const Contribute = ({ setIsContributeFormActive, reflection, canvasSize }) => {
       css={css`
         background: ${backgroundColor};
         border: 2px solid #036cdb;
+        box-sizing: border-box;
         position: fixed;
         z-index: 50;
         flex-direction: column;
@@ -96,6 +97,7 @@ const Contribute = ({ setIsContributeFormActive, reflection, canvasSize }) => {
             display: flex;
             justify-content: space-between;
             background-color: white;
+            box-sizing: border-box;
           `}
         >
           <CompactPicker
@@ -180,7 +182,7 @@ const Contribute = ({ setIsContributeFormActive, reflection, canvasSize }) => {
             height: 50px;
             width: 120px;
             border: 2px solid #036cdb;
-            transform: translate(calc(100% + 20px), 0%);
+            transform: translate(0%, calc(100% + 20px));
             font-size: 20px;
 
             &:hover {
@@ -207,7 +209,7 @@ const Contribute = ({ setIsContributeFormActive, reflection, canvasSize }) => {
             css={css`
               position: absolute;
               bottom: 0;
-              right: 0;
+              left: 0;
               font-size: 18px;
               transform: translate(0%, calc(100% + 2px));
             `}
