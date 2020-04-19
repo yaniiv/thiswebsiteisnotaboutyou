@@ -8,12 +8,16 @@ import { postData } from "../fetchers";
 import { isGeoIpDataValid, getLocationString } from "../helpers";
 import moment from "moment";
 
-const Contribute = ({ setIsContributeFormActive, reflection, canvasSize }) => {
+const Contribute = ({
+  setIsContributeFormActive,
+  reflection,
+  canvasSize,
+  setSelectedIndex,
+}) => {
   const [backgroundColor, setBackgroundColor] = useState("grey");
   const canvasElement = useRef(null);
   const [isLoading, setIsLoading] = useState(false);
   const [showMoreColors, setShowMoreColors] = useState(false);
-
   const { clientIp, geoIpData } = reflection;
   const geoIpValid = isGeoIpDataValid(geoIpData);
   // const { register, handleSubmit, errors } = useForm();
@@ -69,24 +73,35 @@ const Contribute = ({ setIsContributeFormActive, reflection, canvasSize }) => {
           css={css`
             border: 2px solid #036cdb;
             cursor: pointer;
-            fill: none;
             float: right;
             top: 0;
             right: 0;
-            transform: translate(calc(100% + 20px), 0%);
-
+            background-color: transparent;
+            position: relative;
             stroke-width: 2;
-            z-index: 50;
-            height: 60px;
-            width: 60px;
+            z-index: 900;
+
+            height: 36px;
+            width: 36px;
+            transform: translate(calc(50%), -50%);
+
+            @media (min-width: 768px) {
+              transform: translate(calc(100% + 12px), 0%);
+
+              height: 60px;
+              width: 60px;
+            }
+
             &:hover {
               background-color: white;
             }
           `}
           name="close"
           stroke="red"
+          fill="white"
         />
       </div>
+
       <div
         css={css`
           position: relative;
@@ -96,7 +111,7 @@ const Contribute = ({ setIsContributeFormActive, reflection, canvasSize }) => {
           css={css`
             position: absolute;
             top: 0;
-            transform: translate(-2px, calc(-100% - 4px));
+            transform: translate(-2px, calc(-100% - 12px));
             border: 2px solid #036cdb;
             width: ${canvasSize}px;
             display: flex;
@@ -109,6 +124,7 @@ const Contribute = ({ setIsContributeFormActive, reflection, canvasSize }) => {
             css={css`
               width: 100% !important;
               border-radius: 0 !important;
+              box-sizing: border-box !important;
               &:hover {
                 cursor: pointer;
               }
@@ -125,18 +141,24 @@ const Contribute = ({ setIsContributeFormActive, reflection, canvasSize }) => {
           <div
             onClick={() => setShowMoreColors((prevState) => !prevState)}
             css={css`
-              font-size: 20px;
-              padding: 0 4px;
-              box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 10px,
-                rgba(0, 0, 0, 0.16) 0px 2px 5px;
-              border-radius: 2px;
+              font-size: 14px;
+              padding: 4px;
+              border-left: 2px solid #036cdb;
+              display: flex;
+              text-align: center;
+              align-items: center;
               background: rgb(255, 255, 255);
               cursor: pointer;
+
+              :hover {
+                background-color: lightgray;
+              }
             `}
           >
-            ...more
+            ...more colors
           </div>
         </div>
+
         {showMoreColors && (
           <SketchPicker
             css={css`
@@ -145,8 +167,14 @@ const Contribute = ({ setIsContributeFormActive, reflection, canvasSize }) => {
               border-radius: 0 !important;
               box-sizing: border-box;
               position: absolute;
+              z-index: 8000;
               right: 0;
-              transform: translate(calc(100% + 20px), 80px);
+              transform: translate(0, 0px);
+              left: 0;
+
+              @media (min-width: 768px) {
+                transform: translate(calc(100% + 20px), 80px);
+              }
               &:hover {
                 cursor: pointer;
               }
@@ -157,6 +185,7 @@ const Contribute = ({ setIsContributeFormActive, reflection, canvasSize }) => {
             }}
           />
         )}
+
         <CanvasDraw
           ref={canvasElement}
           canvasWidth={canvasSize}
@@ -182,25 +211,53 @@ const Contribute = ({ setIsContributeFormActive, reflection, canvasSize }) => {
             position: absolute;
             bottom: 0;
             right: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             background: white;
             height: 50px;
             width: 120px;
             border: 2px solid #036cdb;
-            transform: translate(0%, calc(100% + 20px));
+            transform: translate(0%, calc(100% + 10px));
             font-size: 20px;
-
-            &:hover {
+            :hover {
               cursor: pointer;
+              background-color: lightgray;
             }
           `}
         >
           submit
+          <Icon
+            css={css`
+              height: 22px;
+              width: 22px;
+              padding-left: 4px;
+              top: 0;
+            `}
+            name="save"
+            stroke="black"
+          />
         </button>
+
         <div
           onClick={() => {
             setSelectedIndex(-1);
           }}
           css={css`
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            font-size: 14px;
+            max-width: 200px;
+
+            @media (min-width: 768px) {
+              max-width: 320px;
+            }
+            @media (min-width: 1024px) {
+              max-width: 480px;
+            }
+
+            transform: translate(0%, calc(100% + 10px));
             :hover {
               cursor: pointer;
               svg {
@@ -209,21 +266,40 @@ const Contribute = ({ setIsContributeFormActive, reflection, canvasSize }) => {
             }
           `}
         >
-          <div
-            css={css`
-              position: absolute;
-              bottom: 0;
-              left: 0;
-              font-size: 14px;
-              @media (min-width: 768) {
-                font-size: 18px;
-              }
-              transform: translate(0%, calc(100% + 2px));
-            `}
-          >
-            Contributing on {moment().format("MMMM Do YYYY, [at] h:mm a")}
-            {isGeoIpDataValid && `${getLocationString(geoIpData)}`}
+          <div css={css``}>
+            Contributing on{" "}
+            <span
+              css={css`
+                font-weight: 600;
+              `}
+            >
+              {moment().format("MMMM Do YYYY, [at] h:mm a")}
+            </span>
+            <span css={css``}>
+              {isGeoIpDataValid && `${getLocationString(geoIpData)}`}
+            </span>
           </div>
+
+          {/* <form>
+            <div>
+              <input
+                onChange={() => setShareAddress((prevState) => !prevState)}
+                type="checkbox"
+                id="shareAddress"
+                name="subscribe"
+                checked={shareAddress}
+                defaultChecked
+              />
+              <label
+                css={css`
+                  font-size: 14px;
+                `}
+                for="shareAddress"
+              >
+                include location
+              </label>
+            </div>
+          </form> */}
         </div>
       </div>
     </div>

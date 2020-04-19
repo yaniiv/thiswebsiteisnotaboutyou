@@ -96,6 +96,7 @@ const Landing = ({ reflection, contributions }) => {
             <Contribute
               canvasSize={canvasSize}
               reflection={reflection}
+              setSelectedIndex={setSelectedIndex}
               setIsContributeFormActive={setIsContributeFormActive}
               isContributeFormActive={isContributeFormActive}
             />

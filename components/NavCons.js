@@ -44,16 +44,24 @@ const Nav = ({
           setIsContributeFormActive((prevState) => !prevState);
         }}
         css={css`
-          color: white;
-          background: transparent;
+          color: #036cdb;
+          background: white;
           border: 2px solid #036cdb;
           position: fixed;
           top: 0px;
           padding: 8px;
+
+          font-size: 16px;
+          text-decoration: underline;
+
+          @media (min-width: 768px) {
+            font-size: 22px;
+          }
+
           :hover {
             cursor: pointer;
             color: #036cdb;
-            background-color: white;
+            background-color: lightgray;
             text-decoration: underline;
           }
         `}
@@ -72,10 +80,10 @@ const Nav = ({
             right: 0;
             border: 2px solid #036cdb;
             width: 60px;
-            background: transparent;
+            background-color: white;
 
             :hover {
-              background-color: white;
+              background-color: lightgray;
               cursor: pointer;
             }
           `}

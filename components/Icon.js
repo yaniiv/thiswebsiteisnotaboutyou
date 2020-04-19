@@ -57,6 +57,13 @@ const getPath = (name) => {
           <line x1="12" y1="8" x2="12" y2="8" />
         </g>
       );
+    case "save":
+      return (
+        <g>
+          <path d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8l-6-6z" />
+          <path d="M14 3v5h5M12 18v-6M9 15h6" />
+        </g>
+      );
     case "question":
       return (
         <g>

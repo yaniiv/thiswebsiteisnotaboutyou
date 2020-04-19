@@ -51,7 +51,7 @@ const Intro = ({
             background: white;
             padding: 10px;
             border: 1px solid #036cdb;
-            animation: 0.75s ${fadeIn} ease;
+            animation: 0.6s ${fadeIn} ease;
             animation-iteration-count: 1;
             animation-fill-mode: forwards;
 
@@ -88,6 +88,10 @@ const Intro = ({
           css={css`
             left: 26%;
             top: calc(36% + 68px);
+
+            @media (min-width: 768px) {
+              top: calc(36% + 90px);
+            }
           `}
         >
           every refresh surfaces 111 of the most recent contributions
@@ -158,7 +162,7 @@ const Intro = ({
             width: 200px !important;
 
             @media (min-width: 768px) {
-              top: calc(58% + 140px);
+              top: calc(58% + 150px);
 
               width: 290px !important;
             }
