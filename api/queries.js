@@ -1,5 +1,4 @@
 const { Contribution } = require("./db");
-const { generateTimeStamp30DaysAgo } = require("./api-utils");
 
 const keys = "-_id ip canvas color createdAt";
 
