@@ -19,6 +19,7 @@ const Contribute = ({ setIsContributeFormActive, reflection, canvasSize }) => {
   // const { register, handleSubmit, errors } = useForm();
   const onSubmit = async () => {
     setIsLoading(true);
+    console.warn("onSubmit drawingData", drawingData);
 
     const drawingData = canvasElement.current.getSaveData();
     const payload = {
@@ -152,7 +153,6 @@ const Contribute = ({ setIsContributeFormActive, reflection, canvasSize }) => {
             }}
           />
         )}
-
         <CanvasDraw
           ref={canvasElement}
           canvasWidth={canvasSize}

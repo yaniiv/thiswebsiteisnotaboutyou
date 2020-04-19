@@ -23,6 +23,11 @@ const Nav = ({
     return null;
   }
   console.warn("boxSize", boxSize);
+  console.warn("isContributeFormActive", isContributeFormActive);
+  console.warn(
+    "showIntroContent && !isContributeFormActive",
+    showIntroContent && !isContributeFormActive
+  );
   return (
     <nav
       css={css`
@@ -53,7 +58,7 @@ const Nav = ({
       >
         contribute
       </div>
-      {showIntroContent && (
+      {showIntroContent && !isContributeFormActive && (
         <div
           onClick={() => {
             setShowIntroContent(false);
@@ -85,6 +90,35 @@ const Nav = ({
               stroke-width: 2;
             `}
             name="close"
+          />
+        </div>
+      )}
+      {!showIntroContent && (
+        <div
+          onClick={() => {
+            setShowIntroContent(true);
+          }}
+          css={css`
+            height: 60px;
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            border: 2px solid #036cdb;
+            width: 60px;
+            background: transparent;
+
+            :hover {
+              background-color: grey;
+              cursor: pointer;
+            }
+          `}
+        >
+          <Icon
+            css={css`
+              fill: none;
+              stroke-width: 2;
+            `}
+            name="info"
           />
         </div>
       )}

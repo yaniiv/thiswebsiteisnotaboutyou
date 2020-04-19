@@ -6,10 +6,11 @@ import CanvasDraw from "react-canvas-draw";
 
 const Boxes = ({
   boxSize,
-  contributions,
+  contributions = [],
   setSelectedIndex,
   setShowIntroContent,
 }) => {
+  console.warn("contributions", contributions);
   const handleBoxClick = (index) => {
     setShowIntroContent(false);
     setSelectedIndex(index);
