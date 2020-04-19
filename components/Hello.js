@@ -19,8 +19,7 @@ const Hello = ({ clientIp }) => {
           text-decoration: underline;
         `}
       >
-        {clientIp || "11.111.111.111"}
-        {", "}
+        {clientIp}
       </span>
     </div>
   );

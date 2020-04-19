@@ -14,18 +14,19 @@ function isBrowser() {
   return typeof window !== "undefined";
 }
 
-const Landing = ({ data, clientIp, geoIpData, contributions }) => {
-  // console.warn("contributions", contributions);
-  const [showBodyContent, setShowBodyContent] = useState(true);
+const Landing = ({ clientIp, geoIpData, contributions }) => {
   const [boxSize, setBoxSize] = useState(50);
+  const [showBodyContent, setShowBodyContent] = useState(true);
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [isContributeFormActive, setIsContributeFormActive] = useState(false);
+
   const isBoxSelected = selectedIndex !== -1;
 
   useEffect(() => {
     setBoxSize(window.innerWidth / 11);
   }, []);
 
+  console.warn("isContributeFormActive", isContributeFormActive);
   console.warn("showBodyContent", showBodyContent);
   console.warn("selectedIndex", selectedIndex);
   console.warn("boxSize", boxSize);
@@ -58,7 +59,7 @@ const Landing = ({ data, clientIp, geoIpData, contributions }) => {
             `}
           >
             <div>clientIp: {clientIp}</div>
-            <div>geoIpData: {geoIpData}</div>
+            <div>geoIpData: {JSON.stringify(geoIpData)}</div>
           </div>
           <div>
             <Head>
@@ -113,11 +114,11 @@ const Landing = ({ data, clientIp, geoIpData, contributions }) => {
 };
 
 export async function getServerSideProps(context) {
-  const { req, res } = context;
-  const { clientIp } = req;
+  const { req } = context;
+  const { clientIp, geoIpData } = req;
 
   console.warn(">>>>>>>>>> getServerSideProps");
-  // console.warn("geoIpData", geoIpData);
+  console.warn("geoIpData", geoIpData);
   console.warn("clientIp", clientIp);
 
   let contributions = [];
@@ -135,7 +136,7 @@ export async function getServerSideProps(context) {
     console.error(err);
   }
 
-  return { props: { clientIp, contributions } };
+  return { props: { clientIp, geoIpData, contributions } };
 }
 
 export default Landing;
