@@ -1,5 +1,5 @@
 const { dbConnect, disconnect } = require("./db");
-const { validContributionBody } = require("./api-utils");
+const { validContributionBody } = require("../helpers");
 const {
   addNewContribution,
   findContributionsExcludingIp,
@@ -13,13 +13,16 @@ const {
  */
 
 const addContribution = async (contributionData) => {
+  console.warn(
+    "HANDLER > addContribution > incoming contributionData",
+    contributionData
+  );
+
   await dbConnect().catch((e) => {
     throw new Error(e);
   });
 
   if (!validContributionBody(contributionData)) throw new Error(400);
-
-  console.warn("contributionData", contributionData);
 
   let newContribution = addNewContribution(contributionData);
   try {

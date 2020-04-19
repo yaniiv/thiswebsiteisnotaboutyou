@@ -75,7 +75,15 @@ function getLocationString(geoIpData) {
   return clientLocationString;
 }
 
+const validContributionBody = (contributionBody) => {
+  if (!contributionBody) return false;
+  if (!contributionBody.canvas || !contributionBody.color) return false;
+
+  return true;
+};
+
 module.exports = {
+  validContributionBody,
   getCanvasSize,
   isDesktop,
   isLocalDevIp,

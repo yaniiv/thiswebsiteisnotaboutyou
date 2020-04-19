@@ -14,7 +14,12 @@ const contributionSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
+    locationString: {
+      type: String,
+      required: false,
+    },
   },
+
   {
     timestamps: true, // Saves createdAt and updatedAt as dates. createdAt will be our timestamp.
   }

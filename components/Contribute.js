@@ -25,12 +25,11 @@ const Contribute = ({ setIsContributeFormActive, reflection, canvasSize }) => {
       ip: clientIp,
       canvas: drawingData,
       color: backgroundColor,
-      ...(geoIpValid && { location: getLocationString(geoIpData) }),
+      ...(geoIpValid && { locationString: getLocationString(geoIpData) }),
     };
 
     let response;
     try {
-      console.warn("payload", payload);
       const resourceUri = process.env.RESOURCE_URI;
 
       response = await postData(resourceUri, payload);
