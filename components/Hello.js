@@ -46,7 +46,7 @@ const getLocationString = (geoIpData) => {
 };
 
 const ClientLocation = ({ geoIpData }) => {
-  return <div>{getLocationString(geoIpData)}</div>;
+  return <span>{getLocationString(geoIpData)}</span>;
 };
 
 const Hello = ({ clientIp, geoIpData }) => {
@@ -57,10 +57,15 @@ const Hello = ({ clientIp, geoIpData }) => {
     <div
       css={css`
         position: fixed;
-        top: 200px;
+        top: 15%;
         padding: 10px;
         border: 1px solid #036cdb;
         background: white;
+        font-size: 16px;
+
+        @media (min-width: 768px) {
+          font-size: 24px;
+        }
       `}
     >
       <div>

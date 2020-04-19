@@ -3,7 +3,7 @@ import React from "react";
 import { css } from "@emotion/core";
 
 import Hello from "./Hello";
-import BodyText from "./BodyText";
+import IntroText from "./IntroText";
 
 const Intro = ({
   setIsContributeFormActive,
@@ -24,7 +24,7 @@ const Intro = ({
             `}
           >
             <Hello geoIpData={geoIpData} clientIp={clientIp} />
-            <BodyText setIsContributeFormActive={setIsContributeFormActive} />
+            <IntroText setIsContributeFormActive={setIsContributeFormActive} />
           </div>
         </>
       )}

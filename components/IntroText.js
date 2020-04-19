@@ -3,34 +3,29 @@ import { css } from "@emotion/core";
 
 // import { bodyContent } from "../cms-content";
 
-const BodyText = ({ setIsContributeFormActive }) => {
+const IntroText = ({ setIsContributeFormActive }) => {
   return (
-    <>
-      {/* {bodyContent.map((section, index) => (
-        <div
-          key={index}
-          css={css`
-            position: fixed;
-            background: white;
-            padding: 10px;
-            border: 1px solid #036cdb;
-            top: ${section.top};
-            left: ${section.left};
-            width: ${section.width};
-          `}
-        >
-          {section.text}
-        </div>
-      ))} */}
+    <div
+      css={css`
+        > div {
+          width: 200px;
+          font-size: 16px;
+
+          @media (min-width: 768px) {
+            font-size: 22px;
+            width: 400px;
+          }
+        }
+      `}
+    >
       <div
         css={css`
           position: fixed;
           background: white;
           padding: 10px;
           border: 1px solid #036cdb;
-          top: 276px;
-          left: 180px;
-          width: 400px;
+          top: 21%;
+          left: 8%;
         `}
       >
         This website is about everyone who's been here but you
@@ -41,12 +36,11 @@ const BodyText = ({ setIsContributeFormActive }) => {
           background: white;
           padding: 10px;
           border: 1px solid #036cdb;
-          top: 376px;
-          left: 380px;
-          width: 400px;
+          top: 36%;
+          left: 34%;
         `}
       >
-        each note was left by a visitor just like you
+        each note was left by a visitor
       </div>
       <div
         css={css`
@@ -54,9 +48,8 @@ const BodyText = ({ setIsContributeFormActive }) => {
           background: white;
           padding: 10px;
           border: 1px solid #036cdb;
-          top: 476px;
-          left: 280px;
-          width: 400px;
+          top: 42%;
+          left: 26%;
         `}
       >
         every refresh surfaces a random sample of 200 notes
@@ -67,9 +60,8 @@ const BodyText = ({ setIsContributeFormActive }) => {
           background: white;
           padding: 10px;
           border: 1px solid #036cdb;
-          top: 576px;
-          left: 520px;
-          width: 400px;
+          top: 58%;
+          left: 48%;
         `}
       >
         it would be wonderful if you{" "}
@@ -94,15 +86,14 @@ const BodyText = ({ setIsContributeFormActive }) => {
           background: white;
           padding: 10px;
           border: 1px solid #036cdb;
-          top: 740px;
-          left: 740px;
-          width: 400px;
+          top: 73%;
+          left: 54%;
         `}
       >
         but you'll never see your own contributions on the screen.
       </div>
-    </>
+    </div>
   );
 };
 
-export default BodyText;
+export default IntroText;
