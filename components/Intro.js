@@ -81,7 +81,7 @@ const Intro = ({
             }
           `}
         >
-          each note was left by a visitor
+          each note was left by a visitor, click one to view it
         </div>
         <div
           css={css`
@@ -129,17 +129,14 @@ const Intro = ({
                 border: 2px solid #036cdb;
                 background: transparent;
                 transform: translate(50%, -50%);
+                background-color: white;
+                cursor: pointer;
 
                 width: 36px;
                 height: 36px;
                 @media (min-width: 768px) {
                   width: 54px;
                   height: 54px;
-                }
-
-                :hover {
-                  background-color: white;
-                  cursor: pointer;
                 }
               `}
             >

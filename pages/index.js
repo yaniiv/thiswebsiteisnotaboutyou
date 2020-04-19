@@ -16,10 +16,10 @@ import { isBrowser } from "../helpers";
 import { getCanvasSize, getNumBoxesPerRow } from "../helpers";
 
 const Landing = ({ reflection, contributions }) => {
-  const [boxSize, setBoxSize] = useState(50);
+  const [boxSize, setBoxSize] = useState(0);
   const [selectedIndex, setSelectedIndex] = useState(-1);
-  const [showIntroContent, setShowIntroContent] = useState(true);
-  const [isContributeFormActive, setIsContributeFormActive] = useState(true);
+  const [showIntroContent, setShowIntroContent] = useState(false);
+  const [isContributeFormActive, setIsContributeFormActive] = useState(false);
 
   const canvasSize = getCanvasSize();
   const isBoxSelected = selectedIndex !== -1;

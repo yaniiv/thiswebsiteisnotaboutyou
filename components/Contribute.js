@@ -8,6 +8,7 @@ import { postData } from "../fetchers";
 import { isGeoIpDataValid, getLocationString, isDesktop } from "../helpers";
 import moment from "moment";
 import ClientLocation from "./ClientLocation";
+import CloseIcon from "./CloseIcon";
 
 const getMockString = () => {
   if (process.env.NODE_ENV !== "production") return "San Francisco CA, US";
@@ -51,47 +52,6 @@ const SubmitButton = ({ onSubmit, isLoading }) => (
       stroke="black"
     />
   </button>
-);
-
-const CloseIcon = ({ setIsContributeFormActive }) => (
-  <div
-    css={css``}
-    onClick={() => {
-      setIsContributeFormActive(false);
-    }}
-  >
-    <Icon
-      css={css`
-        border: 2px solid #036cdb;
-        cursor: pointer;
-        float: right;
-        top: 0;
-        right: 0;
-        background-color: transparent;
-        position: relative;
-        stroke-width: 2;
-        z-index: 900;
-
-        height: 36px;
-        width: 36px;
-        transform: translate(calc(100% + 6px), -2px);
-
-        @media (min-width: 768px) {
-          transform: translate(calc(100% + 12px), 0%);
-
-          height: 60px;
-          width: 60px;
-        }
-
-        &:hover {
-          background-color: white;
-        }
-      `}
-      name="close"
-      stroke="red"
-      fill="white"
-    />
-  </div>
 );
 
 const ColorPickers = ({
@@ -313,7 +273,11 @@ const Contribute = ({
         width: ${canvasSize}px;
       `}
     >
-      <CloseIcon setIsContributeFormActive={setIsContributeFormActive} />
+      <CloseIcon
+        handleClick={() => {
+          setIsContributeFormActive(false);
+        }}
+      />
 
       <div
         css={css`

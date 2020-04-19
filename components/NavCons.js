@@ -44,7 +44,7 @@ const Nav = ({
           setIsContributeFormActive((prevState) => !prevState);
         }}
         css={css`
-          color: #036cdb;
+          color: blue;
           background: white;
           border: 2px solid #036cdb;
           position: fixed;
@@ -59,7 +59,6 @@ const Nav = ({
 
           :hover {
             cursor: pointer;
-            color: #036cdb;
             background-color: lightgray;
             text-decoration: underline;
           }
@@ -100,7 +99,7 @@ const Nav = ({
               stroke-linecap: round;
             `}
             name="info"
-            stroke="#036cdb"
+            stroke="blue"
           />
         </div>
       )}

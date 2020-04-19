@@ -23,6 +23,42 @@ const getSelectedBox = ({ selectedIndex, contributions }) => {
   };
 };
 
+const CloseIcon = ({ handleClick, addedCss }) => (
+  <div css={addedCss} onClick={handleClick}>
+    <Icon
+      css={css`
+        border: 2px solid #036cdb;
+        cursor: pointer;
+        float: right;
+        top: 0;
+        right: 0;
+        background-color: transparent;
+        position: absolute;
+        stroke-width: 2;
+        z-index: 900;
+
+        height: 36px;
+        width: 36px;
+        transform: translate(calc(100% + 6px), -2px);
+
+        @media (min-width: 768px) {
+          transform: translate(calc(100% + 12px), 0%);
+
+          height: 60px;
+          width: 60px;
+        }
+
+        &:hover {
+          background-color: white;
+        }
+      `}
+      name="close"
+      stroke="red"
+      fill="white"
+    />
+  </div>
+);
+
 const SelectedBox = ({
   selectedIndex,
   setSelectedIndex,
@@ -52,7 +88,6 @@ const SelectedBox = ({
           >
             <div
               css={css`
-                background-color: white;
                 width: ${canvasSize}px;
                 height: ${canvasSize}px;
                 border: 2px solid #036cdb;
@@ -70,55 +105,26 @@ const SelectedBox = ({
                 hideInterface={true}
                 style={{ background: color, pointerEvents: "none" }}
               />
-
               <div
-                onClick={() => {
-                  setSelectedIndex(-1);
-                }}
                 css={css`
-                  &:hover {
-                    cursor: pointer;
-                    svg {
-                      background-color: white;
-                    }
+                  position: absolute;
+                  bottom: 0;
+                  left: 0;
+                  font-size: 14px;
+                  @media (min-width: 768) {
+                    font-size: 18px;
                   }
+                  transform: translate(0%, calc(100% + 2px));
                 `}
               >
-                <div
-                  css={css`
-                    position: absolute;
-                    bottom: 0;
-                    left: 0;
-                    font-size: 14px;
-                    @media (min-width: 768) {
-                      font-size: 18px;
-                    }
-                    transform: translate(0%, calc(100% + 2px));
-                  `}
-                >
-                  Contributed on {created}
-                  {locationString && locationString}
-                </div>
-
-                <Icon
-                  css={css`
-                    cursor: pointer;
-                    float: right;
-                    top: 0;
-                    right: 0;
-                    position: absolute;
-                    stroke-linecap: round;
-                    stroke-linejoin: round;
-                    stroke-width: 2;
-                    height: 60px;
-                    width: 60px;
-                    transform: translate(calc(100% + 20px), 0%);
-                    border: 2px solid #036cdb;
-                  `}
-                  name="close"
-                  stroke="red"
-                />
+                Contributed on {created}
+                {locationString && locationString}
               </div>
+              <CloseIcon
+                handleClick={() => {
+                  setSelectedIndex(-1);
+                }}
+              />
             </div>
           </div>
         </>
