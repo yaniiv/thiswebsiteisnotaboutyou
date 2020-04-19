@@ -29,7 +29,7 @@ const Nav = ({
         top: 0;
         right: 0;
         position: fixed;
-        z-index: 50;
+        z-index: 1000;
         display: flex;
         justify-content: flex-end;
       `}
@@ -43,7 +43,7 @@ const Nav = ({
           background: transparent;
           border: 2px solid #036cdb;
           position: fixed;
-          top: 110px;
+          top: 0px;
           :hover {
             cursor: pointer;
             color: blue;
@@ -53,31 +53,41 @@ const Nav = ({
       >
         contribute
       </div>
-      <div
-        onClick={() => {
-          setShowIntroContent(false);
-        }}
-        css={css`
-          height: 90px;
-          border: 2px solid #036cdb;
-          width: 90px;
-          background: transparent;
-          :hover {
-            cursor: pointer;
+      {showIntroContent && (
+        <div
+          onClick={() => {
+            setShowIntroContent(false);
+          }}
+          css={css`
+            height: 60px;
+            position: fixed;
+            top: calc(56%);
+            left: calc(74%);
+            border: 2px solid #036cdb;
+            width: 60px;
+            background: transparent;
             svg {
               stroke: red;
             }
-          }
-        `}
-      >
-        <Icon
-          css={css`
-            fill: none;
-            stroke-width: 2;
+
+            :hover {
+              background-color: grey;
+              cursor: pointer;
+              svg {
+                fill: red;
+              }
+            }
           `}
-          name="close"
-        />
-      </div>
+        >
+          <Icon
+            css={css`
+              fill: none;
+              stroke-width: 2;
+            `}
+            name="close"
+          />
+        </div>
+      )}
     </nav>
   );
 };

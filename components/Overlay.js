@@ -12,7 +12,6 @@ const Overlay = ({
       {(isBoxSelected || isContributeFormActive) && (
         <div
           onClick={() => {
-            setIsContributeFormActive(false);
             setSelectedIndex(-1);
           }}
           css={css`

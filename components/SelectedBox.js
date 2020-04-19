@@ -89,7 +89,7 @@ const SelectedBox = ({
                     position: absolute;
                     bottom: 0;
                     left: 0;
-                    font-size: 18px;
+                    font-size: 16px;
                     transform: translate(0%, calc(100% + 2px));
                   `}
                 >

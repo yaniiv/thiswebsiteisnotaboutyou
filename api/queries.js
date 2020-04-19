@@ -7,7 +7,7 @@ const findContributionsExcludingIp = async (ip) => {
     .where("ip")
     .ne(ip)
     .limit(111)
-    .sort("createdAt");
+    .sort("-createdAt");
 };
 
 const addNewContribution = (contributionData) => {
