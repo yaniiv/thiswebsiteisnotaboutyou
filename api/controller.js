@@ -4,13 +4,6 @@ const {
   addNewContribution,
   findContributionsExcludingIp,
 } = require("./queries");
-/**
- * @function sendMessage Connects to database and posts a new message with to and from data
- *
- * @param contributionData {object} Data about message from request { to: <string>, from: <string>, message: <string> }
- *
- * @returns {bool} Returns true if insert succeeeds
- */
 
 const addContribution = async (contributionData) => {
   console.warn(
@@ -22,7 +15,10 @@ const addContribution = async (contributionData) => {
     throw new Error(e);
   });
 
-  if (!validContributionBody(contributionData)) throw new Error(400);
+  if (!validContributionBody(contributionData)) {
+    console.warn("Invalid Contribution Body");
+    throw new Error(400);
+  }
 
   let newContribution = addNewContribution(contributionData);
   try {
@@ -33,14 +29,6 @@ const addContribution = async (contributionData) => {
   }
   return newContribution;
 };
-
-/**
- * @function queryForAllMessages Connect to database, query for all messages in database sent within 30 days, limited to 100 messages, then close database
- *
- * @param none
- *
- * @returns {object[]} Returns an array of message objects [ { to: <string>, from: <string>, message: <string>, createdAt: <timestamp>}]
- */
 
 const getAllContributions = async (ip) => {
   console.warn("getAllContributions ip", ip);

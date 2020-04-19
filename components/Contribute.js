@@ -5,7 +5,11 @@ import CanvasDraw from "react-canvas-draw";
 import { SketchPicker } from "react-color";
 import Icon from "./Icon";
 import { postData } from "../fetchers";
-import { isGeoIpDataValid, getLocationString } from "../helpers";
+import {
+  isGeoIpDataValid,
+  getLocationString,
+  formatUtcToHumanReadable,
+} from "../helpers";
 import moment from "moment";
 
 const canvasProps = {};
@@ -161,7 +165,7 @@ const Contribute = ({ setIsContributeFormActive, reflection, canvasSize }) => {
               transform: translate(0%, calc(100% + 2px));
             `}
           >
-            Contributed on {moment().format("MMMM Do YYYY, [at] h:mm:ss a")}{" "}
+            Contributing on {moment().format("MMMM Do YYYY, [at] h:mm:ss a")}
             {isGeoIpDataValid && `${getLocationString(geoIpData)}`}
           </div>
         </div>
