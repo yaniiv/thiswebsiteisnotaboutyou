@@ -1,6 +1,8 @@
 import React from "react";
 import { css } from "@emotion/core";
 
+import { isGeoIpDataValid, getLocationString } from "../helpers";
+
 /* 
 clientIp: 174.62.76.46
 geoIpData: {
@@ -13,37 +15,6 @@ geoIpData: {
   "ll":[37.7703,-122.4407],
   "metro":807,"area":5}
 */
-
-const isGeoIpDataValid = (geoIpData) => {
-  if (geoIpData.error) {
-    return false;
-  }
-
-  if (geoIpData === undefined) {
-    return false;
-  }
-
-  if (!geoIpData.country) {
-    return false;
-  }
-
-  return true;
-};
-
-const getLocationString = (geoIpData) => {
-  const { range, country, region, eu, timezone, city, ll, metro } = geoIpData;
-
-  let clientLocationString = "";
-  if (country && region && city) {
-    clientLocationString = `, from ${city} ${region}, ${country}`;
-  } else if (country && region) {
-    clientLocationString = `, from ${city}, ${region}`;
-  } else if (country) {
-    clientLocationString = `, from ${country}`;
-  }
-
-  return clientLocationString;
-};
 
 const ClientLocation = ({ geoIpData }) => {
   return <span>{getLocationString(geoIpData)}</span>;

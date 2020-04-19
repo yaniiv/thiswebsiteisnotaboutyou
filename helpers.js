@@ -44,10 +44,43 @@ function getCanvasSize() {
   return canvasSize;
 }
 
+function isGeoIpDataValid(geoIpData) {
+  if (geoIpData.error) {
+    return false;
+  }
+
+  if (geoIpData === undefined) {
+    return false;
+  }
+
+  if (!geoIpData.country) {
+    return false;
+  }
+
+  return true;
+}
+
+function getLocationString(geoIpData) {
+  const { range, country, region, eu, timezone, city, ll, metro } = geoIpData;
+
+  let clientLocationString = "";
+  if (country && region && city) {
+    clientLocationString = `, from ${city} ${region}, ${country}`;
+  } else if (country && region) {
+    clientLocationString = `, from ${city}, ${region}`;
+  } else if (country) {
+    clientLocationString = `, from ${country}`;
+  }
+
+  return clientLocationString;
+}
+
 module.exports = {
   getCanvasSize,
   isDesktop,
   isLocalDevIp,
   isBrowser,
   formatUtcToHumanReadable,
+  isGeoIpDataValid,
+  getLocationString,
 };

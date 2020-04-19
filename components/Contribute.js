@@ -5,14 +5,17 @@ import CanvasDraw from "react-canvas-draw";
 import { SketchPicker } from "react-color";
 import Icon from "./Icon";
 import { postData } from "../fetchers";
+import { isGeoIpDataValid, getLocationString } from "../helpers";
 
 const canvasProps = {};
 
-const Contribute = ({ setIsContributeFormActive, clientIp, canvasSize }) => {
+const Contribute = ({ setIsContributeFormActive, reflection, canvasSize }) => {
   const [backgroundColor, setBackgroundColor] = useState("grey");
   const canvasElement = useRef(null);
   const [isLoading, setIsLoading] = useState(false);
 
+  const { clientIp, geoIpData } = reflection;
+  const geoIpValid = isGeoIpDataValid(geoIpData);
   // const { register, handleSubmit, errors } = useForm();
   const onSubmit = async () => {
     setIsLoading(true);
@@ -21,6 +24,7 @@ const Contribute = ({ setIsContributeFormActive, clientIp, canvasSize }) => {
       ip: clientIp,
       canvas: drawingData,
       color: backgroundColor,
+      ...(geoIpValid && { location: getLocationString(geoIpData) }),
     };
 
     let response;
@@ -81,7 +85,7 @@ const Contribute = ({ setIsContributeFormActive, clientIp, canvasSize }) => {
         <SketchPicker
           css={css`
             right: 0;
-            bottom: 0;
+            bottom: 80px;
             border: 2px solid #036cdb;
             border-radius: 0 !important;
             position: absolute;
@@ -113,6 +117,7 @@ const Contribute = ({ setIsContributeFormActive, clientIp, canvasSize }) => {
           immediateLoading={false}
           hideInterface={false}
         />
+
         <button
           onClick={onSubmit}
           disabled={isLoading}
@@ -134,6 +139,31 @@ const Contribute = ({ setIsContributeFormActive, clientIp, canvasSize }) => {
         >
           submit
         </button>
+        <div
+          onClick={() => {
+            setSelectedIndex(-1);
+          }}
+          css={css`
+            :hover {
+              cursor: pointer;
+              svg {
+                stroke: red;
+              }
+            }
+          `}
+        >
+          <div
+            css={css`
+              position: absolute;
+              bottom: 0;
+              right: 0;
+              font-size: 18px;
+              transform: translate(0%, calc(100% + 2px));
+            `}
+          >
+            Contributed from {getLocationString(geoIpData)}
+          </div>
+        </div>
       </div>
     </div>
   );

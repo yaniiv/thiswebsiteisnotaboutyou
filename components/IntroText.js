@@ -8,6 +8,10 @@ const IntroText = ({ setIsContributeFormActive }) => {
         > div {
           width: 200px;
           font-size: 16px;
+          position: fixed;
+          background: white;
+          padding: 10px;
+          border: 1px solid #036cdb;
 
           @media (min-width: 768px) {
             font-size: 22px;
@@ -18,10 +22,6 @@ const IntroText = ({ setIsContributeFormActive }) => {
     >
       <div
         css={css`
-          position: fixed;
-          background: white;
-          padding: 10px;
-          border: 1px solid #036cdb;
           top: calc(15% + 68px);
           left: 8%;
         `}
@@ -30,24 +30,16 @@ const IntroText = ({ setIsContributeFormActive }) => {
       </div>
       <div
         css={css`
-          position: fixed;
-          background: white;
-          padding: 10px;
-          border: 1px solid #036cdb;
           top: 36%;
           left: 34%;
+          width: 290px !important;
         `}
       >
         each note was left by a visitor
       </div>
       <div
         css={css`
-          position: fixed;
-          background: white;
-          padding: 10px;
-          border: 1px solid #036cdb;
           left: 26%;
-
           top: calc(36% + 68px);
         `}
       >
@@ -55,10 +47,6 @@ const IntroText = ({ setIsContributeFormActive }) => {
       </div>
       <div
         css={css`
-          position: fixed;
-          background: white;
-          padding: 10px;
-          border: 1px solid #036cdb;
           top: 58%;
           left: 48%;
         `}
@@ -81,12 +69,9 @@ const IntroText = ({ setIsContributeFormActive }) => {
       </div>
       <div
         css={css`
-          position: fixed;
-          background: white;
-          padding: 10px;
-          border: 1px solid #036cdb;
           top: calc(58% + 142px);
-          left: 54%;
+          left: 48%;
+          width: 290px !important;
         `}
       >
         but you'll never see your own contributions on your screen.

@@ -1,4 +1,5 @@
 import fetch from "isomorphic-unfetch";
+import { isBrowser } from "./helpers";
 
 /* Default options are marked with *
   const response = await fetch(url, {
@@ -24,7 +25,15 @@ export async function postData(url = "", data = {}) {
 
 export async function getData(url = "", clientIp) {
   console.warn("url", url);
-  const response = await fetch(`${url}?ip=${clientIp}`, {
+
+  let withEgo;
+  if (isBrowser()) {
+    const urlParams = new URLSearchParams(window.location.search);
+    withEgo = urlParams.get("ego");
+    console.warn("withEgo", withEgo);
+  }
+
+  const response = await fetch(`${url}?ip=${clientIp}&ego=${withEgo}`, {
     method: "GET", // *GET, POST, PUT, DELETE, etc.
     headers: {
       "Content-Type": "application/json",
