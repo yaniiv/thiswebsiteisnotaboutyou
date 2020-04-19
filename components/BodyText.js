@@ -33,7 +33,7 @@ const BodyText = ({ setIsContributeFormActive }) => {
           width: 400px;
         `}
       >
-        This website is about everyone else who's been here but you
+        This website is about everyone who's been here but you
       </div>
       <div
         css={css`
@@ -46,7 +46,7 @@ const BodyText = ({ setIsContributeFormActive }) => {
           width: 400px;
         `}
       >
-        each box was left by a person who's been here and left a note
+        each note was left by a visitor just like you
       </div>
       <div
         css={css`

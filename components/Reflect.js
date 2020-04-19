@@ -9,11 +9,10 @@ const Reflect = ({ reflection: { geoIpData, clientIp } }) => {
       css={css`
         position: fixed;
         color: black;
+        display: flex;
         flex-direction: column;
         left: 0;
         bottom: 0;
-        height: 200px;
-        width: 200px;
         background-color: white;
         font-size: 16px;
       `}
