@@ -20,6 +20,7 @@ const Contribute = ({ setIsContributeFormActive, reflection, canvasSize }) => {
   // const { register, handleSubmit, errors } = useForm();
   const onSubmit = async () => {
     setIsLoading(true);
+
     const drawingData = canvasElement.current.getSaveData();
     const payload = {
       ip: clientIp,
@@ -28,11 +29,10 @@ const Contribute = ({ setIsContributeFormActive, reflection, canvasSize }) => {
       ...(geoIpValid && { locationString: getLocationString(geoIpData) }),
     };
 
-    let response;
     try {
       const resourceUri = process.env.RESOURCE_URI;
 
-      response = await postData(resourceUri, payload);
+      await postData(resourceUri, payload);
 
       setIsContributeFormActive(false);
     } catch (err) {
