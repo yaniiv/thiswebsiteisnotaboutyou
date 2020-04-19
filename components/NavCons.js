@@ -17,7 +17,11 @@ const Nav = ({
   isBoxSelected,
   showIntroContent,
   setIsContributeFormActive,
+  isContributeFormActive,
 }) => {
+  if (isBoxSelected || isContributeFormActive) {
+    return null;
+  }
   console.warn("boxSize", boxSize);
   return (
     <nav
