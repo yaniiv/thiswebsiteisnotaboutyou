@@ -34,7 +34,7 @@ app.prepare().then(() => {
 
   server.get("/contributions", async (req, res) => {
     console.warn("server.get");
-    console.warn("eq.query.ip", eq.query.ip);
+    console.warn("eq.query.ip", req.query.ip);
     let contributions;
 
     try {

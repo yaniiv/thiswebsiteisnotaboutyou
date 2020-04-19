@@ -86,7 +86,10 @@ const SelectedBox = ({
                 <div
                   css={css`
                     position: absolute;
-                    top: 0;
+                    bottom: 0;
+                    right: 0;
+                    font-size: 18px;
+                    transform: translate(0%, calc(100% + 2px));
                   `}
                 >
                   Contributed on {created}

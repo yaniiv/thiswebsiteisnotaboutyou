@@ -11,12 +11,11 @@ const canvasProps = {};
 const Contribute = ({ setIsContributeFormActive, clientIp, canvasSize }) => {
   const [backgroundColor, setBackgroundColor] = useState("grey");
   const canvasElement = useRef(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   // const { register, handleSubmit, errors } = useForm();
   const onSubmit = async () => {
-    console.warn("ONSUBMIT");
-    console.warn("Button Press -> contribute submit");
-
+    setIsLoading(true);
     const drawingData = canvasElement.current.getSaveData();
     const payload = {
       ip: clientIp,
@@ -30,13 +29,13 @@ const Contribute = ({ setIsContributeFormActive, clientIp, canvasSize }) => {
       const resourceUri = process.env.RESOURCE_URI;
 
       response = await postData(resourceUri, payload);
-      setIsContributeFormActive(false);
-      console.warn("POST DATA SUCCESS -> response", response);
-    } catch (err) {
-      console.warn("POST DATA ERROR -> err", err);
 
+      setIsContributeFormActive(false);
+    } catch (err) {
       console.error(err);
     }
+
+    setIsLoading(false);
   };
 
   return (
@@ -116,6 +115,7 @@ const Contribute = ({ setIsContributeFormActive, clientIp, canvasSize }) => {
         />
         <button
           onClick={onSubmit}
+          disabled={isLoading}
           css={css`
             position: absolute;
             bottom: 0;
