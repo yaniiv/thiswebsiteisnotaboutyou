@@ -105,9 +105,11 @@ const Landing = ({ reflection, contributions }) => {
 };
 
 export async function getServerSideProps(context) {
-  const { req } = context;
+  console.warn(">>>>>>>>>>>getServerSideProps");
+  const { req, query } = context;
+  console.warn("query", query);
+  console.warn("query.ego", query.ego);
   const { clientIp, geoIpData } = req;
-
   const reflection = {
     clientIp,
     geoIpData,
@@ -116,15 +118,12 @@ export async function getServerSideProps(context) {
   let contributions = [];
 
   try {
-    contributions = await getData(process.env.RESOURCE_URI, clientIp);
-
-    // console.warn(
-    //   "getServerSideProps | GET CONTRIBUTIONS SUCCESS -> contributions",
-    //   contributions
-    // );
+    contributions = await getData(
+      process.env.RESOURCE_URI,
+      clientIp,
+      query.ego
+    );
   } catch (err) {
-    console.warn("getServerSideProps | GET CONTRIBUTIONS ERROR -> err", err);
-
     console.error(err);
   }
 

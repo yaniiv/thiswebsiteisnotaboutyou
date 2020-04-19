@@ -14,8 +14,8 @@ import { isBrowser } from "./helpers";
 
 export async function postData(url = "", data = {}) {
   const response = await fetch(url, {
-    body: JSON.stringify(data), // body data type must match "Content-Type" header
-    method: "POST", // *GET, POST, PUT, DELETE, etc.
+    body: JSON.stringify(data),
+    method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
@@ -23,18 +23,16 @@ export async function postData(url = "", data = {}) {
   return response.json();
 }
 
-export async function getData(url = "", clientIp) {
-  console.warn("url", url);
+export async function getData(url = "", clientIp, ego) {
+  let requestUrl = `${url}?ip=${clientIp}`;
 
-  let withEgo;
-  if (isBrowser()) {
-    const urlParams = new URLSearchParams(window.location.search);
-    withEgo = urlParams.get("ego");
-    console.warn("withEgo", withEgo);
+  if (ego) {
+    requestUrl += `&ego=${ego}`;
   }
 
-  const response = await fetch(`${url}?ip=${clientIp}&ego=${withEgo}`, {
-    method: "GET", // *GET, POST, PUT, DELETE, etc.
+  console.warn("requestUrl", requestUrl);
+  const response = await fetch(requestUrl, {
+    method: "GET",
     headers: {
       "Content-Type": "application/json",
     },

@@ -35,9 +35,11 @@ app.prepare().then(() => {
   server.get("/contributions", async (req, res) => {
     console.warn("server.get");
     console.warn("req.query.ip", req.query.ip);
+    console.warn("req.query.ego", req.query.ego);
     let parsedIp = req.query.ip;
 
-    if (parsedIp === "::1") {
+    // bypass filtering by IP by setting filter value to {}
+    if (req.query.ego) {
       parsedIp = undefined;
     }
 
