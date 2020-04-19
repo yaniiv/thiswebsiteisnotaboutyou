@@ -5,11 +5,7 @@ import CanvasDraw from "react-canvas-draw";
 import { SketchPicker } from "react-color";
 import Icon from "./Icon";
 import { postData } from "../fetchers";
-import {
-  isGeoIpDataValid,
-  getLocationString,
-  formatUtcToHumanReadable,
-} from "../helpers";
+import { isGeoIpDataValid, getLocationString } from "../helpers";
 import moment from "moment";
 
 const canvasProps = {};
