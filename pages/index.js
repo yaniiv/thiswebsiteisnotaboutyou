@@ -17,7 +17,7 @@ import { getCanvasSize } from "../helpers";
 
 const Landing = ({ reflection, contributions }) => {
   const [boxSize, setBoxSize] = useState(50);
-  const [selectedIndex, setSelectedIndex] = useState(1);
+  const [selectedIndex, setSelectedIndex] = useState(-1);
   const [showIntroContent, setShowIntroContent] = useState(true);
   const [isContributeFormActive, setIsContributeFormActive] = useState(false);
 
