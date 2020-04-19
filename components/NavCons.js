@@ -49,50 +49,17 @@ const Nav = ({
           border: 2px solid #036cdb;
           position: fixed;
           top: 0px;
+          padding: 8px;
           :hover {
             cursor: pointer;
-            color: blue;
+            color: #036cdb;
+            background-color: white;
             text-decoration: underline;
           }
         `}
       >
         contribute
       </div>
-      {showIntroContent && !isContributeFormActive && (
-        <div
-          onClick={() => {
-            setShowIntroContent(false);
-          }}
-          css={css`
-            height: 60px;
-            position: fixed;
-            top: calc(56%);
-            left: calc(74%);
-            border: 2px solid #036cdb;
-            width: 60px;
-            background: transparent;
-            svg {
-              stroke: red;
-            }
-
-            :hover {
-              background-color: grey;
-              cursor: pointer;
-              svg {
-                fill: red;
-              }
-            }
-          `}
-        >
-          <Icon
-            css={css`
-              fill: none;
-              stroke-width: 2;
-            `}
-            name="close"
-          />
-        </div>
-      )}
       {!showIntroContent && (
         <div
           onClick={() => {
@@ -108,17 +75,19 @@ const Nav = ({
             background: transparent;
 
             :hover {
-              background-color: grey;
+              background-color: white;
               cursor: pointer;
             }
           `}
         >
           <Icon
             css={css`
-              fill: none;
               stroke-width: 2;
+              stroke-linejoin: round;
+              stroke-linecap: round;
             `}
             name="info"
+            stroke="#036cdb"
           />
         </div>
       )}
@@ -127,3 +96,18 @@ const Nav = ({
 };
 
 export default Nav;
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="#000000"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <circle cx="12" cy="12" r="10"></circle>
+  <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+  <line x1="12" y1="17" x2="12.01" y2="17"></line>
+</svg>;

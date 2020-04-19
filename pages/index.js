@@ -13,7 +13,7 @@ import Intro from "../components/Intro";
 import Reflect from "../components/Reflect";
 
 import { isBrowser } from "../helpers";
-import { getCanvasSize } from "../helpers";
+import { getCanvasSize, getNumBoxesPerRow } from "../helpers";
 
 const Landing = ({ reflection, contributions }) => {
   const [boxSize, setBoxSize] = useState(50);
@@ -25,7 +25,7 @@ const Landing = ({ reflection, contributions }) => {
   const isBoxSelected = selectedIndex !== -1;
 
   useEffect(() => {
-    setBoxSize(window.innerWidth / 11);
+    setBoxSize(window.innerWidth / getNumBoxesPerRow());
   }, []);
 
   console.warn("boxSize", boxSize);
@@ -53,6 +53,7 @@ const Landing = ({ reflection, contributions }) => {
             <title>This Website Is Not About You</title>
           </Head>
           <Intro
+            setShowIntroContent={setShowIntroContent}
             showIntroContent={showIntroContent}
             isBoxSelected={isBoxSelected}
             setIsContributeFormActive={setIsContributeFormActive}
@@ -74,7 +75,7 @@ const Landing = ({ reflection, contributions }) => {
             isContributeFormActive={isContributeFormActive}
             setIsContributeFormActive={setIsContributeFormActive}
           />
-          <Reflect reflection={reflection} />
+          {/* <Reflect reflection={reflection} /> */}
           <SelectedBox
             canvasSize={canvasSize}
             setSelectedIndex={setSelectedIndex}

@@ -22,6 +22,8 @@ const Contribute = ({ setIsContributeFormActive, reflection, canvasSize }) => {
     console.warn("onSubmit drawingData", drawingData);
 
     const drawingData = canvasElement.current.getSaveData();
+    console.warn("drawingData", drawingData);
+
     const payload = {
       ip: clientIp,
       canvas: drawingData,
@@ -77,10 +79,12 @@ const Contribute = ({ setIsContributeFormActive, reflection, canvasSize }) => {
             z-index: 50;
             height: 60px;
             width: 60px;
+            &:hover {
+              background-color: white;
+            }
           `}
           name="close"
-          fill="white"
-          stroke="white"
+          stroke="red"
         />
       </div>
       <div
@@ -210,11 +214,14 @@ const Contribute = ({ setIsContributeFormActive, reflection, canvasSize }) => {
               position: absolute;
               bottom: 0;
               left: 0;
-              font-size: 18px;
+              font-size: 14px;
+              @media (min-width: 768) {
+                font-size: 18px;
+              }
               transform: translate(0%, calc(100% + 2px));
             `}
           >
-            Contributing on {moment().format("MMMM Do YYYY, [at] h:mm:ss a")}
+            Contributing on {moment().format("MMMM Do YYYY, [at] h:mm a")}
             {isGeoIpDataValid && `${getLocationString(geoIpData)}`}
           </div>
         </div>

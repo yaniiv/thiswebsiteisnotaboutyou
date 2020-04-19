@@ -17,7 +17,7 @@ function isDesktop() {
 }
 
 function formatUtcToHumanReadable(date) {
-  return moment.utc(date).format("MMMM Do YYYY, [at] h:mm:ss a");
+  return moment.utc(date).format("MMMM Do YYYY, [at] h:mm a");
 }
 
 function getCanvasSize() {
@@ -29,12 +29,8 @@ function getCanvasSize() {
 
   if (window.innerWidth > 1024) {
     canvasSize = 600;
-  } else if (window.innerWidth > 800) {
-    canvasSize = 600;
-  } else if (window.innerWidth > 700) {
-    canvasSize = 500;
-  } else if (window.innerWidth > 500) {
-    canvasSize = 400;
+  } else if (window.innerWidth > 768) {
+    canvasSize = 440;
   } else {
     canvasSize = 300;
   }
@@ -77,14 +73,32 @@ function getLocationString(geoIpData) {
   return clientLocationString;
 }
 
-const validContributionBody = (contributionBody) => {
+function validContributionBody(contributionBody) {
   if (!contributionBody) return false;
   if (!contributionBody.canvas || !contributionBody.color) return false;
 
   return true;
-};
+}
+
+function getNumBoxesPerRow() {
+  if (!isBrowser()) {
+    return 0;
+  }
+
+  let numBoxesPerRow;
+  if (window.innerWidth > 1024) {
+    numBoxesPerRow = 8;
+  } else if (window.innerWidth > 768) {
+    numBoxesPerRow = 6;
+  } else {
+    numBoxesPerRow = 2;
+  }
+
+  return numBoxesPerRow;
+}
 
 module.exports = {
+  getNumBoxesPerRow,
   validContributionBody,
   getCanvasSize,
   isDesktop,

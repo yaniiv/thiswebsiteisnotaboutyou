@@ -76,10 +76,10 @@ const SelectedBox = ({
                   setSelectedIndex(-1);
                 }}
                 css={css`
-                  :hover {
+                  &:hover {
                     cursor: pointer;
                     svg {
-                      stroke: red;
+                      background-color: white;
                     }
                   }
                 `}
@@ -89,7 +89,10 @@ const SelectedBox = ({
                     position: absolute;
                     bottom: 0;
                     left: 0;
-                    font-size: 16px;
+                    font-size: 14px;
+                    @media (min-width: 768) {
+                      font-size: 18px;
+                    }
                     transform: translate(0%, calc(100% + 2px));
                   `}
                 >
@@ -100,7 +103,6 @@ const SelectedBox = ({
                 <Icon
                   css={css`
                     cursor: pointer;
-                    fill: none;
                     float: right;
                     top: 0;
                     right: 0;
@@ -114,6 +116,7 @@ const SelectedBox = ({
                     border: 2px solid #036cdb;
                   `}
                   name="close"
+                  stroke="red"
                 />
               </div>
             </div>
