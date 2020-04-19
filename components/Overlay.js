@@ -1,5 +1,6 @@
 import React from "react";
 import { css } from "@emotion/core";
+import CanvasDraw from "react-canvas-draw";
 
 const Overlay = ({
   isBoxSelected,
@@ -14,6 +15,29 @@ const Overlay = ({
           onClick={() => {
             setSelectedIndex(-1);
           }}
+        >
+          <CanvasDraw
+            style={{
+              position: "fixed",
+              zIndex: 40,
+              background: "white",
+              opacity: "0.825",
+            }}
+            disabled={true}
+            hideGrid={true}
+            canvasWidth={window.innerWidth}
+            canvasHeight={window.innerHeight}
+          />
+        </div>
+      )}
+    </>
+  );
+};
+
+export default Overlay;
+
+/*         <div
+     
           css={css`
             height: 100%;
             width: 100%;
@@ -22,10 +46,4 @@ const Overlay = ({
             background: white;
             opacity: 0.75;
           `}
-        />
-      )}
-    </>
-  );
-};
-
-export default Overlay;
+        />*/

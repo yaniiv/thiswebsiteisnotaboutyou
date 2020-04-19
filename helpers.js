@@ -32,7 +32,7 @@ function getCanvasSize() {
   } else if (window.innerWidth > 768) {
     canvasSize = 440;
   } else {
-    canvasSize = 300;
+    canvasSize = 280;
   }
 
   return canvasSize;
@@ -63,11 +63,11 @@ function getLocationString(geoIpData) {
 
   let clientLocationString = "";
   if (country && region && city) {
-    clientLocationString = `, from ${city} ${region}, ${country}`;
+    clientLocationString = `${city} ${region}, ${country}`;
   } else if (country && region) {
-    clientLocationString = `, from ${city}, ${region}`;
+    clientLocationString = `${city}, ${region}`;
   } else if (country) {
-    clientLocationString = `, from ${country}`;
+    clientLocationString = `${country}`;
   }
 
   return clientLocationString;

@@ -50,7 +50,6 @@ const Nav = ({
           position: fixed;
           top: 0px;
           padding: 8px;
-
           font-size: 16px;
           text-decoration: underline;
 
@@ -74,23 +73,29 @@ const Nav = ({
             setShowIntroContent(true);
           }}
           css={css`
-            height: 60px;
             position: fixed;
-            bottom: 0;
             right: 0;
             border: 2px solid #036cdb;
-            width: 60px;
             background-color: white;
+            top: 50px;
+            padding: 4px;
 
             :hover {
               background-color: lightgray;
               cursor: pointer;
             }
+
+            height: 30px;
+            width: 30px;
+            @media (min-width: 768px) {
+              height: 42px;
+              width: 42px;
+            }
           `}
         >
           <Icon
             css={css`
-              stroke-width: 2;
+              stroke-width: 1.6;
               stroke-linejoin: round;
               stroke-linecap: round;
             `}

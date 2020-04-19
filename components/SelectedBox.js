@@ -9,6 +9,7 @@ import Icon from "./Icon";
 const getSelectedBox = ({ selectedIndex, contributions }) => {
   const selectedBox = contributions[selectedIndex] || {};
   console.warn("selectedBox", selectedBox);
+
   const { ip, createdAt, color, canvas, locationString } = selectedBox;
 
   const paresedDate = formatUtcToHumanReadable(createdAt);
@@ -29,7 +30,6 @@ const SelectedBox = ({
   isBoxSelected,
   canvasSize,
 }) => {
-  console.warn("contributions", contributions);
   const { locationString, created, color, canvas } = getSelectedBox({
     selectedIndex,
     contributions,

@@ -51,9 +51,9 @@ const Intro = ({
             background: white;
             padding: 10px;
             border: 1px solid #036cdb;
-            animation: 0.6s ${fadeIn} ease;
+            /* animation: 0.6s ${fadeIn} ease;
             animation-iteration-count: 1;
-            animation-fill-mode: forwards;
+            animation-fill-mode: forwards; */
 
             @media (min-width: 768px) {
               font-size: 22px;
@@ -65,7 +65,6 @@ const Intro = ({
         <div
           css={css`
             top: calc(15% + 68px);
-            opacity: 0;
             left: 4%;
           `}
         >

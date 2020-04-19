@@ -3,6 +3,7 @@ import { css } from "@emotion/core";
 
 import { isGeoIpDataValid, getLocationString } from "../helpers";
 
+import ClientLocation from "./ClientLocation";
 /* 
 clientIp: 174.62.76.46
 geoIpData: {
@@ -15,10 +16,6 @@ geoIpData: {
   "ll":[37.7703,-122.4407],
   "metro":807,"area":5}
 */
-
-const ClientLocation = ({ geoIpData }) => {
-  return <span>{getLocationString(geoIpData)}</span>;
-};
 
 const Hello = ({ reflection }) => {
   const { clientIp, geoIpData } = reflection;
