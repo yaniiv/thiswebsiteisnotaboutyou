@@ -2,13 +2,11 @@ import React, { useState, useRef } from "react";
 import { css } from "@emotion/core";
 import CanvasDraw from "react-canvas-draw";
 // import { useForm } from "react-hook-form";
-import { SketchPicker } from "react-color";
+import { SketchPicker, HuePicker } from "react-color";
 import Icon from "./Icon";
 import { postData } from "../fetchers";
 import { isGeoIpDataValid, getLocationString } from "../helpers";
 import moment from "moment";
-
-const canvasProps = {};
 
 const Contribute = ({ setIsContributeFormActive, reflection, canvasSize }) => {
   const [backgroundColor, setBackgroundColor] = useState("grey");
@@ -71,6 +69,7 @@ const Contribute = ({ setIsContributeFormActive, reflection, canvasSize }) => {
             top: 0;
             right: 0;
             transform: translate(calc(100% + 20px), 0%);
+
             stroke-width: 2;
             z-index: 50;
             height: 60px;
@@ -82,18 +81,20 @@ const Contribute = ({ setIsContributeFormActive, reflection, canvasSize }) => {
         />
       </div>
       <div>
-        <SketchPicker
+        <HuePicker
           css={css`
             right: 0;
             bottom: 80px;
             border: 2px solid #036cdb;
+
             border-radius: 0 !important;
-            position: absolute;
-            transform: translate(calc(100% + 20px), 0%);
+            /* position: absolute;
+            transform: translate(calc(100% + 20px), 0%); */
             &:hover {
               cursor: pointer;
             }
           `}
+          style={{ transform: "rotate(90deg)" }}
           color={backgroundColor}
           onChangeComplete={(sketchColor) => {
             setBackgroundColor(sketchColor.hex);
@@ -101,7 +102,6 @@ const Contribute = ({ setIsContributeFormActive, reflection, canvasSize }) => {
         />
         <CanvasDraw
           ref={canvasElement}
-          {...canvasProps}
           canvasWidth={canvasSize}
           canvasHeight={canvasSize}
           style={{ background: "transparent" }}
