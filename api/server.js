@@ -34,11 +34,18 @@ app.prepare().then(() => {
 
   server.get("/contributions", async (req, res) => {
     console.warn("server.get");
-    console.warn("eq.query.ip", req.query.ip);
+    console.warn("req.query.ip", req.query.ip);
+    let parsedIp = req.query.ip;
+
+    if (parsedIp === "::1") {
+      parsedIp = undefined;
+    }
+
     let contributions;
 
     try {
-      contributions = await getAllContributions(req.query.ip);
+      contributions = await getAllContributions(parsedIp);
+      console.warn("contributions.length", contributions.length);
     } catch (err) {
       return res.status(400).send(err);
     }

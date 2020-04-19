@@ -103,7 +103,7 @@ const Contribute = ({ setIsContributeFormActive, clientIp, canvasSize }) => {
           style={{ background: "transparent" }}
           loadTimeOffset={5}
           lazyRadius={0}
-          brushRadius={6}
+          brushRadius={3}
           brushColor="black"
           // catenaryColor: "#0a0302",
           // gridColor: "rgba(150,150,150,0.17)",

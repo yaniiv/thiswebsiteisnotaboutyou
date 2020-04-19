@@ -47,16 +47,13 @@ const SelectedBox = ({
             `}
           >
             <div
-              onClick={() => setSelectedIndex(-1)}
               css={css`
                 background-color: white;
                 width: ${canvasSize}px;
                 height: ${canvasSize}px;
                 border: 2px solid #036cdb;
-                ${isBoxSelected &&
-                css`
-                  background-color: ${color};
-                `}
+                background-color: ${color};
+                cursor: not-allowed;
               `}
             >
               <CanvasDraw

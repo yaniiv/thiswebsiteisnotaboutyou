@@ -1,8 +1,6 @@
 import React from "react";
 import { css } from "@emotion/core";
 
-// import { bodyContent } from "../cms-content";
-
 const IntroText = ({ setIsContributeFormActive }) => {
   return (
     <div
@@ -53,7 +51,7 @@ const IntroText = ({ setIsContributeFormActive }) => {
           top: calc(36% + 68px);
         `}
       >
-        every refresh surfaces a random sample of 200 notes
+        every refresh surfaces 111 of the most recent contributions
       </div>
       <div
         css={css`
@@ -91,7 +89,7 @@ const IntroText = ({ setIsContributeFormActive }) => {
           left: 54%;
         `}
       >
-        but you'll never see your own contributions on the screen.
+        but you'll never see your own contributions on your screen.
       </div>
     </div>
   );
