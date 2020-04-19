@@ -28,9 +28,9 @@ function getCanvasSize() {
   let canvasSize;
 
   if (window.innerWidth > 1024) {
-    canvasSize = 800;
+    canvasSize = 600;
   } else if (window.innerWidth > 800) {
-    canvasSize = 700;
+    canvasSize = 600;
   } else if (window.innerWidth > 700) {
     canvasSize = 500;
   } else if (window.innerWidth > 500) {
