@@ -32,7 +32,7 @@ const Boxes = ({
               width: ${boxSize}px;
               flex-basis: ${boxSize}px;
               font-size: 24px;
-              border: 1px solid #036cdb;
+
               box-sizing: border-box;
               cursor: pointer;
               position: relative;
@@ -53,7 +53,7 @@ const Boxes = ({
                 font-size: 8px;
               `}
             >
-              {moment.utc(createdAt).format("MMMM Do YYYY, h:mma")}
+              {/* {moment.utc(createdAt).format("MMMM Do YYYY, h:mma")} */}
             </div>
             <CanvasDraw
               canvasWidth={boxSize}
@@ -64,7 +64,11 @@ const Boxes = ({
               saveData={canvas}
               immediateLoading={false}
               hideInterface={false}
-              style={{ background: color, pointerEvents: "none" }}
+              style={{
+                background: color,
+                pointerEvents: "none",
+                border: "1px solid #036cdb",
+              }}
             />
           </div>
         );

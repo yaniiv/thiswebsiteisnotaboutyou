@@ -24,7 +24,7 @@ const IntroText = ({ setIsContributeFormActive }) => {
           background: white;
           padding: 10px;
           border: 1px solid #036cdb;
-          top: 21%;
+          top: calc(15% + 68px);
           left: 8%;
         `}
       >
@@ -48,8 +48,9 @@ const IntroText = ({ setIsContributeFormActive }) => {
           background: white;
           padding: 10px;
           border: 1px solid #036cdb;
-          top: 42%;
           left: 26%;
+
+          top: calc(36% + 68px);
         `}
       >
         every refresh surfaces a random sample of 200 notes
@@ -86,7 +87,7 @@ const IntroText = ({ setIsContributeFormActive }) => {
           background: white;
           padding: 10px;
           border: 1px solid #036cdb;
-          top: 73%;
+          top: calc(58% + 142px);
           left: 54%;
         `}
       >

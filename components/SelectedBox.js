@@ -89,7 +89,7 @@ const SelectedBox = ({
                     top: 0;
                   `}
                 >
-                  {created}
+                  Contributed on {created}
                 </div>
 
                 <Icon

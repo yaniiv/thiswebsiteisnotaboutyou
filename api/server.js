@@ -4,7 +4,6 @@
 // const { createServer } = require("http");
 require("dotenv").config();
 
-const { parse } = require("url");
 const next = require("next");
 const express = require("express");
 const cookieParser = require("cookie-parser");
@@ -13,12 +12,13 @@ const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
 const geolocationParser = require("./geolocationParser");
 
+// Routes Handlers
+const { addContribution, getAllContributions } = require("./controller");
+
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 
 const handle = app.getRequestHandler();
-
-const { addContribution, getAllContributions } = require("./controller");
 
 const LOGGER_FORMAT = dev
   ? "dev"
