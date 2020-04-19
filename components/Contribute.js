@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { css } from "@emotion/core";
 import CanvasDraw from "react-canvas-draw";
 // import { useForm } from "react-hook-form";
-import { SketchPicker, HuePicker } from "react-color";
+import { SketchPicker, HuePicker, CompactPicker } from "react-color";
 import Icon from "./Icon";
 import { postData } from "../fetchers";
 import { isGeoIpDataValid, getLocationString } from "../helpers";
@@ -12,6 +12,7 @@ const Contribute = ({ setIsContributeFormActive, reflection, canvasSize }) => {
   const [backgroundColor, setBackgroundColor] = useState("grey");
   const canvasElement = useRef(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [showMoreColors, setShowMoreColors] = useState(true);
 
   const { clientIp, geoIpData } = reflection;
   const geoIpValid = isGeoIpDataValid(geoIpData);
@@ -80,26 +81,76 @@ const Contribute = ({ setIsContributeFormActive, reflection, canvasSize }) => {
           stroke="white"
         />
       </div>
-      <div>
-        <HuePicker
+      <div
+        css={css`
+          position: relative;
+        `}
+      >
+        <div
           css={css`
-            right: 0;
-            bottom: 80px;
+            position: absolute;
+            top: 0;
+            transform: translate(-2px, calc(-100% - 4px));
             border: 2px solid #036cdb;
-
-            border-radius: 0 !important;
-            /* position: absolute;
-            transform: translate(calc(100% + 20px), 0%); */
-            &:hover {
-              cursor: pointer;
-            }
+            width: ${canvasSize}px;
+            display: flex;
+            justify-content: space-between;
+            background-color: white;
           `}
-          style={{ transform: "rotate(90deg)" }}
-          color={backgroundColor}
-          onChangeComplete={(sketchColor) => {
-            setBackgroundColor(sketchColor.hex);
-          }}
-        />
+        >
+          <CompactPicker
+            css={css`
+              width: 100% !important;
+              border-radius: 0 !important;
+              &:hover {
+                cursor: pointer;
+              }
+
+              .flexbox-fix {
+                display: none !important;
+              }
+            `}
+            color={backgroundColor}
+            onChangeComplete={(sketchColor) => {
+              setBackgroundColor(sketchColor.hex);
+            }}
+          />
+          <div
+            onClick={() => setShowMoreColors((prevState) => !prevState)}
+            css={css`
+              font-size: 20px;
+              padding: 0 4px;
+              box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 10px,
+                rgba(0, 0, 0, 0.16) 0px 2px 5px;
+              border-radius: 2px;
+              background: rgb(255, 255, 255);
+              cursor: pointer;
+            `}
+          >
+            ...more
+          </div>
+        </div>
+        {showMoreColors && (
+          <SketchPicker
+            css={css`
+              border: 2px solid #036cdb;
+              background-color: "white";
+              border-radius: 0 !important;
+              box-sizing: border-box;
+              position: absolute;
+              right: 0;
+              transform: translate(calc(100% + 20px), 80px);
+              &:hover {
+                cursor: pointer;
+              }
+            `}
+            color={backgroundColor}
+            onChangeComplete={(sketchColor) => {
+              setBackgroundColor(sketchColor.hex);
+            }}
+          />
+        )}
+
         <CanvasDraw
           ref={canvasElement}
           canvasWidth={canvasSize}
