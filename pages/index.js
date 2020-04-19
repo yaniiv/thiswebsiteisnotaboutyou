@@ -10,7 +10,7 @@ import Nav from "../components/NavCons";
 import Contribute from "../components/Contribute";
 import Overlay from "../components/Overlay";
 import Intro from "../components/Intro";
-import Reflect from "../components/Reflect";
+// import Reflect from "../components/Reflect";
 
 import { isBrowser } from "../helpers";
 import { getCanvasSize, getNumBoxesPerRow } from "../helpers";
@@ -32,6 +32,7 @@ const Landing = ({ reflection, contributions }) => {
   console.warn("reflection", reflection);
   console.warn("canvasSize", canvasSize);
   console.warn("isBoxSelected", isBoxSelected);
+  console.warn("contributions", contributions);
 
   return (
     <>

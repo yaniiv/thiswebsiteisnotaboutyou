@@ -15,17 +15,26 @@ const Contribute = ({
   setSelectedIndex,
 }) => {
   const [backgroundColor, setBackgroundColor] = useState("grey");
-  const canvasElement = useRef(null);
   const [isLoading, setIsLoading] = useState(false);
   const [showMoreColors, setShowMoreColors] = useState(false);
+
+  const canvasElement = useRef(null);
+
   const { clientIp, geoIpData } = reflection;
   const geoIpValid = isGeoIpDataValid(geoIpData);
-  // const { register, handleSubmit, errors } = useForm();
+
   const onSubmit = async () => {
     setIsLoading(true);
     console.warn("onSubmit drawingData", drawingData);
 
     const drawingData = canvasElement.current.getSaveData();
+    console.warn("canvasElement", canvasElement);
+    console.warn("canvasElement.current", canvasElement.current);
+    console.warn("canvasElement.current.canvas", canvasElement.current.canvas);
+    console.warn(
+      "canvasElement.current.canvas.toDataURL('image/png')",
+      canvasElement.current.canvas.toDataURL("image/png")
+    );
     console.warn("drawingData", drawingData);
 
     const payload = {
