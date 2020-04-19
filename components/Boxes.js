@@ -58,7 +58,8 @@ const Boxes = ({
             <CanvasDraw
               canvasWidth={boxSize}
               canvasHeight={boxSize}
-              gridColor={color}
+              gridColor={"transparent"}
+              hideGrid={true}
               disabled={true}
               saveData={canvas}
               immediateLoading={false}

@@ -1,8 +1,8 @@
 import React from "react";
 import { css } from "@emotion/core";
-import moment from "moment";
-
 import CanvasDraw from "react-canvas-draw";
+
+import { getCanvasSize, formatUtcToHumanReadable } from "../helpers";
 
 import Icon from "./Icon";
 
@@ -10,10 +10,7 @@ const getSelectedBox = ({ selectedIndex, contributions }) => {
   const selectedBox = contributions[selectedIndex] || {};
   const { ip, createdAt, color, canvas } = selectedBox;
 
-  const paresedDate = moment
-    .utc(createdAt)
-    .format("dddd, MMMM Do YYYY, h:mm:ss");
-  console.warn("paresedDate", paresedDate);
+  const paresedDate = formatUtcToHumanReadable(createdAt);
 
   return {
     ip,
@@ -28,17 +25,12 @@ const SelectedBox = ({
   setSelectedIndex,
   contributions,
   isBoxSelected,
+  canvasSize,
 }) => {
   const { ip, created, color, canvas } = getSelectedBox({
     selectedIndex,
     contributions,
   });
-
-  console.warn(">>>>>>>> SELECTED BOX >>>>>>>");
-  console.warn("ip", ip);
-  console.warn("color", color);
-  // console.warn("canvas", canvas);
-  console.warn("created", created);
 
   return (
     <>
@@ -58,8 +50,8 @@ const SelectedBox = ({
               onClick={() => setSelectedIndex(-1)}
               css={css`
                 background-color: white;
-                width: 600px;
-                height: 600px;
+                width: ${canvasSize}px;
+                height: ${canvasSize}px;
                 border: 2px solid #036cdb;
                 ${isBoxSelected &&
                 css`
@@ -68,8 +60,8 @@ const SelectedBox = ({
               `}
             >
               <CanvasDraw
-                canvasWidth={600}
-                canvasHeight={600}
+                canvasWidth={canvasSize}
+                canvasHeight={canvasSize}
                 gridColor={color}
                 disabled={true}
                 saveData={canvas}
@@ -91,6 +83,15 @@ const SelectedBox = ({
                   }
                 `}
               >
+                <div
+                  css={css`
+                    position: absolute;
+                    top: 0;
+                  `}
+                >
+                  {created}
+                </div>
+
                 <Icon
                   css={css`
                     cursor: pointer;
@@ -98,6 +99,7 @@ const SelectedBox = ({
                     float: right;
                     top: 0;
                     right: 0;
+                    position: absolute;
                     stroke-linecap: round;
                     stroke-linejoin: round;
                     stroke-width: 2;
@@ -109,7 +111,6 @@ const SelectedBox = ({
                   name="close"
                 />
               </div>
-              <div>created: {created}</div>
             </div>
           </div>
         </>

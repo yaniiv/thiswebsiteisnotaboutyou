@@ -13,6 +13,7 @@ import Intro from "../components/Intro";
 import Reflect from "../components/Reflect";
 
 import { isBrowser } from "../helpers";
+import { getCanvasSize } from "../helpers";
 
 const Landing = ({ reflection, contributions }) => {
   const [boxSize, setBoxSize] = useState(50);
@@ -20,6 +21,7 @@ const Landing = ({ reflection, contributions }) => {
   const [showIntroContent, setShowIntroContent] = useState(true);
   const [isContributeFormActive, setIsContributeFormActive] = useState(false);
 
+  const canvasSize = getCanvasSize();
   const isBoxSelected = selectedIndex !== -1;
 
   useEffect(() => {
@@ -28,6 +30,8 @@ const Landing = ({ reflection, contributions }) => {
 
   console.warn("boxSize", boxSize);
   console.warn("reflection", reflection);
+  console.warn("canvasSize", canvasSize);
+
   return (
     <>
       <Global
@@ -69,6 +73,7 @@ const Landing = ({ reflection, contributions }) => {
           />
           <Reflect reflection={reflection} />
           <SelectedBox
+            canvasSize={canvasSize}
             setSelectedIndex={setSelectedIndex}
             selectedIndex={selectedIndex}
             boxSize={boxSize}
@@ -85,6 +90,7 @@ const Landing = ({ reflection, contributions }) => {
           />
           {isContributeFormActive && (
             <Contribute
+              canvasSize={canvasSize}
               clientIp={reflection.clientIp}
               setIsContributeFormActive={setIsContributeFormActive}
               isContributeFormActive={isContributeFormActive}

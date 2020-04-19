@@ -39,7 +39,7 @@ async function postData(url = "", data = {}) {
   return response.json(); // parses JSON response into native JavaScript objects
 }
 
-const Contribute = ({ setIsContributeFormActive, parsedIp }) => {
+const Contribute = ({ setIsContributeFormActive, parsedIp, canvasSize }) => {
   const [backgroundColor, setBackgroundColor] = useState("grey");
   const canvasElement = useRef(null);
 
@@ -81,12 +81,8 @@ const Contribute = ({ setIsContributeFormActive, parsedIp }) => {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        height: 300px;
-        width: 300px;
-        @media (min-width: 768px) {
-          height: 600px;
-          width: 600px;
-        }
+        height: ${canvasSize}px;
+        width: ${canvasSize}px;
       `}
     >
       <div
@@ -134,6 +130,8 @@ const Contribute = ({ setIsContributeFormActive, parsedIp }) => {
         <CanvasDraw
           ref={canvasElement}
           {...canvasProps}
+          canvasWidth={canvasSize}
+          canvasHeight={canvasSize}
           style={{ background: "transparent" }}
         />
         <button
