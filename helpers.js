@@ -17,7 +17,7 @@ function isDesktop() {
 }
 
 function formatUtcToHumanReadable(date) {
-  return moment.utc(date).format("MMMM Do YYYY, [at] h:mm:ss a");
+  return moment.utc(date).format("MMMM Do YYYY, [at] h:mm:ss a PST[PST]");
 }
 
 function getCanvasSize() {
