@@ -17,7 +17,7 @@ import { isBrowser } from "../helpers";
 const Landing = ({ reflection, contributions }) => {
   const [boxSize, setBoxSize] = useState(50);
   const [selectedIndex, setSelectedIndex] = useState(-1);
-  const [showBodyContent, setShowBodyContent] = useState(true);
+  const [showIntroContent, setShowIntroContent] = useState(true);
   const [isContributeFormActive, setIsContributeFormActive] = useState(false);
 
   const isBoxSelected = selectedIndex !== -1;
@@ -47,10 +47,16 @@ const Landing = ({ reflection, contributions }) => {
           <Head>
             <title>This Website Is Not About You</title>
           </Head>
+          <Intro
+            showIntroContent={showIntroContent}
+            isBoxSelected={isBoxSelected}
+            setIsContributeFormActive={setIsContributeFormActive}
+            reflection={reflection}
+          />
           <Nav
             boxSize={boxSize}
-            showBodyContent={showBodyContent}
-            setShowBodyContent={setShowBodyContent}
+            showIntroContent={showIntroContent}
+            setShowIntroContent={setShowIntroContent}
             setIsContributeFormActive={setIsContributeFormActive}
             isBoxSelected={isBoxSelected}
           />
@@ -62,13 +68,6 @@ const Landing = ({ reflection, contributions }) => {
             setIsContributeFormActive={setIsContributeFormActive}
           />
           <Reflect reflection={reflection} />
-
-          <Intro
-            showBodyContent={showBodyContent}
-            isBoxSelected={isBoxSelected}
-            setIsContributeFormActive={setIsContributeFormActive}
-            clientIp={reflection.clientIp}
-          />
           <SelectedBox
             setSelectedIndex={setSelectedIndex}
             selectedIndex={selectedIndex}
@@ -80,6 +79,7 @@ const Landing = ({ reflection, contributions }) => {
             contributions={contributions}
             isBoxSelected={isBoxSelected}
             setSelectedIndex={setSelectedIndex}
+            setShowIntroContent={setShowIntroContent}
             selectedIndex={selectedIndex}
             boxSize={boxSize}
           />

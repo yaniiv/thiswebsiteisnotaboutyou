@@ -4,7 +4,17 @@ import moment from "moment";
 
 import CanvasDraw from "react-canvas-draw";
 
-const Boxes = ({ boxSize, contributions, setSelectedIndex }) => {
+const Boxes = ({
+  boxSize,
+  contributions,
+  setSelectedIndex,
+  setShowIntroContent,
+}) => {
+  const handleBoxClick = (index) => {
+    setShowIntroContent(false);
+    setSelectedIndex(index);
+  };
+
   return (
     <div
       css={css`
@@ -16,9 +26,7 @@ const Boxes = ({ boxSize, contributions, setSelectedIndex }) => {
         return (
           <div
             key={index}
-            onClick={() => {
-              setSelectedIndex(index);
-            }}
+            onClick={() => handleBoxClick(index)}
             css={css`
               height: ${boxSize}px;
               width: ${boxSize}px;

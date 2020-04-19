@@ -39,6 +39,7 @@ app.prepare().then(() => {
   server.get("/contributions", async (req, res) => {
     console.warn("server.get");
     let contributions;
+
     try {
       contributions = await queryForAllContributions();
     } catch (err) {

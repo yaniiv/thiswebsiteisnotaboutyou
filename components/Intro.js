@@ -1,4 +1,5 @@
 import React from "react";
+
 import { css } from "@emotion/core";
 
 import Hello from "./Hello";
@@ -6,13 +7,15 @@ import BodyText from "./BodyText";
 
 const Intro = ({
   setIsContributeFormActive,
-  clientIp,
-  showBodyContent,
+  reflection,
+  showIntroContent,
   isBoxSelected,
 }) => {
+  const { clientIp, geoIpData } = reflection;
+
   return (
     <>
-      {showBodyContent && !isBoxSelected && (
+      {showIntroContent && !isBoxSelected && (
         <>
           <div
             css={css`
@@ -20,7 +23,7 @@ const Intro = ({
               z-index: 69;
             `}
           >
-            <Hello clientIp={clientIp} />
+            <Hello geoIpData={geoIpData} clientIp={clientIp} />
             <BodyText setIsContributeFormActive={setIsContributeFormActive} />
           </div>
         </>

@@ -1,7 +1,58 @@
 import React from "react";
 import { css } from "@emotion/core";
 
-const Hello = ({ clientIp }) => {
+/* 
+clientIp: 174.62.76.46
+geoIpData: {
+  "range":[2923318272,2923319295],
+  "country":"US",
+  "region":"CA",
+  "eu":"0",
+  "timezone":"America/Los_Angeles",
+  "city":"San Francisco",
+  "ll":[37.7703,-122.4407],
+  "metro":807,"area":5}
+*/
+
+const isGeoIpDataValid = (geoIpData) => {
+  if (geoIpData.error) {
+    return false;
+  }
+
+  if (geoIpData === undefined) {
+    return false;
+  }
+
+  if (!geoIpData.country) {
+    return false;
+  }
+
+  return true;
+};
+
+const getLocationString = (geoIpData) => {
+  const { range, country, region, eu, timezone, city, ll, metro } = geoIpData;
+
+  let clientLocationString = "";
+  if (country && region && city) {
+    clientLocationString = `from ${city} ${region}, ${country}`;
+  } else if (country && region) {
+    clientLocationString = `from ${city}, ${region}`;
+  } else if (country) {
+    clientLocationString = `from ${country}`;
+  }
+
+  return clientLocationString;
+};
+
+const ClientLocation = ({ geoIpData }) => {
+  return <div>{getLocationString(geoIpData)}</div>;
+};
+
+const Hello = ({ clientIp, geoIpData }) => {
+  console.warn("geoIpData", geoIpData);
+  const geoIpValid = isGeoIpDataValid(geoIpData);
+
   return (
     <div
       css={css`
@@ -12,15 +63,18 @@ const Hello = ({ clientIp }) => {
         background: white;
       `}
     >
-      Hello{" "}
-      <span
-        css={css`
-          color: blueviolet;
-          text-decoration: underline;
-        `}
-      >
-        {clientIp}
-      </span>
+      <div>
+        Hello{" "}
+        <span
+          css={css`
+            color: blueviolet;
+            text-decoration: underline;
+          `}
+        >
+          {clientIp}
+        </span>
+        {geoIpValid && <ClientLocation geoIpData={geoIpData} />}
+      </div>
     </div>
   );
 };

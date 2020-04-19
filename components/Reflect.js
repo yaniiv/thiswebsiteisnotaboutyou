@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { css, Global } from "@emotion/core";
+import { css } from "@emotion/core";
 
 const Reflect = ({ reflection: { geoIpData, clientIp } }) => {
   console.warn("geoIpData", geoIpData);

@@ -12,10 +12,10 @@ import Icon from "./Icon";
 // });
 
 const Nav = ({
-  setShowBodyContent,
+  setShowIntroContent,
   boxSize,
   isBoxSelected,
-  showBodyContent,
+  showIntroContent,
   setIsContributeFormActive,
 }) => {
   console.warn("boxSize", boxSize);
@@ -51,7 +51,7 @@ const Nav = ({
       </div>
       <div
         onClick={() => {
-          setShowBodyContent(false);
+          setShowIntroContent(false);
         }}
         css={css`
           height: 90px;
