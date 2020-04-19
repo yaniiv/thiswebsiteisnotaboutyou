@@ -2,12 +2,7 @@ import React from "react";
 import { css } from "@emotion/core";
 import CanvasDraw from "react-canvas-draw";
 
-import {
-  getCanvasSize,
-  formatUtcToHumanReadable,
-  isGeoIpDataValid,
-  getLocationString,
-} from "../helpers";
+import { formatUtcToHumanReadable } from "../helpers";
 
 import Icon from "./Icon";
 
@@ -32,11 +27,10 @@ const SelectedBox = ({
   isBoxSelected,
   canvasSize,
 }) => {
-  const { geoIpData, created, color, canvas } = getSelectedBox({
+  const { locationString, created, color, canvas } = getSelectedBox({
     selectedIndex,
     contributions,
   });
-  const geoIpValid = isGeoIpDataValid(geoIpData);
 
   return (
     <>
@@ -96,7 +90,7 @@ const SelectedBox = ({
                   `}
                 >
                   Contributed on {created}
-                  {geoIpValid && `${getLocationString(geoIpData)}`}
+                  {locationString && locationString}
                 </div>
 
                 <Icon

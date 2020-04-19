@@ -48,6 +48,7 @@ function isGeoIpDataValid(geoIpData) {
   if (!geoIpData) {
     return false;
   }
+
   if (geoIpData.error) {
     return false;
   }
