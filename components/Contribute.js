@@ -4,42 +4,11 @@ import CanvasDraw from "react-canvas-draw";
 // import { useForm } from "react-hook-form";
 import { SketchPicker } from "react-color";
 import Icon from "./Icon";
+import { postData } from "../fetchers";
 
-const canvasProps = {
-  onChange: null,
-  loadTimeOffset: 5,
-  lazyRadius: 30,
-  brushRadius: 6,
-  brushColor: "black",
-  // catenaryColor: "#0a0302",
-  // gridColor: "rgba(150,150,150,0.17)",
-  hideGrid: true,
-  canvasWidth: 600,
-  canvasHeight: 600,
-  disabled: false,
-  saveData: null,
-  immediateLoading: false,
-  hideInterface: false,
-};
+const canvasProps = {};
 
-// Example POST method implementation:
-async function postData(url = "", data = {}) {
-  // Default options are marked with *
-  const response = await fetch(url, {
-    method: "POST", // *GET, POST, PUT, DELETE, etc.
-    credentials: "same-origin", // include, *same-origin, omit
-    headers: {
-      "Content-Type": "application/json",
-      // 'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    redirect: "follow", // manual, *follow, error
-    referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-    body: JSON.stringify(data), // body data type must match "Content-Type" header
-  });
-  return response.json(); // parses JSON response into native JavaScript objects
-}
-
-const Contribute = ({ setIsContributeFormActive, parsedIp, canvasSize }) => {
+const Contribute = ({ setIsContributeFormActive, clientIp, canvasSize }) => {
   const [backgroundColor, setBackgroundColor] = useState("grey");
   const canvasElement = useRef(null);
 
@@ -50,7 +19,7 @@ const Contribute = ({ setIsContributeFormActive, parsedIp, canvasSize }) => {
 
     const drawingData = canvasElement.current.getSaveData();
     const payload = {
-      ip: parsedIp,
+      ip: clientIp,
       canvas: drawingData,
       color: backgroundColor,
     };
@@ -133,6 +102,17 @@ const Contribute = ({ setIsContributeFormActive, parsedIp, canvasSize }) => {
           canvasWidth={canvasSize}
           canvasHeight={canvasSize}
           style={{ background: "transparent" }}
+          loadTimeOffset={5}
+          lazyRadius={30}
+          brushRadius={6}
+          brushColor="black"
+          // catenaryColor: "#0a0302",
+          // gridColor: "rgba(150,150,150,0.17)",
+          hideGrid={true}
+          disabled={false}
+          saveData={null}
+          immediateLoading={false}
+          hideInterface={false}
         />
         <button
           onClick={onSubmit}

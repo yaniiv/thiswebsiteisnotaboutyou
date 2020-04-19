@@ -22,9 +22,14 @@ export async function postData(url = "", data = {}) {
   return response.json();
 }
 
-export async function getData(url = "") {
+export async function getData(url = "", clientIp) {
   console.warn("url", url);
-  const response = await fetch(url);
+  const response = await fetch(`${url}?ip=${clientIp}`, {
+    method: "GET", // *GET, POST, PUT, DELETE, etc.
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 
   return response.json();
 }

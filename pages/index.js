@@ -31,6 +31,7 @@ const Landing = ({ reflection, contributions }) => {
   console.warn("boxSize", boxSize);
   console.warn("reflection", reflection);
   console.warn("canvasSize", canvasSize);
+  console.warn("isBoxSelected", isBoxSelected);
 
   return (
     <>
@@ -56,6 +57,7 @@ const Landing = ({ reflection, contributions }) => {
             isBoxSelected={isBoxSelected}
             setIsContributeFormActive={setIsContributeFormActive}
             reflection={reflection}
+            isContributeFormActive={isContributeFormActive}
           />
           <Nav
             boxSize={boxSize}
@@ -114,7 +116,7 @@ export async function getServerSideProps(context) {
   let contributions = [];
 
   try {
-    contributions = await getData(process.env.RESOURCE_URI);
+    contributions = await getData(process.env.RESOURCE_URI, clientIp);
 
     // console.warn(
     //   "getServerSideProps | GET CONTRIBUTIONS SUCCESS -> contributions",

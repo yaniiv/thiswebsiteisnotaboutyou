@@ -35,11 +35,11 @@ const getLocationString = (geoIpData) => {
 
   let clientLocationString = "";
   if (country && region && city) {
-    clientLocationString = `from ${city} ${region}, ${country}`;
+    clientLocationString = `, from ${city} ${region}, ${country}`;
   } else if (country && region) {
-    clientLocationString = `from ${city}, ${region}`;
+    clientLocationString = `, from ${city}, ${region}`;
   } else if (country) {
-    clientLocationString = `from ${country}`;
+    clientLocationString = `, from ${country}`;
   }
 
   return clientLocationString;
@@ -49,8 +49,8 @@ const ClientLocation = ({ geoIpData }) => {
   return <span>{getLocationString(geoIpData)}</span>;
 };
 
-const Hello = ({ clientIp, geoIpData }) => {
-  console.warn("geoIpData", geoIpData);
+const Hello = ({ reflection }) => {
+  const { clientIp, geoIpData } = reflection;
   const geoIpValid = isGeoIpDataValid(geoIpData);
 
   return (

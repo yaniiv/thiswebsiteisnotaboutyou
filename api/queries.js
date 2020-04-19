@@ -8,11 +8,9 @@ const { generateTimeStamp30DaysAgo } = require("./api-utils");
  */
 const keys = "-_id ip canvas color createdAt";
 
-const getAllContributions = async () =>
-  Contribution.find({}, keys)
-    .where("createdAt")
-    .gte(generateTimeStamp30DaysAgo())
-    .limit(111);
+const findContributionsExcludingIp = async (ip) => {
+  return Contribution.find({}, keys).where("ip").ne(ip).limit(111);
+};
 
 /**
  * @function addNewContribution generates new model for a message from the imported mongoose schema
@@ -26,4 +24,4 @@ const addNewContribution = (contributionData) => {
   return new Contribution(contributionData);
 };
 
-module.exports = { getAllContributions, addNewContribution };
+module.exports = { findContributionsExcludingIp, addNewContribution };

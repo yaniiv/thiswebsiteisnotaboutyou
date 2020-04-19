@@ -10,25 +10,22 @@ const Intro = ({
   reflection,
   showIntroContent,
   isBoxSelected,
+  isContributeFormActive,
 }) => {
-  const { clientIp, geoIpData } = reflection;
+  if (isBoxSelected || isContributeFormActive || !showIntroContent) {
+    return null;
+  }
 
   return (
-    <>
-      {showIntroContent && !isBoxSelected && (
-        <>
-          <div
-            css={css`
-              position: relative;
-              z-index: 69;
-            `}
-          >
-            <Hello geoIpData={geoIpData} clientIp={clientIp} />
-            <IntroText setIsContributeFormActive={setIsContributeFormActive} />
-          </div>
-        </>
-      )}
-    </>
+    <div
+      css={css`
+        position: relative;
+        z-index: 69;
+      `}
+    >
+      <Hello reflection={reflection} />
+      <IntroText setIsContributeFormActive={setIsContributeFormActive} />
+    </div>
   );
 };
 

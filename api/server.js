@@ -18,7 +18,7 @@ const app = next({ dev });
 
 const handle = app.getRequestHandler();
 
-const { addContribution, queryForAllContributions } = require("./controller");
+const { addContribution, getAllContributions } = require("./controller");
 
 const LOGGER_FORMAT = dev
   ? "dev"
@@ -32,16 +32,13 @@ app.prepare().then(() => {
   server.use(morgan(LOGGER_FORMAT));
   server.use(geolocationParser);
 
-  // Be sure to pass `true` as the second argument to `url.parse`.
-  // This tells it to parse the query portion of the URL.
-  // const { pathname, query } = parsedUrl
-
   server.get("/contributions", async (req, res) => {
     console.warn("server.get");
+    console.warn("eq.query.ip", eq.query.ip);
     let contributions;
 
     try {
-      contributions = await queryForAllContributions();
+      contributions = await getAllContributions(req.query.ip);
     } catch (err) {
       return res.status(400).send(err);
     }
