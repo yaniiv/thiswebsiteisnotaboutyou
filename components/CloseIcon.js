@@ -11,7 +11,7 @@ const CloseIcon = ({ handleClick, addedCss }) => (
         float: right;
         top: 0;
         right: 0;
-        background-color: transparent;
+        background-color: white;
         position: absolute;
         stroke-width: 2;
         z-index: 900;
@@ -21,7 +21,7 @@ const CloseIcon = ({ handleClick, addedCss }) => (
         transform: translate(calc(100% + 6px), -2px);
 
         @media (min-width: 768px) {
-          transform: translate(calc(100% + 12px), 0%);
+          transform: translate(calc(100% + 10px), 0%);
 
           height: 60px;
           width: 60px;

@@ -22,21 +22,17 @@ const SubmitButton = ({ onSubmit, isLoading }) => (
       display: flex;
       justify-content: center;
       align-items: center;
-      background: transparent;
+      background: white;
       border: 2px solid #036cdb;
       font-size: 16px;
       height: 50px;
       width: 100px;
+      cursor: pointer;
 
       @media (min-width: 768px) {
         font-size: 20px;
         height: 50px;
         width: 120px;
-      }
-
-      :hover {
-        cursor: pointer;
-        background-color: white;
       }
     `}
   >

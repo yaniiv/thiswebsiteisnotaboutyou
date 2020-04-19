@@ -4,7 +4,7 @@ import CanvasDraw from "react-canvas-draw";
 
 import { formatUtcToHumanReadable } from "../helpers";
 
-import Icon from "./Icon";
+import CloseIcon from "./CloseIcon";
 
 const getSelectedBox = ({ selectedIndex, contributions }) => {
   const selectedBox = contributions[selectedIndex] || {};
@@ -22,42 +22,6 @@ const getSelectedBox = ({ selectedIndex, contributions }) => {
     created: paresedDate,
   };
 };
-
-const CloseIcon = ({ handleClick, addedCss }) => (
-  <div css={addedCss} onClick={handleClick}>
-    <Icon
-      css={css`
-        border: 2px solid #036cdb;
-        cursor: pointer;
-        float: right;
-        top: 0;
-        right: 0;
-        background-color: transparent;
-        position: absolute;
-        stroke-width: 2;
-        z-index: 900;
-
-        height: 36px;
-        width: 36px;
-        transform: translate(calc(100% + 6px), -2px);
-
-        @media (min-width: 768px) {
-          transform: translate(calc(100% + 12px), 0%);
-
-          height: 60px;
-          width: 60px;
-        }
-
-        &:hover {
-          background-color: white;
-        }
-      `}
-      name="close"
-      stroke="red"
-      fill="white"
-    />
-  </div>
-);
 
 const SelectedBox = ({
   selectedIndex,
