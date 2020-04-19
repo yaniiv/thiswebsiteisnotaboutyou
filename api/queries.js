@@ -1,6 +1,6 @@
 const { Contribution } = require("./db");
 
-const keys = "-_id ip canvas color createdAt";
+const keys = "-_id ip canvas color createdAt locationString";
 
 const findContributionsExcludingIp = async (ip) => {
   return Contribution.find({}, keys)

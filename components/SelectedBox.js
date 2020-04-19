@@ -27,6 +27,7 @@ const SelectedBox = ({
   isBoxSelected,
   canvasSize,
 }) => {
+  console.warn("contributions", contributions);
   const { locationString, created, color, canvas } = getSelectedBox({
     selectedIndex,
     contributions,
