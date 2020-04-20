@@ -11,9 +11,9 @@ import ClientLocation from "./ClientLocation";
 import CloseIcon from "./CloseIcon";
 import chroma from "chroma-js";
 
-const getMockString = () => {
-  if (process.env.NODE_ENV !== "production") return "San Francisco CA, US";
-};
+// const getMockString = () => {
+//   if (process.env.NODE_ENV !== "production") return "San Francisco CA, US";
+// };
 
 const SubmitButton = ({ onSubmit, isLoading }) => (
   <button
@@ -235,7 +235,7 @@ const SeeYourOwn = () => (
     css={css`
       position: absolute;
       bottom: 0;
-      transform: translate(0, 132px);
+      transform: translate(0, 152px);
       left: 0;
       opacity: 0;
 
@@ -246,6 +246,7 @@ const SeeYourOwn = () => (
       font-size: 12px;
 
       @media (min-width: 768px) {
+        transform: translate(0, 132px);
         font-size: 14px;
       }
     `}
