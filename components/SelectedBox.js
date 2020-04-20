@@ -5,6 +5,7 @@ import CanvasDraw from "react-canvas-draw";
 import { formatUtcToHumanReadable } from "../helpers";
 
 import CloseIcon from "./CloseIcon";
+import ClientLocation from "./ClientLocation";
 
 const getSelectedBox = ({ selectedIndex, contributions }) => {
   const selectedBox = contributions[selectedIndex] || {};
@@ -81,7 +82,7 @@ const SelectedBox = ({
                   transform: translate(0%, calc(100% + 2px));
                 `}
               >
-                Contributed on {created}
+                Contributed on {created}, from{" "}
                 {locationString && locationString}
               </div>
               <CloseIcon
