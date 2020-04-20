@@ -17,14 +17,9 @@ geoIpData: {
 */
 
 const ClientLocation = ({ geoIpData, addedCss, geoIpValid }) => {
-  // if (!geoIpValid) {
-  //   return null
-  // }
-  return (
-    <span>
-      , from <span css={addedCss}>San Francisco CA, US</span>
-    </span>
-  );
+  if (!geoIpValid) {
+    return null;
+  }
 
   return (
     <span>

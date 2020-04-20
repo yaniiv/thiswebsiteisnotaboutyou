@@ -18,7 +18,7 @@ import { getCanvasSize, getNumBoxesPerRow } from "../helpers";
 const Landing = ({ reflection, contributions }) => {
   const [boxSize, setBoxSize] = useState(0);
   const [selectedIndex, setSelectedIndex] = useState(-1);
-  const [showIntroContent, setShowIntroContent] = useState(false);
+  const [showIntroContent, setShowIntroContent] = useState(true);
   const [isContributeFormActive, setIsContributeFormActive] = useState(false);
 
   const canvasSize = getCanvasSize();

@@ -9,7 +9,7 @@ const Overlay = ({
   isContributeFormActive,
   showIntroContent,
 }) => {
-  if (!showIntroContent && !isBoxSelected && !isContributeFormActive) {
+  if (!isBoxSelected && !isContributeFormActive) {
     return null;
   }
 
