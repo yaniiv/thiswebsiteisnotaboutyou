@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { css } from "@emotion/core";
+import { css, keyframes } from "@emotion/core";
 import CanvasDraw from "react-canvas-draw";
 // import { useForm } from "react-hook-form";
 import { SketchPicker, HuePicker, CompactPicker } from "react-color";
@@ -9,6 +9,7 @@ import { isGeoIpDataValid, getLocationString, isDesktop } from "../helpers";
 import moment from "moment";
 import ClientLocation from "./ClientLocation";
 import CloseIcon from "./CloseIcon";
+import chroma from "chroma-js";
 
 const getMockString = () => {
   if (process.env.NODE_ENV !== "production") return "San Francisco CA, US";
@@ -184,7 +185,13 @@ const TimeAndLocation = ({
       >
         {moment().format("MMMM Do YYYY, [at] h:mm a")}
       </span>
-      {geoIpValid && <ClientLocation geoIpData={geoIpData} />}
+      <ClientLocation
+        geoIpValid={geoIpValid}
+        geoIpData={geoIpData}
+        addedCss={css`
+          font-weight: 600;
+        `}
+      />
     </div>
 
     <form
@@ -207,13 +214,57 @@ const TimeAndLocation = ({
   </div>
 );
 
+const fadeIn = keyframes`
+  from, 0% to {
+    opacity: 0;
+  }
+
+  40%, 43% {
+    opacity: 0.7;
+  }
+
+  70% {
+  }
+  100% {
+    opacity: 1;
+  }
+`;
+
+const SeeYourOwn = () => (
+  <div
+    css={css`
+      position: absolute;
+      bottom: 0;
+      transform: translate(0, 132px);
+      left: 0;
+      opacity: 0;
+
+      animation: 1s ${fadeIn} ease;
+      animation-iteration-count: 1;
+      animation-fill-mode: forwards;
+      animation-delay: 1.2s;
+      font-size: 12px;
+
+      @media (min-width: 768px) {
+        font-size: 14px;
+      }
+    `}
+  >
+    If you insist on seeing your own contributions on the screen after you
+    contribute, you may append "/?ego=true" to the end of the url to do so:{" "}
+    <a href="http://www.thiswebsiteisnotaboutyou.com/?ego=true">
+      www.thiswebsiteisnotaboutyou.com/?ego=true
+    </a>
+  </div>
+);
+
 const Contribute = ({
   setIsContributeFormActive,
   reflection,
   canvasSize,
   setSelectedIndex,
 }) => {
-  const [backgroundColor, setBackgroundColor] = useState("grey");
+  const [backgroundColor, setBackgroundColor] = useState(chroma.random().hex());
   const [isLoading, setIsLoading] = useState(false);
   const [showMoreColors, setShowMoreColors] = useState(false);
   const [shareAddress, setShareAddress] = useState(true);
@@ -330,6 +381,7 @@ const Contribute = ({
           />
           <SubmitButton isLoading={isLoading} onSubmit={onSubmit} />
         </div>
+        <SeeYourOwn />
       </div>
     </div>
   );

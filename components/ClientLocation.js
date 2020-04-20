@@ -16,17 +16,19 @@ geoIpData: {
   "metro":807,"area":5}
 */
 
-const ClientLocation = ({ geoIpData }) => {
+const ClientLocation = ({ geoIpData, addedCss, geoIpValid }) => {
+  // if (!geoIpValid) {
+  //   return null
+  // }
   return (
     <span>
-      , from{" "}
-      <span
-        css={css`
-          font-weight: 600;
-        `}
-      >
-        {getLocationString(geoIpData)}
-      </span>
+      , from <span css={addedCss}>San Francisco CA, US</span>
+    </span>
+  );
+
+  return (
+    <span>
+      , from <span css={addedCss}>{getLocationString(geoIpData)}</span>
     </span>
   );
 };

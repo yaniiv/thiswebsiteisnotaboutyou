@@ -46,7 +46,7 @@ const Hello = ({ reflection }) => {
         >
           {clientIp}
         </span>
-        {geoIpValid && <ClientLocation geoIpData={geoIpData} />}
+        <ClientLocation geoIpValid={geoIpValid} geoIpData={geoIpData} />
       </div>
     </div>
   );

@@ -1,26 +1,9 @@
 import React from "react";
 
-import { css, keyframes } from "@emotion/core";
+import { css } from "@emotion/core";
 
 import Hello from "./Hello";
 import Icon from "./Icon";
-
-const fadeIn = keyframes`
-  from, 20%, 53%, 70%, to {
-    opacity: 0;
-  }
-
-  /* 40%, 43% {
-    transform: translate3d(0, -30px, 0);
-  }
-
-  70% {
-    transform: translate3d(0, -15px, 0);
-  } */
-  100% {
-    opacity: 1;
-  }
-`;
 
 const Intro = ({
   setIsContributeFormActive,
@@ -92,9 +75,6 @@ const Intro = ({
             background: white;
             padding: 10px;
             border: 2px solid #036cdb;
-            /* animation: 0.6s ${fadeIn} ease;
-            animation-iteration-count: 1;
-            animation-fill-mode: forwards; */
 
             @media (min-width: 768px) {
               font-size: 24px;
@@ -149,7 +129,10 @@ const Intro = ({
               color: blue;
               cursor: pointer;
             `}
-            onClick={() => setIsContributeFormActive(true)}
+            onClick={() => {
+              setShowIntroContent(false);
+              setIsContributeFormActive(true);
+            }}
           >
             contributed
           </span>{" "}
@@ -169,7 +152,7 @@ const Intro = ({
             }
           `}
         >
-          but you'll never see your own contributions on your screen.
+          but you wont see your own contributions on the screen.
         </div>
       </div>
     </div>
