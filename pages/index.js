@@ -19,7 +19,7 @@ const Landing = ({ reflection, contributions }) => {
   const [boxSize, setBoxSize] = useState(0);
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [showIntroContent, setShowIntroContent] = useState(false);
-  const [isContributeFormActive, setIsContributeFormActive] = useState(true);
+  const [isContributeFormActive, setIsContributeFormActive] = useState(false);
 
   const canvasSize = getCanvasSize();
   const isBoxSelected = selectedIndex !== -1;
