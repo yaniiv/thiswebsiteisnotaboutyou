@@ -62,6 +62,7 @@ const Landing = ({ reflection, contributions }) => {
             isContributeFormActive={isContributeFormActive}
           />
           <Nav
+            setSelectedIndex={setSelectedIndex}
             boxSize={boxSize}
             showIntroContent={showIntroContent}
             setShowIntroContent={setShowIntroContent}

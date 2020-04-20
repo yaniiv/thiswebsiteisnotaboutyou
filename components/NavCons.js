@@ -16,9 +16,11 @@ const Nav = ({
   boxSize,
   isBoxSelected,
   showIntroContent,
+  setSelectedIndex,
   setIsContributeFormActive,
   isContributeFormActive,
 }) => {
+  if (isContributeFormActive) return null;
   return (
     <nav
       css={css`
@@ -32,6 +34,7 @@ const Nav = ({
     >
       <div
         onClick={() => {
+          setSelectedIndex(-1);
           setShowIntroContent(false);
           setIsContributeFormActive((prevState) => !prevState);
         }}
@@ -59,6 +62,7 @@ const Nav = ({
       </div>
       <div
         onClick={() => {
+          setSelectedIndex(-1);
           setIsContributeFormActive(false);
           setShowIntroContent((prevState) => !prevState);
         }}
