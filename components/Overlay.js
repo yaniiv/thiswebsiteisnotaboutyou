@@ -13,10 +13,10 @@ const Overlay = ({
     return null;
   }
 
-  let overlayColor = chroma.random().darken().desaturate().hex();
-  if (isContributeFormActive || isBoxSelected) {
-    overlayColor = "white";
-  }
+  // let overlayColor = chroma.random().darken().desaturate().hex();
+  // if (isContributeFormActive || isBoxSelected) {
+  let overlayColor = "white";
+  // }
 
   return (
     <div

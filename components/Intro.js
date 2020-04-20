@@ -102,7 +102,7 @@ const Intro = ({
             }
           `}
         >
-          each note was left by a visitor, click one to view it
+          each note was left by a visitor, click one to watch it
         </div>
         <div
           css={css`
