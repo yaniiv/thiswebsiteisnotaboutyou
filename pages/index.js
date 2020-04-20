@@ -70,6 +70,7 @@ const Landing = ({ reflection, contributions }) => {
             isContributeFormActive={isContributeFormActive}
           />
           <Overlay
+            showIntroContent={showIntroContent}
             setSelectedIndex={setSelectedIndex}
             selectedIndex={selectedIndex}
             isBoxSelected={isBoxSelected}

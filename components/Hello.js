@@ -27,7 +27,7 @@ const Hello = ({ reflection }) => {
         position: fixed;
         top: 15%;
         padding: 10px;
-        border: 1px solid #036cdb;
+        border: 2px solid #036cdb;
         background: white;
         font-size: 16px;
 

@@ -19,15 +19,6 @@ const Nav = ({
   setIsContributeFormActive,
   isContributeFormActive,
 }) => {
-  if (isBoxSelected || isContributeFormActive) {
-    return null;
-  }
-  console.warn("boxSize", boxSize);
-  console.warn("isContributeFormActive", isContributeFormActive);
-  console.warn(
-    "showIntroContent && !isContributeFormActive",
-    showIntroContent && !isContributeFormActive
-  );
   return (
     <nav
       css={css`
@@ -41,6 +32,7 @@ const Nav = ({
     >
       <div
         onClick={() => {
+          setShowIntroContent(false);
           setIsContributeFormActive((prevState) => !prevState);
         }}
         css={css`
@@ -50,7 +42,7 @@ const Nav = ({
           position: fixed;
           top: 0px;
           padding: 8px;
-          font-size: 16px;
+          font-size: 20px;
           text-decoration: underline;
 
           @media (min-width: 768px) {
@@ -59,50 +51,59 @@ const Nav = ({
 
           :hover {
             cursor: pointer;
-            background-color: lightgray;
             text-decoration: underline;
           }
         `}
       >
         contribute
       </div>
-      {!showIntroContent && (
-        <div
-          onClick={() => {
-            setShowIntroContent(true);
-          }}
-          css={css`
-            position: fixed;
-            right: 0;
-            border: 2px solid #036cdb;
-            background-color: white;
-            top: 50px;
-            padding: 4px;
+      <div
+        onClick={() => {
+          setIsContributeFormActive(false);
+          setShowIntroContent((prevState) => !prevState);
+        }}
+        css={css`
+          position: fixed;
+          right: 0;
+          border: 2px solid #036cdb;
+          background-color: white;
+          padding: 4px;
 
-            :hover {
-              background-color: lightgray;
-              cursor: pointer;
-            }
+          :hover {
+            cursor: pointer;
+          }
 
-            height: 30px;
-            width: 30px;
-            @media (min-width: 768px) {
-              height: 42px;
-              width: 42px;
-            }
-          `}
-        >
+          top: 46px;
+
+          height: 30px;
+          width: 30px;
+          @media (min-width: 768px) {
+            top: 48px;
+            height: 36px;
+            width: 36px;
+          }
+        `}
+      >
+        {!showIntroContent ? (
           <Icon
             css={css`
               stroke-width: 1.6;
               stroke-linejoin: round;
               stroke-linecap: round;
             `}
-            name="info"
+            name={"question"}
             stroke="blue"
           />
-        </div>
-      )}
+        ) : (
+          <Icon
+            css={css`
+              stroke-width: 1.6;
+            `}
+            name={"close"}
+            stroke="red"
+          />
+        )}
+      </div>
     </nav>
   );
 };

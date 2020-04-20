@@ -200,7 +200,7 @@ const TimeAndLocation = ({
         name="subscribe"
         checked={shareAddress}
       />
-      <label css={css``} for="shareAddress">
+      <label css={css``} htmlFor="shareAddress">
         Include location in contribution
       </label>
     </form>

@@ -44,19 +44,60 @@ const Intro = ({
       <Hello reflection={reflection} />
       <div
         css={css`
+          position: fixed;
+          bottom: 0;
+          right: 0;
+          background: white;
+          border: 2px solid #036cdb;
+          padding: 4px;
+          font-size: 14px;
+        `}
+      >
+        <a
+          href="https://www.yanivgoldobin.com"
+          css={css`
+            text-decoration: none;
+          `}
+          target="_blank"
+        >
+          built with{" "}
+          <Icon
+            css={css`
+              stroke-width: 2;
+            `}
+            name="love"
+            height="14px"
+            width="14px"
+            fill="#fcd116"
+            stroke="#fcd116"
+          />{" "}
+          by{" "}
+          <span
+            css={css`
+              text-decoration: underline;
+            `}
+          >
+            {" "}
+            yaniv
+          </span>
+        </a>
+      </div>
+
+      <div
+        css={css`
           > div {
             width: 200px;
             font-size: 16px;
             position: fixed;
             background: white;
             padding: 10px;
-            border: 1px solid #036cdb;
+            border: 2px solid #036cdb;
             /* animation: 0.6s ${fadeIn} ease;
             animation-iteration-count: 1;
             animation-fill-mode: forwards; */
 
             @media (min-width: 768px) {
-              font-size: 22px;
+              font-size: 24px;
               width: 400px;
             }
           }
@@ -106,10 +147,7 @@ const Intro = ({
             css={css`
               text-decoration: underline;
               color: blue;
-              &:hover {
-                cursor: pointer;
-                color: #036cdb;
-              }
+              cursor: pointer;
             `}
             onClick={() => setIsContributeFormActive(true)}
           >
@@ -117,39 +155,6 @@ const Intro = ({
           </span>{" "}
           to the wall and helped to create something with the other people that
           have been here
-          {showIntroContent && !isContributeFormActive && (
-            <div
-              onClick={() => {
-                setShowIntroContent(false);
-              }}
-              css={css`
-                position: absolute;
-                top: 0;
-                right: 0;
-                border: 2px solid #036cdb;
-                background: transparent;
-                transform: translate(50%, -50%);
-                background-color: white;
-                cursor: pointer;
-
-                width: 36px;
-                height: 36px;
-                @media (min-width: 768px) {
-                  width: 54px;
-                  height: 54px;
-                }
-              `}
-            >
-              <Icon
-                css={css`
-                  fill: none;
-                  stroke-width: 2;
-                `}
-                stroke="red"
-                name="close"
-              />
-            </div>
-          )}
         </div>
         <div
           css={css`
