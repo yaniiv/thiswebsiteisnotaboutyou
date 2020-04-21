@@ -63,7 +63,7 @@ const Boxes = ({
               hideGrid={true}
               disabled={true}
               saveData={canvas}
-              immediateLoading={true}
+              immediateLoading={false}
               hideInterface={false}
               style={{
                 background: color,
